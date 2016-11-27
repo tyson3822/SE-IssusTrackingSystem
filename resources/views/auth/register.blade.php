@@ -1,4 +1,4 @@
-@extends('layouts.login_navbar')
+@extends('layouts.welcome_navbar')
 
 @section('content')
 <div class="container">
