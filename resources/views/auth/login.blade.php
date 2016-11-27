@@ -65,7 +65,7 @@
                             <label class="col-md-offset-1 control-label">New User</label>
 
                             <div class="row col-md-offset-1">
-                                <button type="submit"  class="btn btn-primary">Sign Up</button>
+                                <button type="submit"  class="btn btn-primary">Sign Up!</button>
                             </div>
                         </div>
                     </form>
