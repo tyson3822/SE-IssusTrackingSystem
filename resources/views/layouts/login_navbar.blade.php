@@ -30,12 +30,12 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <p class="navbar-text" style="margin-bottom:0px">test</p>
+                        <li><a href="{{url('/ProjectList')}}">ProjectList</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <p class="navbar-text" style="margin-bottom:0px">Setting</p>
-                        <p class="navbar-text" style="margin-bottom:0px">User Name</p>
-                        <p class="navbar-text" style="margin-bottom:0px">Log Out</p>
+                        <li class="active"><a href="{{url('/Setting')}}">Setting</a></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">User Name</label></li>
+                        <li><a href="{{url('/login')}}">Log Out</a></li>
                     </ul>
                 </div>
             </div>

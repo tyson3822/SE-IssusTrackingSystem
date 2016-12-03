@@ -30,7 +30,7 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a>ProjectList</a></li>
+                        <li><a href="{{url('/ProjectList')}}">ProjectList</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="{{url('/Setting')}}">Setting</a></li>
@@ -64,16 +64,20 @@
             </div>
             <div class="container col-md-5" style="border-left-width:1px;border-left-style:solid;border-color:#bababa">
                 <label class="col-md-offset-2" style="font-size:30px; color:black;">Edit personal information</label>
-                <form class="form-horizontal" role="form" method="POST" action="">
-                    <p class="col-md-offset-1" style="font-size:18px;color: black">
-                        <label class="col-md-4">User Name : </label>
-                        <input type="text" name="user_name" style="width:60%">
-                        <br>
-                        <label class="col-md-4">Password : </label>
-                        <input type="text" name="password" style="width:60%">
-                        <br><br>
-                        <button type="submit" class="btn btn-primary col-md-offset-9" style="width:20%">Save</button>
-                    </p>
+                <form class="form-horizontal" role="form" method="POST" action="/Setting/{{$email}}/{{$user_name}}/{{$password}}">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
+                    <div class="col-md-offset-1">
+                        <label class="col-md-4" style="font-size:18px;color: black">User Name : </label>
+                        <input type="text" name="user_name" class="form-control" style="width:60%">  
+                    </div>
+                    <br>
+                    <div class="col-md-offset-1">
+                        <label class="col-md-4" style="font-size:18px;color: black">Password : </label>
+                        <input id="password" type="password" class="form-control" name="password" style="width:60%">  
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary col-md-offset-9" style="width:20%">Save</button>
                 </form>      
             </div>
         </div>
