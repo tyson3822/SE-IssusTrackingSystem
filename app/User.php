@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the projects that user join.
+     */
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class,'project_user_relations')->withPivot('user_auth');
+    }
 }
