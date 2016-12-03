@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <p class="text-align:center"><strong><h1>Issue Tracking System</h1></strong></p>
+        
+            <img src="img/123.jpg" width="700" height="500">
         </div>
 
         <div class="col-md-4">
