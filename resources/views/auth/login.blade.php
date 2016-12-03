@@ -60,12 +60,12 @@
                         </div>
                     </form>
 
-                    <form class="form-horizontal" role="form" method="POST">
+                    <form class="form-horizontal" role="form" action="{{ url('/register') }}">
                         <div class="form-group">
                             <label class="col-md-offset-1 control-label">New User</label>
 
                             <div class="row col-md-offset-1">
-                                <button type="submit" class="btn btn-primary">Sign Up</button>
+                                <button type="submit"  class="btn btn-primary">Sign Up!</button>
                             </div>
                         </div>
                     </form>
