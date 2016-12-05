@@ -34,7 +34,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{url('/Setting')}}">Setting</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user_name}}</label></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
                         <li><a href="{{url('/login')}}">Log Out</a></li>
                     </ul>
                 </div>
