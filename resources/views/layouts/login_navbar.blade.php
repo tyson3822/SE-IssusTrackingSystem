@@ -35,7 +35,9 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="{{url('/Setting')}}">Setting</a></li>
                         <li><label class="navbar-text" style="margin-bottom:0px">User Name</label></li>
-                        <li><a href="{{url('/login')}}">Log Out</a></li>
+                        <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                        </li>
                     </ul>
                 </div>
             </div>
