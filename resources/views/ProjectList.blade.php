@@ -31,11 +31,13 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a>ProjectList</a></li>
+                        @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{url('/Setting')}}">Setting</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
-                        <li><a href="{{url('/login')}}">Log Out</a></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user['name']}}</label></li>
+                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>n
                     </ul>
                 </div>
             </div>
@@ -63,7 +65,13 @@
             @foreach ($user->projects as $project)
             <div class="col-md-4">
                 <div class="panel panel-info" style="padding-left: 0px;padding-right: 0px;">
-                    <div class="panel-heading">{{$project->subject}}</div>
+                    <div class="panel-heading">
+                        <div class="panel-heading">{{$project->subject}}</div>
+                        <div class="panel-title pull-right">
+                            <a href="#" class="btn btn-default btn-sm" role="button">Go</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="panel-body">
 
                         {{--@for ($count = 0; $count < $project_issue_count[$index]; $count++)--}}
