@@ -14,10 +14,10 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-	Route::get('/', function () {return redirect('/home');});
+	Route::get('/','HomeController@index');
 
 	Auth::routes();
-	Route::get('/home', 'HomeController@index');
+
 
 	//導向Setting頁面,傳入使用者的資料(user_name,email,password,access)
 	Route::get('/Setting',function(){
@@ -51,10 +51,11 @@ Route::group(['middleware' => ['web']], function () {
 	});
 
 	//導向Project List頁面
-	Route::get('/ProjectList',function(){
+	Route::get('/projectlist',function(){
 		return view('ProjectList')
 			->with('user_name','abc')
 			->with('projects_name',array('Project A','Project B','Project C'))
 			->with('project_issue_count',array(2,4,6));
 	});
+
 });
