@@ -34,7 +34,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{url('/Setting')}}">Setting</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user_name}}</label></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
                         <li><a href="{{url('/login')}}">Log Out</a></li>
                     </ul>
                 </div>
@@ -60,19 +60,20 @@
             <?php
                 $index = 0;
             ?>
-            @foreach ($projects_name as $project_name)
+            @foreach ($user->projects as $project)
             <div class="col-md-4">
                 <div class="panel panel-info" style="padding-left: 0px;padding-right: 0px;">
-                    <div class="panel-heading">{{$project_name}}</div>
+                    <div class="panel-heading">{{$project->subject}}</div>
                     <div class="panel-body">
-                        @for ($count = 0; $count < $project_issue_count[$index]; $count++)
-                            <img src="simple_issue.png" class="col-md-offset-1">
-                        @endfor
+
+                        {{--@for ($count = 0; $count < $project_issue_count[$index]; $count++)--}}
+                            {{--<img src="simple_issue.png" class="col-md-offset-1">--}}
+                        {{--@endfor--}}
                     </div>
                 </div>
             </div>
             <?php
-                $index++;
+//                $index++;
             ?>
             @endforeach
         </div>

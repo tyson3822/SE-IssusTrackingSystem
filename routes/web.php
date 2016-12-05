@@ -51,11 +51,6 @@ Route::group(['middleware' => ['web']], function () {
 	});
 
 	//導向Project List頁面
-	Route::get('/projectlist',function(){
-		return view('ProjectList')
-			->with('user_name','abc')
-			->with('projects_name',array('Project A','Project B','Project C'))
-			->with('project_issue_count',array(2,4,6));
-	});
+	Route::get('/projectlist','ProjectController@index');
 
 });
