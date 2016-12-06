@@ -44,92 +44,88 @@
         </nav>
 
         <div class="row">
-            <div class="col-md-offset-1 col-md-10">
-                <form class="form-horizontal" role="form" method="POST" action="{{}}">
+            <form class="form-horizontal" role="form" method="POST" action="{{}}">
+                <div class="col-md-offset-1 col-md-10">
                     <button type="submit" class="btn btn-primary" style="width:10%">Save</button>
-                </form>
+                </div>
                 <br>
-            </div>
-        </div>
-            
-        <div class="row">
-            <div class="col-md-offset-1 col-md-10" style="border-bottom-width:1px;border-bottom-style:solid;border-color:#bababa">
-
-                <?php
-                    $admin_count = 0;
-                ?>
-                @foreach($users as $user)
-                <?php
-                    if($user['access'] == 'admin'){
-                        if($admin_count % 2 == 0){
-                ?>              
-                    <div class="col-md-offset-1 col-md-5">
-                        <div class="col-md-offset-1">
-                            <img src="person.png" class="img-circle">
-                            <label class="col-md-offset-1">{{$user['name']}}</label>
-                            <select class="selectpicker col-md-offset-1" style="width:30%" name="access">
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                            </select>
-                        </div>
-                    </div> 
-                <?php
-                        }else{
-                ?>
-                <!--<?php echo $admin_count;?>-->
-                    <div class="col-md-offset-1 col-md-5">
-                        <img src="person.png" class="img-circle">
-                        <label class="col-md-offset-1">{{$user['name']}}</label>
-                        <select class="selectpicker col-md-offset-1" style="width:30%" name="access">
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
-                    </div>
-                <?php
-                        }
-                        $admin_count++;
-                    }
-                ?>
-                @endforeach
-            </div>
-
-            <div class="col-md-offset-1 col-md-10">
-                <?php
-                    $user_count = 0;
-                ?>
-                @foreach($users as $user)
-                <?php 
-                    if($user['access'] == 'user'){
-                        if($user_count % 2 == 0){
-                ?>
-                    <div class="col-md-offset-1 col-md-5" style="border-right-width:1px;border-right-style:solid;border-color:#bababa">
-                        <div class="col-md-offset-1">
-                            <img src="person.png" class="img-circle">
-                            <label class="col-md-offset-1">{{$user['name']}}</label>
-                            <select class="selectpicker col-md-offset-1" style="width:30%" name="access">
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                    </div>
-                <?php
-                        }else{
-                ?>
-                    <div class="col-md-offset-1 col-md-5">
-                        <img src="person.png" class="img-circle">
-                        <label class="col-md-offset-1">{{$user['name']}}</label>
-                        <select class="selectpicker col-md-offset-1" style="width:30%" name="access">
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
+                <div class="col-md-offset-1 col-md-10" style="border-bottom-width:1px;border-bottom-style:solid;border-color:#bababa">
                     <?php
-                        }
-                        $user_count++;
-                    }
+                        $admin_count = 0;
                     ?>
-                @endforeach
-            </div>
+                    @foreach($users as $user)
+                        <?php
+                            if($user['access'] == 'admin'){
+                                if($admin_count % 2 == 0){
+                        ?>              
+                            <div class="col-md-offset-1 col-md-5">
+                                <div class="col-md-offset-1">
+                                    <img src="person.png" class="img-circle">
+                                    <label class="col-md-offset-1">{{$user['name']}}</label>
+                                    <select class="selectpicker col-md-offset-1" style="width:30%" name="access">
+                                        <option value="admin" selected="selected">Admin</option>
+                                        <option value="user">User</option>
+                                    </select>
+                                </div>
+                            </div> 
+                        <?php
+                                }else{
+                        ?>
+                            <!--<?php echo $admin_count;?>-->
+                            <div class="col-md-offset-1 col-md-5">
+                                <img src="person.png" class="img-circle">
+                                <label class="col-md-offset-1">{{$user['name']}}</label>
+                                <select class="selectpicker col-md-offset-1" style="width:30%" name="access">
+                                    <option value="admin" selected="selected">Admin</option>
+                                    <option value="user">User</option>
+                                </select>
+                            </div>
+                        <?php
+                            }
+                            $admin_count++;
+                        }
+                        ?>
+                    @endforeach
+                </div>
+
+                <div class="col-md-offset-1 col-md-10">
+                    <?php
+                        $user_count = 0;
+                    ?>
+                    @foreach($users as $user)
+                        <?php 
+                            if($user['access'] == 'user'){
+                                if($user_count % 2 == 0){
+                        ?>
+                            <div class="col-md-offset-1 col-md-5" style="border-right-width:1px;border-right-style:solid;border-color:#bababa">
+                                <div class="col-md-offset-1">
+                                    <img src="person.png" class="img-circle">
+                                    <label class="col-md-offset-1">{{$user['name']}}</label>
+                                    <select class="selectpicker col-md-offset-1" style="width:30%" name="access">
+                                        <option value="admin">Admin</option>
+                                        <option value="user" selected="selected">User</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <?php
+                                }else{
+                        ?>
+                            <div class="col-md-offset-1 col-md-5">
+                                <img src="person.png" class="img-circle">
+                                <label class="col-md-offset-1">{{$user['name']}}</label>
+                                <select class="selectpicker col-md-offset-1" style="width:30%" name="access">
+                                    <option value="admin">Admin</option>
+                                    <option value="user" selected="selected">User</option>
+                                </select>
+                            </div>
+                        <?php
+                                }
+                            $user_count++;
+                            }
+                        ?>
+                    @endforeach
+                </div>
+            </form>
         </div>
     </div>
 </body>
