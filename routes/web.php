@@ -53,11 +53,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::put('/Access_Manage',function(){});
 
 	//導向Project List頁面
-
 	Route::get('/projectlist','ProjectController@index');
 
 	//進入點擊的project裡點,導向Issue List頁面
 	Route::get('/IssueList/{project}',function(){});
-
 
 });

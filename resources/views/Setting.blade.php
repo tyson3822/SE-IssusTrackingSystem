@@ -31,11 +31,13 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="{{url('/ProjectList')}}">ProjectList</a></li>
+                        @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="{{url('/Setting')}}">Setting</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user_name}}</label></li>
-                        <li><a href="{{url('/login')}}">Log Out</a></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user['name']}}</label></li>
+                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                     </ul>
                 </div>
             </div>
@@ -51,20 +53,16 @@
         <div class="row">
             <div class="container col-md-offset-1 col-md-5" style="border-right-width:1px;border-right-style:solid;border-color:#bababa">
                 <label class="col-md-offset-2" style="font-size:30px; color:black;">Personal information</label>
-                @if($access === 'admin')
-                    <a class="col-md-offset-1" style="font-size: 15px" href="{{url('/Access_Manage')}}">Change access</a>
-                @endif
-                
                 <p class="col-md-offset-1" style="font-size:18px;color: black">
-                    <label>User Name : {{$user_name}}</label><br>
-                    <label>Email : {{$email}}</label><br>
-                    <label>Password : {{$password}}</label><br>
-                    <label>access : {{$access}}</label>
+                    <label>User Name : {{$user['name']}}</label><br>
+                    <label>Email : {{$user['email']}}</label><br>
+                    <label>Password : {{$user['password']}}</label><br>
+                    <label>access : {{$user['access']}}</label>
                 </p>
             </div>
             <div class="container col-md-5" style="border-left-width:1px;border-left-style:solid;border-color:#bababa">
                 <label class="col-md-offset-2" style="font-size:30px; color:black;">Edit personal information</label>
-                <form class="form-horizontal" role="form" method="POST" action="/Setting/{{$email}}/{{$user_name}}/{{$password}}">
+                <form class="form-horizontal" role="form" method="POST" action="/Setting">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="col-md-offset-1">
