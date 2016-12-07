@@ -48,9 +48,14 @@ Route::group(['middleware' => ['web']], function () {
 			->with('user_name','abc');
 	});
 
-	//導向Project List頁面
+	//接收使用者權限變更資訊
+	//導向Access_Manage,傳入目前使用者的名稱,以及所有使用者的名稱和權限(陣列)(更新)
+	Route::put('/Access_Manage',function(){});
 
+	//導向Project List頁面
 	Route::get('/projectlist','ProjectController@index');
 
+	//進入點擊的project裡點,導向Issue List頁面
+	Route::get('/IssueList/{project}',function(){});
 
 });
