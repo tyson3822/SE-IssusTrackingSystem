@@ -30,7 +30,7 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{url('/ProjectList')}}">ProjectList</a></li>
+                        <li><a href="{{url('/projectlist')}}">ProjectList</a></li>
                         @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

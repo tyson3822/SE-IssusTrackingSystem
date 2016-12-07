@@ -30,9 +30,8 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+                        <li><a href="{{url('/projectlist')}}">ProjectList</a></li>
                         <li class="active"><a>AccountList</a></li>
-                        <li><a href="{{url('/ProjectList')}}">ProjectList</a></li>
-                        <li><a>IssueList</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{url('/Setting')}}">Setting</a></li>
@@ -44,7 +43,9 @@
         </nav>
 
         <div class="row">
-            <form class="form-horizontal" role="form" method="POST" action="{{}}">
+            <form class="form-horizontal" role="form" method="POST" action="{{url('/')}}">
+                {{ csrf_field() }}
+                {{ method_field('PUT') }}
                 <div class="col-md-offset-1 col-md-10">
                     <button type="submit" class="btn btn-primary" style="width:10%">Save</button>
                 </div>
