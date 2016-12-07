@@ -51,7 +51,7 @@
             <div class="col-md-4">
                 <form>
                     <button type="submit" class="btn btn-default col-md-4">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true">Create</span>
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>Create
                     </button>
                 </form>
                 <form>
