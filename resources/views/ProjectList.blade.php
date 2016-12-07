@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
+    <!-- Referencing Bootstrap CSS that is hosted locally -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -35,9 +38,9 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{url('/Setting')}}">Setting</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user['name']}}</label></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
                         <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>n
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                     </ul>
                 </div>
             </div>
@@ -53,10 +56,10 @@
                 </form>
                 <form>
                     <button type="submit" class="btn btn-default col-md-4">
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true">Close</span>
+                        <span class="glyphicon glyphicon-minus-sign"></span>Close
                     </button>
                 </form>
-            </div>         
+            </div>
         </div>
         <div class="row col-md-offset-1 col-md-10">
             <?php
@@ -68,7 +71,8 @@
                     <div class="panel-heading">
                         <div class="panel-heading">{{$project->subject}}</div>
                         <div class="panel-title pull-right">
-                            <a href="#" class="btn btn-default btn-sm" role="button">Go</a>
+                            <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
+                            <form id="GotoProject" action="{{ url('/IssueList/{project}') }}" method="GET" style="display: none;">{{ csrf_field() }}</form>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -89,5 +93,8 @@
     
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    
+    <!-- Referencing Bootstrap JS that is hosted locally -->
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
