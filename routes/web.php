@@ -49,7 +49,7 @@ Route::group(['middleware' => ['web']], function () {
 	});
 
 	//接收使用者權限變更資訊
-	//導向Access_Manage,傳入目前使用者的名稱,以及所有使用者的名稱和權限(陣列)(更新)
+	//導向Access_Manage,傳入目前使用者的名稱,以及所有使用者的名稱和權限(陣列)(更改過的)
 	Route::put('/Access_Manage',function(){});
 
 	//導向Project List頁面
