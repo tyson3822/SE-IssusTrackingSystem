@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
+    <!-- Referencing Bootstrap CSS that is hosted locally -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -48,7 +51,7 @@
             <div class="col-md-4">
                 <form>
                     <button type="submit" class="btn btn-default col-md-4">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true">Create</span>
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>Create
                     </button>
                 </form>
                 <form>
@@ -90,5 +93,8 @@
     
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    
+    <!-- Referencing Bootstrap JS that is hosted locally -->
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

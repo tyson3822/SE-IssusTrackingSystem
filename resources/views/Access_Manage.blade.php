@@ -75,7 +75,7 @@
         </nav>
 
         <div class="row">
-            <form class="form-horizontal" role="form" method="POST" action="{{url('/')}}">
+            <form class="form-horizontal" role="form" method="POST" action="{{url('/Access_Manage')}}">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="col-md-offset-1 col-md-5">
