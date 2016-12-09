@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <!--<link href="/css/app.css" rel="stylesheet">-->
 
     <!-- Referencing Bootstrap CSS that is hosted locally -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -24,6 +24,52 @@
     </script>
 </head>
 <body>
+    <!-- Create Project Modal -->
+    <div class="modal fade" id="CreateProjectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Create Project</h4>
+                </div>
+                <form class="form-horizontal" role="form" method="POST" action="/Create_Project">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <label class="control-label col-md-3" style="text-align: left;">Project Title : </label>
+                        <input class="form-control" style="width:60%" type="text" name="project_name">
+                        <label class="control-label col-md-4" style="text-align: left;">Project Descript : </label>
+                        <textarea class="form-control" rows="4" name="descript"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Close Project Modal -->
+    <div class="modal fade" id="CloseProjectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Create Project</h4>
+                </div>
+                <form class="form-horizontal" role="form" method="POST" action="/Create_Project">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
             <div class="container-fluid">
@@ -50,13 +96,13 @@
             <h1 style="color: black;" class="col-md-8">Project List</h1>
             <div class="col-md-4">
                 <form>
-                    <button type="submit" class="btn btn-default col-md-4">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>Create
+                    <button type="button" class="btn btn-default col-md-4 " data-toggle="modal" data-target="#CreateProjectModal">
+                        <span class="glyphicon glyphicon-plus-sign"></span>Create Project
                     </button>
                 </form>
                 <form>
-                    <button type="submit" class="btn btn-default col-md-4">
-                        <span class="glyphicon glyphicon-minus-sign"></span>Close
+                    <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseProjectModal">
+                        <span class="glyphicon glyphicon-minus-sign"></span>Close Project
                     </button>
                 </form>
             </div>
@@ -90,10 +136,15 @@
             @endforeach
         </div>
     </div>
+
+    
     
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <!--<script src="/js/app.js"></script>-->
     
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <!-- Referencing Bootstrap JS that is hosted locally -->
     <script src="/js/bootstrap.min.js"></script>
 </body>

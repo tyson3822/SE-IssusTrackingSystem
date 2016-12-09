@@ -55,7 +55,11 @@ Route::group(['middleware' => ['web']], function () {
 	//導向Project List頁面
 	Route::get('/projectlist','ProjectController@index');
 
+	//建立project
+	//從前端拿project_name,descript
+	//建立好後回到projectlist畫面
+	Route::post('/Create_Project',function(){});
+
 	//進入點擊的project裡點,導向Issue List頁面
 	Route::get('/IssueList/{project}',function(){});
-
 });
