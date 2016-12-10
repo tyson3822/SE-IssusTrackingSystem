@@ -58,7 +58,7 @@
                     </button>
                 </form>
                 <form>
-                    <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseProjectModal">
+                    <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseProjectModal" data-id="abc">
                         <span class="glyphicon glyphicon-minus-sign"></span>Close Project
                     </button>
                 </form>
@@ -76,6 +76,9 @@
                         <div class="panel-title pull-right">
                             <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
                             <form id="GotoProject" action="{{ url('/IssueList/{project}') }}" method="GET" style="display: none;">{{ csrf_field() }}</form>
+                            @if($project->role == 'manager')
+                                <button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-id="{{$project}}">&times;</button>
+                            @endif
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -97,6 +100,17 @@
     <!-- Scripts -->
     <!--<script src="/js/app.js"></script>-->
     
+    <script type="text/javascript">
+        $('#CloseProjectModal').on('show.bs.modal', function(e) {
+
+            //get data-id attribute of the clicked element
+            var project = $(e.relatedTarget).data('id');
+            
+            //populate the textbox
+            $(e.currentTarget).find('label[name="project"]').val(project);
+        });
+    </script>
+
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 

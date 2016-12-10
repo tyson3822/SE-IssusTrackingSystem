@@ -4,11 +4,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Create Project</h4>
+                <h4 class="modal-title" id="myModalLabel">Close Project</h4>
             </div>
-            <form class="form-horizontal" role="form" method="POST" action="/Create_Project">
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('/Close_Project/{project}') }}">
                 {{ csrf_field() }}
+                {{ method_field('PUT') }}
                 <div class="modal-body">
+                    <p>你想關掉
+                        <label name="project"></label>
+                        嗎?
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
