@@ -36,4 +36,18 @@ class ProjectController extends Controller
         */
     }
 
+    public function createProject(Request $request)
+    {
+        $projectId = Project::create([
+            'subject' => $request->subject,
+            'description' => $request->description,
+            'visible' => $request->visible,
+            'state' => $request->state,
+        ])->id;
+
+        $request->user()->projects()->attach($projectId, ['user_auth' => 'manager']);
+
+        return view('ProjectList', compact('user'));
+    }
+
 }
