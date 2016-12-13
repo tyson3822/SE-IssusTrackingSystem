@@ -48,7 +48,7 @@ class ProjectController extends Controller
         $user = $request->user();
         $user->projects()->attach($projectId, ['user_auth' => 'manager']);
 
-        return view('ProjectList', compact('user'));
+        return redirect('/projectlist');
     }
 
 }
