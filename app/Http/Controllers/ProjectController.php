@@ -45,7 +45,8 @@ class ProjectController extends Controller
             'state' => $request->state,
         ])->id;
 
-        $request->user()->projects()->attach($projectId, ['user_auth' => 'manager']);
+        $user = $request->user();
+        $user->projects()->attach($projectId, ['user_auth' => 'manager']);
 
         return view('ProjectList', compact('user'));
     }
