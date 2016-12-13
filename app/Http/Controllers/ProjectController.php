@@ -51,4 +51,10 @@ class ProjectController extends Controller
         return redirect('/projectlist');
     }
 
+    public function closeProject(Request $request)
+    {
+        Project::find($request->id)->update(['state' => 'close']);
+        return redirect('/projectlist');
+    }
+
 }

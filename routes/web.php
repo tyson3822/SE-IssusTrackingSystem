@@ -63,5 +63,8 @@ Route::group(['middleware' => ['web']], function () {
 	//進入點擊的project裡點,導向Issue List頁面
 	Route::get('/IssueList/{project}',function(){});
 
-
+    //關閉project
+    //從前端拿id
+    //關閉project後回到projectlist畫面
+    Route::post('/Close_Project','closeProject@createProject');
 });
