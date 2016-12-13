@@ -36,9 +36,36 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <label class="control-label col-md-3" style="text-align: left;">Project Title : </label>
-                        <input class="form-control" style="width:60%" type="text" name="project_name">
-                        <label class="control-label col-md-4" style="text-align: left;">Project Descript : </label>
-                        <textarea class="form-control" rows="4" name="descript"></textarea>
+                        <input class="form-control" style="width:60%" type="text" name="subject">
+                        <label class="control-label col-md-4" style="text-align: left;">Project Description : </label>
+                        <textarea class="form-control" rows="4" name="description"></textarea>
+
+                        <div class="row">
+                            <label>
+                                private
+                                <input type="radio" name="visible" value="private" checked>
+                            </label>
+                            <label>
+                                public
+                                <input type="radio" name="visible" value="public">
+                            </label>
+                        </div>
+
+                        <div class="row">
+                            <label>
+                                normal
+                                <input type="radio" name="state" value="normal" checked>
+                            </label>
+                            <label>
+                                close
+                                <input type="radio" name="state" value="close">
+                            </label>
+                            <label>
+                                disable
+                                <input type="radio" name="state" value="disable">
+                            </label>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
