@@ -26,7 +26,7 @@
 <body>
     @include('Project.Create_Project_Modal')
     @include('Project.Close_Project_Modal')
-    
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
             <div class="container-fluid">
@@ -55,11 +55,6 @@
                 <form>
                     <button type="button" class="btn btn-default col-md-4 " data-toggle="modal" data-target="#CreateProjectModal">
                         <span class="glyphicon glyphicon-plus-sign"></span>Create Project
-                    </button>
-                </form>
-                <form>
-                    <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseProjectModal" data-project="test">
-                        <span class="glyphicon glyphicon-minus-sign"></span>Close Project
                     </button>
                 </form>
             </div>

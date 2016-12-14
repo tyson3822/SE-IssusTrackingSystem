@@ -58,7 +58,7 @@ Route::group(['middleware' => ['web']], function () {
 	//建立project
 	//從前端拿project_name,descript
 	//建立好後回到projectlist畫面
-	Route::post('/Create_Project',function(){});
+	Route::post('/Create_Project','ProjectController@createProject');
 
 	//關閉project
 	//關閉後回到projectlist畫面
@@ -66,4 +66,6 @@ Route::group(['middleware' => ['web']], function () {
 
 	//進入點擊的project裡點,導向Issue List頁面
 	Route::get('/IssueList/{project}',function(){});
+
+
 });
