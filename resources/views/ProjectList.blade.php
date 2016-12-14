@@ -24,78 +24,8 @@
     </script>
 </head>
 <body>
-    <!-- Create Project Modal -->
-    <div class="modal fade" id="CreateProjectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Create Project</h4>
-                </div>
-                <form class="form-horizontal" role="form" method="POST" action="/Create_Project">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <label class="control-label col-md-3" style="text-align: left;">Project Title : </label>
-                        <input class="form-control" style="width:60%" type="text" name="subject">
-                        <label class="control-label col-md-4" style="text-align: left;">Project Description : </label>
-                        <textarea class="form-control" rows="4" name="description"></textarea>
-
-                        <div class="row">
-                            <label>
-                                private
-                                <input type="radio" name="visible" value="private" checked>
-                            </label>
-                            <label>
-                                public
-                                <input type="radio" name="visible" value="public">
-                            </label>
-                        </div>
-
-                        <div class="row">
-                            <label>
-                                normal
-                                <input type="radio" name="state" value="normal" checked>
-                            </label>
-                            <label>
-                                close
-                                <input type="radio" name="state" value="close">
-                            </label>
-                            <label>
-                                disable
-                                <input type="radio" name="state" value="disable">
-                            </label>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Close Project Modal -->
-    <div class="modal fade" id="CloseProjectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Create Project</h4>
-                </div>
-                <form class="form-horizontal" role="form" method="POST" action="/Create_Project">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    @include('Project.Create_Project_Modal')
+    @include('Project.Close_Project_Modal')
 
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
@@ -127,11 +57,6 @@
                         <span class="glyphicon glyphicon-plus-sign"></span>Create Project
                     </button>
                 </form>
-                <form>
-                    <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseProjectModal">
-                        <span class="glyphicon glyphicon-minus-sign"></span>Close Project
-                    </button>
-                </form>
             </div>
         </div>
         <div class="row col-md-offset-1 col-md-10">
@@ -146,6 +71,15 @@
                         <div class="panel-title pull-right">
                             <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
                             <form id="GotoProject" action="{{ url('/IssueList/{project}') }}" method="GET" style="display: none;">{{ csrf_field() }}</form>
+                            @if($project->role == 'manager')
+                                <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project="{{$project}}">&times;</button>-->
+
+                                <button type="submit" class="close" onclick="event.preventDefault();document.getElementById('CloseProject').submit();">&times;</button>
+                                <form id="CloseProject" action="{{ url('/Close_Project/{project->id}') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                    {{ method_field('PUT') }}
+                                </form>
+                            @endif
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -164,13 +98,27 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <!--<script src="/js/app.js"></script>-->
-    
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+    <!-- Scripts -->
+    <!--<script src="/js/app.js"></script>-->
+
     <!-- Referencing Bootstrap JS that is hosted locally -->
     <script src="/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $('#CloseProjectModal').on('show.bs.modal', function(e) {
+
+            //get data-id attribute of the clicked element
+            var button = $(e.relatedTarget);
+            var project = button.data('project');
+            
+            var modal = $(this);
+            //modal.find('.modal-body label').text(project);
+            //populate the textbox
+            $(e.currentTarget).find('label[name="project"]').text(project->subject);
+        });
+    </script>
 </body>
 </html>
