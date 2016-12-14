@@ -58,7 +58,7 @@
                     </button>
                 </form>
                 <form>
-                    <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseProjectModal" data-id="abc">
+                    <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseProjectModal" data-project="test">
                         <span class="glyphicon glyphicon-minus-sign"></span>Close Project
                     </button>
                 </form>
@@ -77,7 +77,13 @@
                             <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
                             <form id="GotoProject" action="{{ url('/IssueList/{project}') }}" method="GET" style="display: none;">{{ csrf_field() }}</form>
                             @if($project->role == 'manager')
-                                <button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-id="{{$project}}">&times;</button>
+                                <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project="{{$project}}">&times;</button>-->
+
+                                <button type="submit" class="close" onclick="event.preventDefault();document.getElementById('CloseProject').submit();">&times;</button>
+                                <form id="CloseProject" action="{{ url('/Close_Project/{project->id}') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                    {{ method_field('PUT') }}
+                                </form>
                             @endif
                         </div>
                         <div class="clearfix"></div>
@@ -97,24 +103,27 @@
         </div>
     </div>
 
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <!-- Scripts -->
     <!--<script src="/js/app.js"></script>-->
-    
+
+    <!-- Referencing Bootstrap JS that is hosted locally -->
+    <script src="/js/bootstrap.min.js"></script>
+
     <script type="text/javascript">
         $('#CloseProjectModal').on('show.bs.modal', function(e) {
 
             //get data-id attribute of the clicked element
-            var project = $(e.relatedTarget).data('id');
+            var button = $(e.relatedTarget);
+            var project = button.data('project');
             
+            var modal = $(this);
+            //modal.find('.modal-body label').text(project);
             //populate the textbox
-            $(e.currentTarget).find('label[name="project"]').val(project);
+            $(e.currentTarget).find('label[name="project"]').text(project->subject);
         });
     </script>
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Referencing Bootstrap JS that is hosted locally -->
-    <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
