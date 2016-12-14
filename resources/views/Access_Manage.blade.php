@@ -77,6 +77,12 @@
                                         <option value="admin" selected="selected">Admin</option>
                                         <option value="user">User</option>
                                     </select>
+                                    <button type="submit" class="btn btn-danger col-md-offset-1" onclick="event.preventDefault();document.getElementById('delete_user).submit();">刪除
+                                    </button>
+                                    <form id="delete_user" action="{{ url('/Delete_user/{user}') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                    </form>
                                 </div>
                             </div> 
                         <?php
@@ -90,6 +96,12 @@
                                     <option value="admin" selected="selected">Admin</option>
                                     <option value="user">User</option>
                                 </select>
+                                <button type="submit" class="btn btn-danger col-md-offset-1" onclick="event.preventDefault();document.getElementById('delete_user).submit();">刪除
+                                </button>
+                                <form id="delete_user" action="{{ url('/Delete_user/{user}') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                </form>
                             </div>
                         <?php
                             }
@@ -116,6 +128,12 @@
                                         <option value="admin">Admin</option>
                                         <option value="user" selected="selected">User</option>
                                     </select>
+                                    <button type="submit" class="btn btn-danger col-md-offset-1" onclick="event.preventDefault();document.getElementById('delete_user).submit();">刪除
+                                    </button>
+                                    <form id="delete_user" action="{{ url('/Delete_user/{user}') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                    </form>
                                 </div>
                             </div>
                         <?php
@@ -128,6 +146,12 @@
                                     <option value="admin">Admin</option>
                                     <option value="user" selected="selected">User</option>
                                 </select>
+                                <button type="submit" class="btn btn-danger col-md-offset-1" onclick="event.preventDefault();document.getElementById('delete_user).submit();">刪除
+                                </button>
+                                <form id="delete_user" action="{{ url('/Delete_user/{user}') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                </form>
                             </div>
                         <?php
                                 }
