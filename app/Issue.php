@@ -40,4 +40,12 @@ class Issue extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    /**
+     * Get the logs that the issue has.
+     */
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
+    }
 }

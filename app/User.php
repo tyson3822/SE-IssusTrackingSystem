@@ -42,4 +42,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Issue::class);
     }
+
+    /**
+     * Get the logs that the user has.
+     */
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
+    }
 }
