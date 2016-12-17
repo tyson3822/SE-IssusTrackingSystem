@@ -33,5 +33,13 @@ class Project extends Model
         return $this->belongsToMany(User::class,'project_user_relations')->withPivot('user_auth');
     }
 
+    /**
+     * Get the project that the issue belongs to.
+     */
+    public function issues()
+    {
+        return $this->hasMany(Issue::class);
+    }
+
 
 }
