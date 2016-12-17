@@ -36,7 +36,7 @@
                     @include('layouts.AccountList_navbar')
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{url('/Setting')}}">Setting</a></li>
+                    <li><a href="{{url('/setting')}}">Setting</a></li>
                     <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
                     <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
