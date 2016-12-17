@@ -61,5 +61,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/Create_Project',function(){});
 
 	//進入點擊的project裡點,導向Issue List頁面
-	Route::get('/IssueList/{project}',function(){});
+	Route::get('/IssueList/{project}',function(){
+		$user = array( ['name'=>'abc']);
+		
+		return view('IssueList')->with('user',$user);
+	});
 });
