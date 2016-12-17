@@ -14,7 +14,8 @@
                     <label class="control-label col-md-4" style="text-align: left;">Project Description : </label>
                     <textarea class="form-control" rows="4" name="description"></textarea>
                     
-                    <div class="row">
+                    <div>
+                        <label>visible : </label>
                         <label>
                             private
                             <input type="radio" name="visible" value="private" checked>
@@ -24,8 +25,8 @@
                             <input type="radio" name="visible" value="public">
                         </label>
                     </div>
-
-                    <div class="row">
+                    <div>
+                        <label>state : </label>
                         <label>
                             normal
                             <input type="radio" name="state" value="normal" checked>

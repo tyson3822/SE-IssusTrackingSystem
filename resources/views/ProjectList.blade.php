@@ -67,12 +67,13 @@
             <div class="col-md-4">
                 <div class="panel panel-info" style="padding-left: 0px;padding-right: 0px;">
                     <div class="panel-heading">
-                        <div class="panel-heading">{{$project->subject}}</div>
-                        <div class="panel-title pull-right">
-                            <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
+                        <div class="panel-title">
+                            {{$project->subject}}
+                            <div class="pull-right">
+                                <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
                             <form id="GotoProject" action="{{ url('/IssueList/{project}') }}" method="GET" style="display: none;">{{ csrf_field() }}</form>
-                            @if($project->role == 'manager')
-                                <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project="{{$project}}">&times;</button>-->
+                            @if($project->pivot['user_auth'] == 'manager')
+                                <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
 
                                 <button type="submit" class="close" onclick="event.preventDefault();document.getElementById('CloseProject').submit();">&times;</button>
                                 <form id="CloseProject" action="{{ url('/Close_Project/{project->id}') }}" method="POST" style="display: none;">
@@ -80,8 +81,8 @@
                                     {{ method_field('PUT') }}
                                 </form>
                             @endif
+                            </div>
                         </div>
-                        <div class="clearfix"></div>
                     </div>
                     <div class="panel-body">
 
@@ -112,12 +113,12 @@
 
             //get data-id attribute of the clicked element
             var button = $(e.relatedTarget);
-            var project = button.data('project');
+            var project_name = button.data('project_name');
             
             var modal = $(this);
             //modal.find('.modal-body label').text(project);
             //populate the textbox
-            $(e.currentTarget).find('label[name="project"]').text(project->subject);
+            $(e.currentTarget).find('label[name="project"]').text(project_name);
         });
     </script>
 </body>
