@@ -61,16 +61,28 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/projectlist','ProjectController@index');
 
 	//建立project
-	//從前端拿project_name,descript
+	//從前端拿專案資訊
 	//建立好後回到projectlist畫面
 	Route::post('/Create_Project','ProjectController@createProject');
 
 	//關閉project
 	//關閉後回到projectlist畫面
-	Route::put('Close_Project/{project}',function(){});
+	Route::put('/Close_Project/{project}',function(){});
 
 	//進入點擊的project裡點,導向Issue List頁面
 	Route::get('/IssueList/{project}',function(){});
 
+	//導向專案成員頁面
+	//傳入user name和這個project的所有成員資訊
+	Route::get('/Project_Member',function(){});
 
+	//剔除專案成員
+	//從前端取得user_id,project_id
+	//刪除完後回到Project_Member頁面
+	Route::delete('/Delete_project_member/{project_id}',function(){});
+
+	//變更專案成員的權限
+	//從前端取得user_id,project_id,權限
+	//更改好後回到Project_Member頁面
+	Route::put('/Change_project_member_role/{project_id}',function(){});
 });
