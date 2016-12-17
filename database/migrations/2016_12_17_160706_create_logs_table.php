@@ -19,13 +19,13 @@ class CreateLogsTable extends Migration
             $table->string('description');
             $table->string('priority')->default('low');
             $table->string('state')->default('ready');
-            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('user_id')->index()->nullable();
             $table->unsignedInteger('issue_id')->index();
             $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')->on('users')
-                ->onDelete('cascade');
+                ->onDelete('set null');
 
             $table->foreign('issue_id')
                 ->references('id')->on('issues')
