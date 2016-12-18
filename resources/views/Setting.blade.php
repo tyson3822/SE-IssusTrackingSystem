@@ -30,7 +30,7 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{url('/projectlist')}}">ProjectList</a></li>
+                        <li><a href="{{url('project_list')}}">ProjectList</a></li>
                         @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -62,12 +62,17 @@
             </div>
             <div class="container col-md-5" style="border-left-width:1px;border-left-style:solid;border-color:#bababa">
                 <label class="col-md-offset-2" style="font-size:30px; color:black;">Edit personal information</label>
-                <form class="form-horizontal" role="form" method="POST" action="/Setting">
+                <form class="form-horizontal" role="form" method="POST" action="{{url('Change_user_info')}}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="col-md-offset-1">
                         <label class="col-md-4" style="font-size:18px;color: black">User Name : </label>
                         <input type="text" name="user_name" class="form-control" style="width:60%">  
+                    </div>
+                    <br>
+                    <div class="col-md-offset-1">
+                        <label class="col-md-4" style="font-size:18px;color: black">Email : </label>
+                        <input type="text" name="email" class="form-control" style="width:60%">
                     </div>
                     <br>
                     <div class="col-md-offset-1">

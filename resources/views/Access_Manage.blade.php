@@ -35,20 +35,20 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{url('/projectlist')}}">ProjectList</a></li>
+                        <li><a href="{{url('project_list')}}">ProjectList</a></li>
                         <li class="active"><a>AccountList</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{url('/setting')}}">Setting</a></li>
                         <li><label class="navbar-text" style="margin-bottom:0px">{{$user_name}}</label></li>
-                        <li><a href="{{url('/login')}}">Log Out</a></li>
+                        <li><a href="{{url('/logout')}}">Log Out</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
         <div class="row">
-            <form class="form-horizontal" role="form" method="POST" action="{{url('/access_manage')}}">
+            <form class="form-horizontal" role="form" method="POST" action="{{url('Change_user_auth')}}">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="col-md-offset-1 col-md-5">
@@ -79,7 +79,7 @@
                                     </select>
                                     <button type="submit" class="btn btn-danger col-md-offset-1" onclick="event.preventDefault();document.getElementById('delete_user).submit();">刪除
                                     </button>
-                                    <form id="delete_user" action="{{ url('/delete_user/{user}') }}" method="POST">
+                                    <form id="delete_user" action="{{ url('Delete_user',$user->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -98,7 +98,7 @@
                                 </select>
                                 <button type="submit" class="btn btn-danger col-md-offset-1" onclick="event.preventDefault();document.getElementById('delete_user).submit();">刪除
                                 </button>
-                                <form id="delete_user" action="{{ url('/delete_user/{user}') }}" method="POST">
+                                <form id="delete_user" action="{{ url('Delete_user',$user->id) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                 </form>
@@ -130,7 +130,7 @@
                                     </select>
                                     <button type="submit" class="btn btn-danger col-md-offset-1" onclick="event.preventDefault();document.getElementById('delete_user).submit();">刪除
                                     </button>
-                                    <form id="delete_user" action="{{ url('/delete_user/{user}') }}" method="POST">
+                                    <form id="delete_user" action="{{ url('Delete_user',$user->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -148,7 +148,7 @@
                                 </select>
                                 <button type="submit" class="btn btn-danger col-md-offset-1" onclick="event.preventDefault();document.getElementById('delete_user).submit();">刪除
                                 </button>
-                                <form id="delete_user" action="{{ url('/delete_user/{user}') }}" method="POST">
+                                <form id="delete_user" action="{{ url('Delete_user',$user->id) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                 </form>

@@ -36,7 +36,7 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a>ProjectList</a></li>
+                        <li class="active"><a href="{{url('project_list')}}">ProjectList</a></li>
                         @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -71,12 +71,12 @@
                             {{$project->subject}}
                             <div class="pull-right">
                                 <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
-                            <form id="GotoProject" action="{{ url('/IssueList/{project}') }}" method="GET" style="display: none;">{{ csrf_field() }}</form>
+                            <form id="GotoProject" action="{{ url('/project/{project->id}') }}" method="GET" style="display: none;">{{ csrf_field() }}</form>
                             @if($project->pivot['user_auth'] == 'manager')
                                 <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
 
                                 <button type="submit" class="close" onclick="event.preventDefault();document.getElementById('CloseProject').submit();">&times;</button>
-                                <form id="CloseProject" action="{{ url('/Close_Project/{project->id}') }}" method="POST" style="display: none;">
+                                <form id="CloseProject" action="{{ url('Close_Project',$project->id) }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                     {{ method_field('PUT') }}
                                 </form>
