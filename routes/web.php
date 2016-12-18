@@ -40,7 +40,7 @@ Route::group(['middleware' => ['web']], function () {
 
 		return view('Setting')
 			->with('user',$user);
-	});
+	})->name('Change_user_info');
 
 	//顯示管理使用者畫面
 	//input:
@@ -58,13 +58,13 @@ Route::group(['middleware' => ['web']], function () {
 	//input: 使用者名稱,使用者email,使用者密碼(新的)
 	//output: 
 	//redirect('Access_Manage')
-	Route::put('/access_manage',function(){});
+	Route::put('/access_manage',function(){})->name('Change_user_auth');
 
 	//刪除使用者
 	//input: user id
 	//output: 
 	//redirect('Access_Manage')
-	Route::delete('/access_manage/delete_user/{user_id}',function(){});
+	Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
 
 	//顯示Project List頁面
 	//input: 
@@ -105,12 +105,12 @@ Route::group(['middleware' => ['web']], function () {
 	//input: user_id,project_id
 	//output: 
 	//redirect('Project_Memeber')
-	Route::delete('/project/{project_id}/project_member/{member_id}/delete',function(){});
+	Route::delete('/project/{project_id}/project_member/{member_id}/delete',function(){})->name('Delete_project_member');
 
 	//變更專案成員的權限
 	//input: user_id,project_id,權限
 	//output: 
 	//redirect('Project_Memeber')
-	Route::put('/project/{project_id}/project_member/{member_id}/change_auth',function(){});
+	Route::put('/project/{project_id}/project_member/{member_id}/change_auth',function(){})->name('Change_project_member_auth');
 
 });
