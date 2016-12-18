@@ -34,4 +34,20 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Project::class,'project_user_relations')->withPivot('user_auth');
     }
+
+    /**
+     * Get the issues that are assigned to user.
+     */
+    public function issues()
+    {
+        return $this->hasMany(Issue::class);
+    }
+
+    /**
+     * Get the logs that the user has.
+     */
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
+    }
 }

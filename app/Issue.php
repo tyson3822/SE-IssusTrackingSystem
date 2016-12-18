@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Issue extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'subject', 'description', 'visible','state',
+        'title', 'description','priority','state','user_id','project_id',
     ];
 
     /**
@@ -26,20 +26,26 @@ class Project extends Model
     ];
 
     /**
-     * Get the users that join the project.
+     * Get the user that the issue is assigned to.
      */
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class,'project_user_relations')->withPivot('user_auth');
+        return $this->belongsTo(User::class);
     }
 
     /**
      * Get the project that the issue belongs to.
      */
-    public function issues()
+    public function project()
     {
-        return $this->hasMany(Issue::class);
+        return $this->belongsTo(Project::class);
     }
 
-
+    /**
+     * Get the logs that the issue has.
+     */
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
+    }
 }
