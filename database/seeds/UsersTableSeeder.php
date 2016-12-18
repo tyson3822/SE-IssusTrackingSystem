@@ -2,6 +2,7 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use DCN\RBAC\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -46,5 +47,6 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('94879487'),
             'role' => 'user',
         ]);
+
     }
 }
