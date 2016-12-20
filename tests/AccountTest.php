@@ -15,10 +15,11 @@ class AccountTest extends TestCase
      * @return void
      */
 
-    //註冊帳號
+    //建立帳戶
     public function testSignUp()
     {
     	$this->visit('/')
+             //註冊頁面
     		 ->click('Register')
     		 ->type('test01', 'name')
     		 ->type('test01@gmail.com', 'email')
@@ -27,14 +28,14 @@ class AccountTest extends TestCase
     		 ->press('Register')
     		 ->see('You are logged in!')
     		 ->seeInDatabase('users', [
-    		 	'name' => 'test01', 
     		 	'email' => 'test01@gmail.com']);
     }
 
-    //帳號登入
+    //使用者登入
     public function testLogIn()
     {
         $this->visit('/')
+             //登入頁面
              ->click('Login')
              ->seePageIs('/login')
              ->type('test@gmail.com', 'email')
@@ -43,11 +44,11 @@ class AccountTest extends TestCase
              ->see('You are logged in!');
     }
 
-    //修改帳號個人資料
+    //帳戶管理
     public function testEditPersonalData()
     {
         $this->visit('/')
-             //登入
+             //登入頁面
              ->click('Login')
              ->seePageIs('/login')
              ->type('test@gmail.com', 'email')
@@ -55,7 +56,7 @@ class AccountTest extends TestCase
              ->press('Login')
              ->see('You are logged in!') //登入後的頁面待改
 
-             //個人資料設定
+             //個人資料設定頁面
              ->press('Setting')
              ->seePageIs('/Setting')
              ->see('test')
@@ -80,7 +81,30 @@ class AccountTest extends TestCase
              ->type('testEdited', 'name')
              ->type('tessaccountedited', 'password')
              ->press('Login')
-             ->see('You are logged in!')  //登入後的頁面待改
-             
+             ->see('You are logged in!');  //登入後的頁面待改
     }
+
+    //帳戶權限
+    public function testAccountPermissions()
+    {
+        $this->visit('/')
+             //註冊帳號
+             ->click('Register')
+             ->type('test01', 'name')
+             ->type('test01@gmail.com', 'email')
+             ->type('test01password', 'password')
+             ->type('test01password', 'password_confirmation')
+             ->press('Register')
+             ->see('You are logged in!')
+
+             //搜尋資料庫確認資料
+             ->seeInDatabase('users', [
+                'name' => 'test01', 
+                'email' => 'test01@gmail.com',
+                'role' => 'user']);
+    }
+
+    //安全機制
+
+
 }
