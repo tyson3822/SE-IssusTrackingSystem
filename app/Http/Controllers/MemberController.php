@@ -32,6 +32,6 @@ class MemberController extends Controller
     {
         $project = Project::find($project_id);
         $user = $request->user();
-        return view('Project_Member.blade', compact('project', 'user'));
+        return view('Project_Member', compact('project', 'user'));
     }
 }
