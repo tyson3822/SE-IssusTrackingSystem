@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Project;
 
 class MemberController extends Controller
 {
@@ -19,5 +21,17 @@ class MemberController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index($project_id, Request $request)
+    {
+        $project = Project::find($project_id);
+        $user = $request->user();
+        return view('Project_Member.blade', compact('project', 'user'));
     }
 }
