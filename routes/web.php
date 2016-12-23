@@ -29,7 +29,7 @@ Route::group(['middleware' => ['web']], function () {
 
 		return view('Setting')
 			->with('user',$user);
-	});
+	})->name('setting');
 
 	//使用者變更自己的資料
 	//input: user_name,password,email(null代表沒有更改,email用來指向使用者)
@@ -97,20 +97,18 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id
 	//output: user，project
 	//view('Project_Member')
-	Route::get('/project/{project_id}/project_member',function(){
-		return view("Project_Member");
-	});
+	Route::get('/project/{project_id}/project_member','MemberController@index');
 
 	//剔除專案成員
 	//input: user_id,project_id
 	//output: 
 	//redirect('Project_Memeber')
-	Route::delete('/project/{project_id}/project_member/{member_id}/delete',function(){})->name('Delete_project_member');
+	Route::delete('/project/{project_id}/project_member/{member_id}/delete','MemberController@removeProjectMember')->name('Delete_project_member');
 
 	//變更專案成員的權限
 	//input: user_id,project_id,權限
 	//output: 
 	//redirect('Project_Memeber')
-	Route::put('/project/{project_id}/project_member/{member_id}/change_auth',function(){})->name('Change_project_member_auth');
+	Route::put('/project/{project_id}/project_member/{member_id}/change_auth','MemberController@updateProjectMember')->name('Change_project_member_auth');
 
 });
