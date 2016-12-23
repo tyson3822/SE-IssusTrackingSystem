@@ -7,9 +7,10 @@
  */
 
 namespace App\Http\Controllers;
+use App\Project;
 use Illuminate\Http\Request;
 
-class IssueController
+class IssueController extends Controller
 {
     /**
      * Create a new controller instance.
