@@ -29,7 +29,7 @@ Route::group(['middleware' => ['web']], function () {
 
 		return view('Setting')
 			->with('user',$user);
-	});
+	})->name('setting');
 
 	//使用者變更自己的資料
 	//input: user_name,password,email(null代表沒有更改,email用來指向使用者)

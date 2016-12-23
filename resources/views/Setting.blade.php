@@ -30,13 +30,13 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{url('project_list')}}">ProjectList</a></li>
+                        <li><a href="{{url('project_list')}}">專案</a></li>
                         @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="{{url('/setting')}}">Setting</a></li>
+                        <li class="active"><a href="{{url('/setting')}}">設定</a></li>
                         <li><label class="navbar-text" style="margin-bottom:0px">{{$user['name']}}</label></li>
-                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                     </ul>
                 </div>
@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1" style="border-bottom-width:1px;border-bottom-style:solid;border-color:#bababa">
                 <div class="col-md-offset-1">
-                    <p style="font-size:50px;color:black;">Setting-</p>
+                    <p style="font-size:50px;color:black;">設定-</p>
                 </div>
             </div>     
         </div>
@@ -54,10 +54,10 @@
             <div class="container col-md-offset-1 col-md-5" style="border-right-width:1px;border-right-style:solid;border-color:#bababa">
                 <label class="col-md-offset-2" style="font-size:30px; color:black;">Personal information</label>
                 <p class="col-md-offset-1" style="font-size:18px;color: black">
-                    <label>User Name : {{$user['name']}}</label><br>
+                    <label>使用者名稱 : {{$user['name']}}</label><br>
                     <label>Email : {{$user['email']}}</label><br>
-                    <label>Password : {{$user['password']}}</label><br>
-                    <label>access : {{$user['access']}}</label>
+                    <label>密碼 : {{$user['password']}}</label><br>
+                    <label>權限 : {{$user['access']}}</label>
                 </p>
             </div>
             <div class="container col-md-5" style="border-left-width:1px;border-left-style:solid;border-color:#bababa">
@@ -66,7 +66,7 @@
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="col-md-offset-1">
-                        <label class="col-md-4" style="font-size:18px;color: black">User Name : </label>
+                        <label class="col-md-4" style="font-size:18px;color: black">使用者名稱 : </label>
                         <input type="text" name="user_name" class="form-control" style="width:60%">  
                     </div>
                     <br>
@@ -76,11 +76,11 @@
                     </div>
                     <br>
                     <div class="col-md-offset-1">
-                        <label class="col-md-4" style="font-size:18px;color: black">Password : </label>
+                        <label class="col-md-4" style="font-size:18px;color: black">密碼 : </label>
                         <input id="password" type="password" class="form-control" name="password" style="width:60%">  
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary col-md-offset-9" style="width:20%">Save</button>
+                    <button type="submit" class="btn btn-primary col-md-offset-9" style="width:20%">儲存</button>
                 </form>      
             </div>
         </div>
