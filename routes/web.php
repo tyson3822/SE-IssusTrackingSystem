@@ -29,7 +29,7 @@ Route::group(['middleware' => ['web']], function () {
 
 		return view('Setting')
 			->with('user',$user);
-	});
+	})->name('setting');
 
 	//使用者變更自己的資料
 	//input: user_name,password,email(null代表沒有更改,email用來指向使用者)
@@ -103,7 +103,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: user_id,project_id
 	//output: 
 	//redirect('Project_Memeber')
-	Route::delete('/project/{project_id}/project_member/{member_id}/delete',function(){})->name('Delete_project_member');
+	Route::delete('/project/{project_id}/project_member/{member_id}/delete','MemberController@removeProjectMember')->name('Delete_project_member');
 
 	//變更專案成員的權限
 	//input: user_id,project_id,權限
