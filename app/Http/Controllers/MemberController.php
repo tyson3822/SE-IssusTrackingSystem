@@ -34,4 +34,11 @@ class MemberController extends Controller
         $user = $request->user();
         return view('Project_Member', compact('project', 'user'));
     }
+
+    public function updateProjectMember($project_id, $member_id, Request $request)
+    {
+        $project = Project::find($project_id);
+        $project->find($project_id)->users()->updateExistingPivot($member_id,['user_auth'=>$request['user_auth']]);
+        return redirect('/project/'.$project_id.'/project_member');
+    }
 }
