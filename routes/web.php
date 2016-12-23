@@ -109,6 +109,6 @@ Route::group(['middleware' => ['web']], function () {
 	//input: user_id,project_id,權限
 	//output: 
 	//redirect('Project_Memeber')
-	Route::put('/project/{project_id}/project_member/{member_id}/change_auth',function(){})->name('Change_project_member_auth');
+	Route::put('/project/{project_id}/project_member/{member_id}/change_auth','MemberController@updateProjectMember')->name('Change_project_member_auth');
 
 });
