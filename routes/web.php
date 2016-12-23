@@ -97,9 +97,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id
 	//output: user，project
 	//view('Project_Member')
-	Route::get('/project/{project_id}/project_member',function(){
-		return view("Project_Member");
-	});
+	Route::get('/project/{project_id}/project_member','MemberController@index');
 
 	//剔除專案成員
 	//input: user_id,project_id
