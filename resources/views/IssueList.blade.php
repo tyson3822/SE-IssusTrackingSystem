@@ -51,6 +51,14 @@
                         </div>
                         <br>
 
+                        @if($project->pivot['user_auth'] == 'manager')
+                            
+                        <label class="control-label col-md-3" style="text-align: left;">Members : </label>
+                        <input class="form-control" style="width:60%" type="text" name="Members_name"><br>
+
+                        @endif
+<!--                         <label class="control-label col-md-3" style="text-align: left;">Members : </label>
+                        <input class="form-control" style="width:60%" type="text" name="Members_name"><br> -->
 
                         <label class="control-label col-md-3" style="text-align: left;">Issue Descript : </label>
                         <textarea class="form-control" rows="4" name="descript"></textarea>
@@ -102,9 +110,9 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{url('/Setting')}}">Setting</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">user</label></li>
-                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+                        <li><a href="{{url('setting')}}">設定</a></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
+                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
 
                     </ul>
@@ -113,7 +121,8 @@
         </nav>
 
         <div class="row col-md-offset-1">
-            <h1 style="color: black;" class="col-md-8">Project Name</h1>
+            <h1 style="color: black;" class="col-md-8">{{$project->subject}}</h1><br>
+
             <div class="col-md-4">
                 <form>
                     <button type="button" class="btn btn-default col-md-4 " data-toggle="modal" data-target="#AddIssueModal">
@@ -126,15 +135,45 @@
                     </button>
                 </form>
             </div>
+            <!-- <br> -->
         </div>
 
         <div class="row col-md-offset-1 col-md-10">
             <?php
                 $index = 0;
             ?>
+            @foreach ($project->issues as $issue)
+
+            <div class="col-md-4">
+                <div class="panel panel-primary" style="padding-left: 0px;padding-right: 0px;">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            {{$issue->title}}
+                            <div class="pull-right">
+                                <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('issue_Descript').submit();">Descript</a>
+                                <form id="issue_Descript" action="{{ url('/issue/'.$issue->id) }}" method="GET" style="display: none;">{{ csrf_field() }}</form>
+                                @if($project->pivot['user_auth'] == 'manager')
+                                    <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
+
+                                    <button type="submit" class="close" onclick="event.preventDefault();document.getElementById('CloseIssue').submit();">&times;</button>
+                                    <form id="CloseIssue" action="{{ url('Close_Issue',$issue->id) }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PUT') }}
+                                    </form>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+
+                       
+                    </div>
+                </div>
+            </div>
 
 
 
+            @endforeach
         </div>
 
 

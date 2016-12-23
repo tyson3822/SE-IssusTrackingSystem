@@ -71,7 +71,7 @@
                             {{$project->subject}}
                             <div class="pull-right">
                                 <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
-                                <form id="GotoProject" action="{{ url('/project/{project->id}') }}" method="GET" style="display: none;">
+                                <form id="GotoProject" action="{{ url('/project/'.$project->id) }}" method="GET" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                                 @if($project->pivot['user_auth'] == 'manager')
