@@ -34,4 +34,11 @@ class MemberController extends Controller
         $user = $request->user();
         return view('Project_Member', compact('project', 'user'));
     }
+
+    public function removeProjectMember($project_id, $member_id)
+    {
+        $project = Project::find($project_id);
+        $project->users()->detach($member_id);
+        return redirect('/project/'.$project_id.'/project_member');
+    }
 }
