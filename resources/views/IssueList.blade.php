@@ -36,39 +36,28 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <label class="control-label col-md-3" style="text-align: left;">Issue Title : </label>
-                        <input class="form-control" style="width:60%" type="text" name="Issue_name">
-                        <label class="control-label col-md-4" style="text-align: left;">Priority : </label>
-                    <!--
-                    <div class="dropdown">
-                        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                        Extra small button <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                          </ul>
-                    </div>
-                    -->
-                    
+                        <input class="form-control" style="width:60%" type="text" name="Issue_name"><br>
+                        <label class="control-label col-md-3" style="text-align: left;">Priority : </label>
 
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                            High
-                                <span class="caret"></span>
-                            </button>
-                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                          </ul>
+
+                       <div>
+                           <form >                            
+                                <select name="selected" style="width:12%" >
+                                    <option value="High" style="color:red;">High</option>
+                                    <option value="Mid">Mid</option>
+                                    <option value="Low">Low</option>
+                                </select>                         
+                            </form> 
                         </div>
+                        <br>
 
 
-                        <label class="control-label col-md-4" style="text-align: left;">Issue Descript : </label>
+                        <label class="control-label col-md-3" style="text-align: left;">Issue Descript : </label>
                         <textarea class="form-control" rows="4" name="descript"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">submit</button>
                     </div>
                 </form>
             </div>
@@ -114,7 +103,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{url('/Setting')}}">Setting</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">User</label></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">user</label></li>
                         <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
 
@@ -144,7 +133,10 @@
                 $index = 0;
             ?>
 
+
+
         </div>
+
 
 
 
