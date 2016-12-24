@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c9c48809a88fd8fa9a475dcdb83b4306",
-    "content-hash": "eed70f9bb78e070125b937c1363906fd",
+    "hash": "e6baa26e845365a91359a3de9805eb1f",
+    "content-hash": "08291c5360a2f2ee6737d10cd294c499",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -63,16 +63,16 @@
         },
         {
             "name": "dcn/rbac",
-            "version": "1.1.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DynamicCodeNinja/RBAC.git",
-                "reference": "cd824530389b0ec58120d18b50cf0ca79ed755d5"
+                "reference": "27407e17c9a161829c41e34337e5ebd33771e969"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DynamicCodeNinja/RBAC/zipball/cd824530389b0ec58120d18b50cf0ca79ed755d5",
-                "reference": "cd824530389b0ec58120d18b50cf0ca79ed755d5",
+                "url": "https://api.github.com/repos/DynamicCodeNinja/RBAC/zipball/27407e17c9a161829c41e34337e5ebd33771e969",
+                "reference": "27407e17c9a161829c41e34337e5ebd33771e969",
                 "shasum": ""
             },
             "require": {
@@ -104,7 +104,7 @@
                 "rbac",
                 "roles"
             ],
-            "time": "2015-08-21 01:14:05"
+            "time": "2016-10-26 01:26:01"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2163,16 +2163,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "0.9.6",
+            "version": "0.9.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "65d4ca18e15cb02eeb1e5336f884e46b9b905be0"
+                "reference": "4de7969f4664da3cef1ccd83866c9f59378c3371"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/65d4ca18e15cb02eeb1e5336f884e46b9b905be0",
-                "reference": "65d4ca18e15cb02eeb1e5336f884e46b9b905be0",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/4de7969f4664da3cef1ccd83866c9f59378c3371",
+                "reference": "4de7969f4664da3cef1ccd83866c9f59378c3371",
                 "shasum": ""
             },
             "require": {
@@ -2224,7 +2224,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2016-09-30 12:09:40"
+            "time": "2016-12-19 14:50:55"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2479,16 +2479,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.3",
+            "version": "4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929"
+                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/903fd6318d0a90b4770a009ff73e4a4e9c437929",
-                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c14196e64a78570034afd0b7a9f3757ba71c2a0a",
+                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a",
                 "shasum": ""
             },
             "require": {
@@ -2538,7 +2538,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-11-28 16:00:31"
+            "time": "2016-12-20 15:22:42"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3592,7 +3592,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "dcn/rbac": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
