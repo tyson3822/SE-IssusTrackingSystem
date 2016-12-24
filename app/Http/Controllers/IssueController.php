@@ -29,6 +29,7 @@ class IssueController extends Controller
      */
     public function index($project_id, Request $request)
     {
+        echo $project_id;
         $user = $request->user();
         $project = $user->projects()->find($project_id);
         return view('IssueList', compact('project', 'user'));

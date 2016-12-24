@@ -71,7 +71,8 @@
                             {{$project->subject}}
                             <div class="pull-right">
                                 <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
-                                <form id="GotoProject" action="{{ url('/project/{project->id}') }}" method="GET" style="display: none;">
+                                {{$project->id}}
+                                <form id="GotoProject" method="GET" style="display: none;" action="{{ url('/project/'.$project->id) }}">
                                     {{ csrf_field() }}
                                 </form>
                                 @if($project->pivot['user_auth'] == 'manager')
@@ -87,10 +88,9 @@
                         </div>
                     </div>
                     <div class="panel-body">
-
-                        {{--@for ($count = 0; $count < $project_issue_count[$index]; $count++)--}}
-                            {{--<img src="simple_issue.png" class="col-md-offset-1">--}}
-                        {{--@endfor--}}
+                        {{--@foreach($project->issues as $issue)
+                            <img src="simple_issue.png" class="col-md-offset-1">
+                        @endforeach--}}
                     </div>
                 </div>
             </div>
