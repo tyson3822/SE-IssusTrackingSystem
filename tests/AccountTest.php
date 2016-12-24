@@ -9,12 +9,6 @@ class AccountTest extends TestCase
 	//use DatabaseMigrations;
 	use DatabaseTransactions;
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-
     //建立帳戶
     public function testSignUp()
     {
