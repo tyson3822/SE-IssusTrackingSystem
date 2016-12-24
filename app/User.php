@@ -29,6 +29,15 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
         'password', 'remember_token',
     ];
 
+    public function setPasswordAttribute($value)
+    {
+        if ($value) {
+            $value = bcrypt($value);
+        }
+
+        $this->attributes['password'] = $value;
+    }
+
     /**
      * Get the projects that user join.
      */

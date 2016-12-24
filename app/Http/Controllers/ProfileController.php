@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
+use App\User;
 
 class ProfileController extends Controller
 {
@@ -10,7 +12,7 @@ class ProfileController extends Controller
      * Create a new controller instance.
      *
      * @return void
-     */
+     */    
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,10 +25,28 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('Setting')
-            ->with('user_name','ABC')
-            ->with('email','a@b.com')
-            ->with('password','123456')
-            ->with('access','admin')
+        $user = Auth::user();
+       return view('/Setting',compact('user'));
     }
+
+
+    public function update(Request $request)
+    {      
+        print_r($request->name);
+
+        $this->validate($request,[
+            'name' => 'required|max:255',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->password = $request->password;
+        $user->save();
+
+        flash('Your account has been updated!');
+        
+        return back();
+    }
+
 }

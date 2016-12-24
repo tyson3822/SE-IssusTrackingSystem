@@ -40,7 +40,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{url('setting')}}">設定</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user_name}}</label></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
                         <li><a href="{{url('/logout')}}">登出</a></li>
                     </ul>
                 </div>
@@ -66,7 +66,7 @@
                     ?>
                     @foreach($users as $user)
                         <?php
-                            if($user['access'] == 'admin'){
+                            if($user['access'] == 'admin' or true){
                                 if($admin_count % 2 == 0){
                         ?>              
                             <div class="col-md-offset-1 col-md-5">

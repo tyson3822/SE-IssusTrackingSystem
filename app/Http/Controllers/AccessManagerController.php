@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\User;
 
-class HomeController extends Controller
+class AccessManagerController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
@@ -24,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('auth.login');
+        $user = Auth::user();
+        $users = User::get();
+        return view('/Access_Manage',compact('user','users'));
     }
 }
