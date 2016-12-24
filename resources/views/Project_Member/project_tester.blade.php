@@ -1,4 +1,4 @@
-<div class="col-md-4 col-md-offset-1">
+<div class="col-md-6 col-md-offset-2">
 	<div class="panel panel-success">
     	<div class="panel-heading">
         	<h3 class="panel-title">Project Tester</h3>
@@ -9,23 +9,25 @@
         			@if($user_project->pivot['user_auth'] == 'manager')
         				@foreach($project->users as $member)
         					@if($member->pivot['user_auth'] == 'tester')
-        						<label class="col-md-3" style="padding: 7px; margin: 0px;">{{$member->name}}</label>
-        						<form method="POST" action="{{ route('Change_project_member_auth',['project_id' => $project->id,'member_id' => $member->id]) }}">
-                            		{{ csrf_field() }}
-                            		{{ method_field('PUT') }}
-                            		<select class="selectpicker col-md-3" style="width:33%; padding: 7px;" name="auth">
-                                		<option value="manager">Manager</option>
-                                		<option value="developer">Developer</option>
-                                		<option value="tester" selected="selected">Tester</option>
-                                		<option value="general">General User</option>
-                            		</select>
-                            		<button type="submit" class="btn btn-primary col-md-2 col-md-offset-1">儲存</button>
-                        		</form>
-                        		<form method="POST" action="{{ route('Delete_project_member',['project_id'=> $project->id,'member_id' => $member->id]) }}">
-                            		{{ csrf_field() }}
-                            		{{ method_field('DELETE') }}
-                            		<button type="button" class="btn btn-danger col-md-2">剔除</button>
-                        		</form>
+                                <div class="row" style="margin: 5px;">
+                                    <label class="col-md-3" style="padding: 7px; margin: 0px;">{{$member->name}}</label>
+                                    <form method="POST" action="{{ route('Change_project_member_auth',['project_id' => $project->id,'member_id' => $member->id]) }}">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PUT') }}
+                                        <select class="selectpicker col-md-3" style="width:33%; padding: 7px;" name="user_auth">
+                                            <option value="manager">Manager</option>
+                                            <option value="developer">Developer</option>
+                                            <option value="tester" selected="selected">Tester</option>
+                                            <option value="general">General User</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary col-md-2 col-md-offset-1" style="margin-right: 2px">儲存</button>
+                                    </form>
+                                    <form method="POST" action="{{ route('Delete_project_member',['project_id'=> $project->id,'member_id' => $member->id]) }}">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button type="button" class="btn btn-danger col-md-2">剔除</button>
+                                    </form>
+                                </div>
         					@endif
         				@endforeach
         			@else
