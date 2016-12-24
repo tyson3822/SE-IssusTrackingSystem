@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{route('project_list')}}">專案</a></li>
-                    <li class="active">議題</li>
+                    <li class="active"><a href="{{route('issue_list',['project_id' => $project->id])}}">議題</a></li>
                     @include('layouts.AccountList_navbar')
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -48,97 +48,11 @@
         </div>
     </nav>
 
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">Project Manager</h3>
-        </div>
-        <div class="panel-body">
-            @foreach($project->users as $member) 
-                @if($member->pivot['user_auth'] == 'manager')
-                    <label class="col-md-1">{{$member->name}}</label>
-                    @foreach($user->projects as $user_project)
-                        @if($user_project->subject == $project->subject && $user_project->pivot['user_auth'] == 'manager')
-                            <form method="POST" action="{{ route('Change_project_member_auth',['project_id' => $project->id,'member_id' => $member->id]) }}">
-                                {{ csrf_field() }}
-                                {{ method_field('PUT') }}
-                                <select class="selectpicker" style="width:30%" name="auth">
-                                    <option value="manager" selected="selected">Manager</option>
-                                    <option value="developer">Developer</option>
-                                    <option value="general">General</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary">儲存</button>
-                            </form>
-                            <form method="POST" action="{{ route('Delete_project_member',['project_id'=> $project->id,'member_id' => $member->id]) }}">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="button" class="btn btn-danger">剔除</button>
-                            </form>
-                        @else
-                            <label>Manager</label>
-                        @endif
-                    @endforeach
-                @endif
-            @endforeach
-        </div>
-    </div>
-    
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title">Developer</h3>
-        </div>
-        <div class="panel-body">
-            {{--@foreach($project->users as $member)
-                @if($member->pivot['user_auth'] == 'manager')
-                    <label name="">Developer name</label>
-                    @if($user->projects[$project->submit]->pivot['user_auth'] == 'manager')
-                        <form method="POST" action="{{ url('Change_project_member_auth',['project_id' => $project->id,'member_id' => $member->id]) }}">
-                            {{ csrf_field() }}
-                            {{ method_field('PUT') }}
-                            <select class="selectpicker col-md-offset-1" style="width:30%" name="role">
-                                <option value="manager">Manager</option>
-                                <option value="developer" selected="selected">Developer</option>
-                                <option value="general">General</option>
-                            </select>
-                        </form>
-                        <form method="POST" action="{{ url('Delete_project_member',['project_id'=> $project->id,'member_id' => $member->id]) }}">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger">剔除</button>
-                        </form>
-                    @endif
-                @endif
-            @endforeach--}}
-        </div>
-    </div>
+    @include('Project_Member.project_manager')
+    @include('Project_Member.project_developer')
+    @include('Project_Member.project_tester')
+    @include('Project_Member.project_general')
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">General</h3>
-        </div>
-        <div class="panel-body">
-            {{--@foreach($project->users as $member)
-                @if($member->pivot['user_auth'] == 'general')
-                    <label name="">General name</label>
-                    @if($user->projects[$project->submit]->pivot['user_auth'] == 'manager')
-                        <form method="POST" action="{{ url('Change_project_member_auth',['project_id' => $project->id,'member_id' => $member->id]) }}">
-                            {{ csrf_field() }}
-                            {{ method_field('PUT') }}
-                            <select class="selectpicker col-md-offset-1" style="width:30%" name="role">
-                                <option value="manager">Manager</option>
-                                <option value="developer">Developer</option>
-                                <option value="general" selected="selected">General</option>
-                            </select>
-                        </form>
-                        <form method="POST" action="{{ url('Delete_project_member',['project_id'=> $project->id,'member_id' => $member->id]) }}">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger">剔除</button>
-                        </form>
-                    @endif
-                @endif
-            @endforeach--}}
-        </div>
-    </div> 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 

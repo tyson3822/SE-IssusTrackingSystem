@@ -104,12 +104,12 @@
                 </div>
 
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{route('project_list')}}">Project List</a>
+                    <a class="navbar-brand" href="{{route('project_list')}}">專案</a>
                 </div>
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a>Issue List</a></li>
+                        <li class="active"><a>議題</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -143,7 +143,6 @@
             <?php
                 $index = 0;
             ?>
-            {{$project->id}}
             <a href="{{ route('project_member',['project_id' => $project->id]) }}">project member</a>
         </div>
 
