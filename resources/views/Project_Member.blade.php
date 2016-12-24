@@ -31,14 +31,14 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a>Project List</a></li>
-                    <li class="active">Issue List</li>
+                    <li><a>專案</a></li>
+                    <li class="active">議題</li>
                     @include('layouts.AccountList_navbar')
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{url('/setting')}}">Setting</a></li>
+                    <li><a href="{{url('setting')}}">設定</a></li>
                     <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
-                    <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+                    <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登入</a></li>
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -54,22 +54,25 @@
         <div class="panel-body">
             @foreach($project->users as $member)
                 @if($member->pivot['user_auth'] == 'manager')
-                    <label name="">prject manager name</label>
+                    <label>prject manager name</label>
                     @if($user->projects[$project->submit]->pivot['user_auth'] == 'manager')
-                        <form method="POST" action="{{ url('/Change_project_member_role/{project_id}') }}">
+                        <form method="POST" action="{{ url('Change_project_member_auth',['project_id' => $project->id,'member_id' => $member->id]) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
-                            <select class="selectpicker col-md-offset-1" style="width:30%" name="role">
+                            <select class="selectpicker col-md-offset-1" style="width:30%" name="auth">
                                 <option value="manager" selected="selected">Manager</option>
                                 <option value="developer">Developer</option>
                                 <option value="general">General</option>
                             </select>
+                            <button type="submit" class="btn btn-primary">儲存</button>
                         </form>
-                        <form method="POST" action="{{ url('/Delete_project_member/{project_id}') }}">
+                        <form method="POST" action="{{ url('Delete_project_member',['project_id'=> $project->id,'member_id' => $member->id]) }}">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger">剔除</button>
+                            <button type="button" class="btn btn-danger">剔除</button>
                         </form>
+                    @else
+                        <label>Manager</label>
                     @endif
                 @endif
             @endforeach
@@ -85,7 +88,7 @@
                 @if($member->pivot['user_auth'] == 'manager')
                     <label name="">Developer name</label>
                     @if($user->projects[$project->submit]->pivot['user_auth'] == 'manager')
-                        <form method="POST" action="{{ url('/Change_project_member_role/{project_id}') }}">
+                        <form method="POST" action="{{ url('Change_project_member_auth',['project_id' => $project->id,'member_id' => $member->id]) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <select class="selectpicker col-md-offset-1" style="width:30%" name="role">
@@ -94,7 +97,7 @@
                                 <option value="general">General</option>
                             </select>
                         </form>
-                        <form method="POST" action="{{ url('/Delete_project_member/{project_id}') }}">
+                        <form method="POST" action="{{ url('Delete_project_member',['project_id'=> $project->id,'member_id' => $member->id]) }}">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">剔除</button>
@@ -114,7 +117,7 @@
                 @if($member->pivot['user_auth'] == 'general')
                     <label name="">General name</label>
                     @if($user->projects[$project->submit]->pivot['user_auth'] == 'manager')
-                        <form method="POST" action="{{ url('/Change_project_member_role/{project_id}') }}">
+                        <form method="POST" action="{{ url('Change_project_member_auth',['project_id' => $project->id,'member_id' => $member->id]) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <select class="selectpicker col-md-offset-1" style="width:30%" name="role">
@@ -123,7 +126,7 @@
                                 <option value="general" selected="selected">General</option>
                             </select>
                         </form>
-                        <form method="POST" action="{{ url('/Delete_project_member/{project_id}') }}">
+                        <form method="POST" action="{{ url('Delete_project_member',['project_id'=> $project->id,'member_id' => $member->id]) }}">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">剔除</button>
