@@ -88,13 +88,13 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id
 	//output: project，user
 	//view('IssueList')
-	Route::get('/project/{project_id}','IssueController@index');
+	Route::get('/project/{project_id}','IssueController@index')->name('issue_list');
 
 	//顯示專案成員畫面
 	//input: project_id
 	//output: user，project
 	//view('Project_Member')
-	Route::get('/project/{project_id}/project_member','MemberController@index');
+	Route::get('/project/{project_id}/project_member','MemberController@index')->name('project_member');
 
 	//剔除專案成員
 	//input: user_id,project_id
