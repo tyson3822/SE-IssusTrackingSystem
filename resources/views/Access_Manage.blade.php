@@ -66,7 +66,7 @@
                     ?>
                     @foreach($users as $user)
                         <?php
-                            if($user['access'] == 'admin'){
+                            if($user['access'] == 'admin' or true){
                                 if($admin_count % 2 == 0){
                         ?>              
                             <div class="col-md-offset-1 col-md-5">

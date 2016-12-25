@@ -24,47 +24,31 @@ Route::group(['middleware' => ['web']], function () {
 	//input: u
 	//output: user_name,email,password,access
 	//view('Setting')
-	Route::get('/setting',function(){
-		$user = ['name'=>'ABC','email'=>'a@b.com','password'=>'123456','access'=>'admin'];
-
-		return view('Setting')
-			->with('user',$user);
-	})->name('setting');
+	Route::get('/setting','ProfileController@index');
 
 	//使用者變更自己的資料
 	//input: user_name,password,email(null代表沒有更改,email用來指向使用者)
 	//
 	//redirect('Setting')
-	Route::put('/setting',function (){
-		$user = ['name'=>'abc','email'=>'a@b.com','password'=>'123','access'=>'admin'];
-
-		return view('Setting')
-			->with('user',$user);
-	})->name('Change_user_info');
+	Route::put('/setting/update','ProfileController@update');
 
 	//顯示管理使用者畫面
 	//input:
 	//output: 目前使用者的名稱,以及所有使用者的名稱和權限(陣列)
 	//view('Access_Manage')
-	Route::get('/access_manage',function(){
-		$users = array(['name'=>'abc','access'=>'admin'],['name'=>'efd','access'=>'user']);
-
-		return view('Access_Manage')
-			->with('users',$users)
-			->with('user_name','abc');
-	});
+	Route::get('/access_manage','AccessManagerController@index');
 
 	//接收使用者權限變更資訊
 	//input: 使用者名稱,使用者email,使用者密碼(新的)
 	//output: 
 	//redirect('Access_Manage')
-	Route::put('/access_manage',function(){})->name('Change_user_auth');
+	//Route::put('/access_manage',function(){})->name('Change_user_auth');
 
 	//刪除使用者
 	//input: user id
 	//output: 
 	//redirect('Access_Manage')
-	Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
+	//Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
 
 	//顯示Project List頁面
 	//input: 
@@ -82,7 +66,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id
 	//output: 
 	//redirect('ProjectList')
-	Route::put('/project/{project_id}/close',function(){})->name('Close_Project');
+	//Route::put('/project/{project_id}/close',function(){})->name('Close_Project');
 
 	//顯示Issue List頁面
 	//input: project_id
