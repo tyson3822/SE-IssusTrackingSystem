@@ -104,17 +104,17 @@
                 </div>
 
                 <div class="navbar-header">
-                    <a class="navbar-brand">Project List</a>
+                    <a class="navbar-brand" href="{{route('project_list')}}">專案</a>
                 </div>
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a>Issue List</a></li>
+                        <li class="active"><a>議題</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{url('/Setting')}}">Setting</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">User</label></li>
+                        <li><a href="{{route('setting')}}">Setting</a></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
                         <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
 
@@ -143,7 +143,7 @@
             <?php
                 $index = 0;
             ?>
-
+            <a href="{{ route('project_member',['project_id' => $project->id]) }}">project member</a>
         </div>
 
 

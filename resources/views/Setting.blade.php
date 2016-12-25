@@ -30,11 +30,11 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{url('project')}}">專案</a></li>
+                        <li><a href="{{route('project_list')}}">專案</a></li>
                         @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="{{url('/setting')}}">設定</a></li>
+                        <li class="active"><a href="{{route('setting')}}">設定</a></li>
                         <li><label class="navbar-text" style="margin-bottom:0px">{{$user['name']}}</label></li>
                         <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
@@ -62,6 +62,7 @@
             </div>
             <div class="container col-md-5" style="border-left-width:1px;border-left-style:solid;border-color:#bababa">
                 <label class="col-md-offset-2" style="font-size:30px; color:black;">Edit personal information</label>
+
                 {!! Form::open(array('url' => 'setting/update', 'method' => 'put')) !!}
                     {{ csrf_field() }}
 
