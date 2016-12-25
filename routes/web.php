@@ -21,20 +21,20 @@ Route::group(['middleware' => ['web']], function () {
 
 
 	//顯示使用者設定頁面
-	//input: u
-	//output: user_name,email,password,access
+	//input: 
+	//output: user
 	//view('Setting')
-	Route::get('/setting','ProfileController@index');
+	Route::get('/setting','ProfileController@index')->name('setting');
 
 	//使用者變更自己的資料
 	//input: user_name,password,email(null代表沒有更改,email用來指向使用者)
 	//
 	//redirect('Setting')
-	Route::put('/setting/update','ProfileController@update');
+	Route::put('/setting/update','ProfileController@update')->name('Change_user_info');;
 
 	//顯示管理使用者畫面
 	//input:
-	//output: 目前使用者的名稱,以及所有使用者的名稱和權限(陣列)
+	//output: user, users
 	//view('Access_Manage')
 	Route::get('/access_manage','AccessManagerController@index');
 
