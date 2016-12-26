@@ -88,9 +88,9 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        {{--@foreach($project->issues as $issue)
+                        @foreach($project->issues as $issue)
                             <img src="simple_issue.png" class="col-md-offset-1">
-                        @endforeach--}}
+                        @endforeach
                     </div>
                 </div>
             </div>
