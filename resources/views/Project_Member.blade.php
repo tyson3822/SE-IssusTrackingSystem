@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <!--<link href="/css/app.css" rel="stylesheet">-->
+    <style class="search_style"></style>
 
     <!-- Referencing Bootstrap CSS that is hosted locally -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +40,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{route('setting')}}">設定</a></li>
                     <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
-                    <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登入</a></li>
+                    <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -48,6 +49,7 @@
         </div>
     </nav>
 
+    @include('Project_Member.Add_member')
     @include('Project_Member.project_manager')
     @include('Project_Member.project_developer')
     @include('Project_Member.project_tester')
