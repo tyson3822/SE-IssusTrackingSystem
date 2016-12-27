@@ -39,16 +39,16 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/access_manage','AccessManagerController@index');
 
 	//接收使用者權限變更資訊
-	//input: 使用者名稱,使用者email,使用者密碼(新的)
+	//input: user_id,auth
 	//output: 
 	//redirect('Access_Manage')
-	//Route::put('/access_manage',function(){})->name('Change_user_auth');
+	Route::put('/access_manage/{user_id}',function(){})->name('Change_user_auth');
 
 	//刪除使用者
 	//input: user id
 	//output: 
 	//redirect('Access_Manage')
-	//Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
+	Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
 
 	//顯示Project List頁面
 	//input: 
