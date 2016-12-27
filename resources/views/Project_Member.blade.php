@@ -12,7 +12,11 @@
 
     <!-- Styles -->
     <!--<link href="/css/app.css" rel="stylesheet">-->
-    <style class="search_style"></style>
+    <style id="my-search">
+        .wrap:not([data-index*=""]){
+            display: none;
+        }
+    </style>
 
     <!-- Referencing Bootstrap CSS that is hosted locally -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +64,18 @@
 
     <!-- Scripts -->
     <!--<script src="/js/app.js"></script>-->
-
+    <script type="text/javascript">
+        var that = $(this);
+        var mSearch = $("#my-search");
+        $("#search-input").bind("change paste keyup", function(){
+            var value = $(this).val();
+            if (!value) {
+                mSearch.html("");
+                return;
+            }; 
+            mSearch.html('.wrap:not([data-index*="' + value.toLowerCase() + '"]) {display: none;}');
+        });
+    </script>
     <!-- Referencing Bootstrap JS that is hosted locally -->
     <script src="/js/bootstrap.min.js"></script>
 
