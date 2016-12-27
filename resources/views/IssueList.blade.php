@@ -36,39 +36,24 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <label class="control-label col-md-3" style="text-align: left;">Issue Title : </label>
-                        <input class="form-control" style="width:60%" type="text" name="Issue_name">
-                        <label class="control-label col-md-4" style="text-align: left;">Priority : </label>
-                    <!--
-                    <div class="dropdown">
-                        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                        Extra small button <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                          </ul>
-                    </div>
-                    -->
-                    
-
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                            High
-                                <span class="caret"></span>
-                            </button>
-                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                          </ul>
+                        <input class="form-control" style="width:60%" type="text" name="Issue_name"><br>
+                        <label class="control-label col-md-3" style="text-align: left;">Priority : </label>
+                       <div>
+                           <form >                            
+                                <select name="selected" style="width:12%" >
+                                    <option value="High" style="color:red;">High</option>
+                                    <option value="Mid">Mid</option>
+                                    <option value="Low">Low</option>
+                                </select>                         
+                            </form> 
                         </div>
-
-
-                        <label class="control-label col-md-4" style="text-align: left;">Issue Descript : </label>
+                        <br>
+                        <label class="control-label col-md-3" style="text-align: left;">Issue Descript : </label>
                         <textarea class="form-control" rows="4" name="descript"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">submit</button>
                     </div>
                 </form>
             </div>
@@ -95,7 +80,7 @@
             </div>
         </div>
     </div>
-
+   
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
             <div class="container-fluid">
@@ -113,18 +98,18 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{route('setting')}}">Setting</a></li>
+                        <li><a href="{{route('setting')}}">設定</a></li>
                         <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
-                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-
                     </ul>
                 </div>
             </div>
         </nav>
 
         <div class="row col-md-offset-1">
-            <h1 style="color: black;" class="col-md-8">Project Name</h1>
+            <h1 style="color: black;" class="col-md-8">{{$project->subject}}</h1><br>
+
             <div class="col-md-4">
                 <form>
                     <button type="button" class="btn btn-default col-md-4 " data-toggle="modal" data-target="#AddIssueModal">
@@ -137,13 +122,47 @@
                     </button>
                 </form>
             </div>
+            <!-- <br> -->
         </div>
 
         <div class="row col-md-offset-1 col-md-10">
             <?php
                 $index = 0;
             ?>
-            <a href="{{ route('project_member',['project_id' => $project->id]) }}">project member</a>
+            @foreach ($project->issues as $issue)
+
+            <div class="col-md-4">
+                <div class="panel panel-primary" style="padding-left: 0px;padding-right: 0px;">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            {{$issue->title}}
+                            <div class="pull-right">
+
+                                <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('issue_Descript').submit();">Descript</a>
+                                <form id="issue_Descript" action="{{ url('/issue/'.$issue->id) }}" method="GET" style="display: none;">{{ csrf_field() }}</form> 
+                                @if($project->pivot['user_auth'] == 'manager')
+                                    <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
+
+                                    <button type="submit" class="close" onclick="event.preventDefault();document.getElementById('CloseIssue').submit();">&times;</button>
+                                    <form id="CloseIssue" action="{{ url('Close_Issue',$issue->id) }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PUT') }}
+                                    </form>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div> 
+                            <p>Priority: {{$issue->priority}}</p>
+                            <p>State: {{$issue->state}}</p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            @endforeach
         </div>
 
 
