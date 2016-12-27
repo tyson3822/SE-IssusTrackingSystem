@@ -51,14 +51,12 @@
                         </div>
                         <br>
 
-                        @if($project->pivot['user_auth'] == 'manager')
+                        <!-- @if($project->pivot['user_auth'] == 'manager')
                             
                         <label class="control-label col-md-3" style="text-align: left;">Members : </label>
                         <input class="form-control" style="width:60%" type="text" name="Members_name"><br>
 
-                        @endif
-<!--                         <label class="control-label col-md-3" style="text-align: left;">Members : </label>
-                        <input class="form-control" style="width:60%" type="text" name="Members_name"><br> -->
+                        @endif -->
 
                         <label class="control-label col-md-3" style="text-align: left;">Issue Descript : </label>
                         <textarea class="form-control" rows="4" name="descript"></textarea>
@@ -165,8 +163,8 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                            {{$issue->description}}
 
-                       
                     </div>
                 </div>
             </div>
