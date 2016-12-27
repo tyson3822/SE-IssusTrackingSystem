@@ -38,8 +38,6 @@
                         <label class="control-label col-md-3" style="text-align: left;">Issue Title : </label>
                         <input class="form-control" style="width:60%" type="text" name="Issue_name"><br>
                         <label class="control-label col-md-3" style="text-align: left;">Priority : </label>
-
-
                        <div>
                            <form >                            
                                 <select name="selected" style="width:12%" >
@@ -50,14 +48,6 @@
                             </form> 
                         </div>
                         <br>
-
-                        <!-- @if($project->pivot['user_auth'] == 'manager')
-                            
-                        <label class="control-label col-md-3" style="text-align: left;">Members : </label>
-                        <input class="form-control" style="width:60%" type="text" name="Members_name"><br>
-
-                        @endif -->
-
                         <label class="control-label col-md-3" style="text-align: left;">Issue Descript : </label>
                         <textarea class="form-control" rows="4" name="descript"></textarea>
                     </div>
@@ -90,7 +80,7 @@
             </div>
         </div>
     </div>
-
+   
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
             <div class="container-fluid">
@@ -148,8 +138,9 @@
                         <div class="panel-title">
                             {{$issue->title}}
                             <div class="pull-right">
+
                                 <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('issue_Descript').submit();">Descript</a>
-                                <form id="issue_Descript" action="{{ url('/issue/'.$issue->id) }}" method="GET" style="display: none;">{{ csrf_field() }}</form>
+                                <form id="issue_Descript" action="{{ url('/issue/'.$issue->id) }}" method="GET" style="display: none;">{{ csrf_field() }}</form> 
                                 @if($project->pivot['user_auth'] == 'manager')
                                     <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
 
@@ -163,7 +154,11 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                            {{$issue->description}}
+                        <div> 
+                            <p>Priority: {{$issue->priority}}</p>
+                            <p>State: {{$issue->state}}</p>
+
+                        </div>
 
                     </div>
                 </div>
@@ -173,7 +168,6 @@
 
             @endforeach
         </div>
-
 
 
 
