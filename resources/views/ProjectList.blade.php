@@ -36,11 +36,11 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{url('project_list')}}">專案</a></li>
+                        <li class="active"><a href="{{route('project_list')}}">專案</a></li>
                         @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{url('setting')}}">設定</a></li>
+                        <li><a href="{{route('setting')}}">設定</a></li>
                         <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
                         <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
@@ -67,30 +67,30 @@
             <div class="col-md-4">
                 <div class="panel panel-info" style="padding-left: 0px;padding-right: 0px;">
                     <div class="panel-heading">
-                        <div class="panel-title">
-                            {{$project->subject}}
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('GotoProject').submit();">Go</a>
-                                <form id="GotoProject" action="{{ url('/project/'.$project->id) }}" method="GET" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                                @if($project->pivot['user_auth'] == 'manager')
-                                    <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
-
-                                    <button type="submit" class="close" onclick="event.preventDefault();document.getElementById('CloseProject').submit();">&times;</button>
-                                    <form id="CloseProject" action="{{ url('Close_Project',$project->id) }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
-                                    </form>
-                                @endif
+                        <div class="panel-title  clearfix">
+                            <div class="pull-left">
+                                {{$project->subject}}
                             </div>
+                            @if($project->pivot['user_auth'] == 'manager')
+                                <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
+
+                                <form method="POST" action="{{ route('Close_Project',$project->id) }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('PUT') }}
+                                    <button type="submit" class="close" style="margin-left: 5px;">&times;</button>
+                                </form>
+                            @endif
+
+                            <form method="GET" action="{{ url('/project',['project_id' =>$project->id]) }}">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-default btn-sm pull-right" style="padding: 4px;">Go</button>
+                            </form>
                         </div>
                     </div>
                     <div class="panel-body">
-
-                        {{--@for ($count = 0; $count < $project_issue_count[$index]; $count++)--}}
-                            {{--<img src="simple_issue.png" class="col-md-offset-1">--}}
-                        {{--@endfor--}}
+                        @foreach($project->issues as $issue)
+                            <img src="simple_issue.png" class="col-md-offset-1">
+                        @endforeach
                     </div>
                 </div>
             </div>
