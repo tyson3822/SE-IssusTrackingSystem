@@ -1,10 +1,10 @@
 <div class="col-md-offset-2">
-    <form class="form-horizontal col-md-8" method="POST" action="{{ route('Change_user_auth') }}" style="padding: 0px">
+    <form class="form-horizontal col-md-8" method="POST" action="{{ route('Change_user_auth',['user_id' => $every_user->id]) }}" style="padding: 0px">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
         <img src="person.png" class="img-circle">
         <label class="col-md-offset-1">{{$every_user->name}}</label>
-        <select class="selectpicker col-md-offset-1" style="width: 30%" name="access">
+        <select class="selectpicker col-md-offset-1" style="width: 30%" name="auth">
             <option value="admin" selected="selected">系統管理者</option>
             <option value="user">系統成員</option>
         </select>
