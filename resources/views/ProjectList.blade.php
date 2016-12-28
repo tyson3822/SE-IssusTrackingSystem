@@ -67,7 +67,7 @@
             <div class="col-md-4">
                 <div class="panel panel-info" style="padding-left: 0px;padding-right: 0px;">
                     <div class="panel-heading">
-                        <div class="panel-title  clearfix">
+                        <div class="panel-title clearfix">
                             <div class="pull-left">
                                 {{$project->subject}}
                             </div>

@@ -42,8 +42,8 @@ Route::group(['middleware' => ['web']], function () {
 	//input: user_id,auth
 	//output: 
 	//redirect('Access_Manage')
-	Route::put('/access_manage/{user_id}',function(){})->name('Change_user_auth');
-
+	//Route::put('/access_manage/{user_id}',function(){})->name('Change_user_auth');
+  
 	//刪除使用者
 	//input: user id
 	//output: 
@@ -74,6 +74,18 @@ Route::group(['middleware' => ['web']], function () {
 	//view('IssueList')
 	Route::get('/project/{project_id}','IssueController@index')->name('issue_list');
 
+	//新增issue
+	//input: project_id,issue_name,priority,descript,state預設是doing
+	//output:
+	//redirect('IssueList')
+	//Route::post('/project/{project_id}/add_issue',function(){})->name('Add_issue');
+
+	//關閉issue
+	//input: project_id,issue_id
+	//output:
+	//redirect('IssueList')
+	//Route::delete('/project/{project_id}/delete_issue/{issue_id}',function(){})->name('Delete_issue');
+
 	//顯示專案成員畫面
 	//input: project_id
 	//output: user，project
@@ -92,4 +104,15 @@ Route::group(['middleware' => ['web']], function () {
 	//redirect('Project_Memeber')
 	Route::put('/project/{project_id}/project_member/{member_id}/change_auth','MemberController@updateProjectMember')->name('Change_project_member_auth');
 
+	//顯示單一一個issue
+	//input: project_id,issue_id
+	//output: user,issue
+	//view('Issue')
+	Route::get('/project/{project_id}/issue/{issue_id}','TestController@index')->name('issue');
+
+	//變更issue資訊
+	//input: project_id,issue_id,priority,descript,state
+	//output: 
+	//redirect('Issue')
+	//Route::get('/project/{project_id}/issue/{issue_id}',function(){})->name('Change_issue_info');
 });
