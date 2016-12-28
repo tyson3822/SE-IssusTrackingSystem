@@ -84,7 +84,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id,issue_id
 	//output:
 	//redirect('IssueList')
-	//Route::delete('/project/{project_id}/delete_issue/{issue_id}',function(){})->name('Delete_issue');
+	Route::delete('/project/{project_id}/delete_issue/{issue_id}','IssueController@closeIssue')->name('Delete_issue');
 
 	//顯示專案成員畫面
 	//input: project_id
