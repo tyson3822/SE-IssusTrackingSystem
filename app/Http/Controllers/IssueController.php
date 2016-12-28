@@ -7,6 +7,7 @@
  */
 
 namespace App\Http\Controllers;
+use App\Issue;
 use App\Project;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,22 @@ class IssueController extends Controller
             'description' => $request->description,
             'priority' => $request->priority,
             'state' => 'ready',
+        ]);
+        $issue->logs()->create([
+            'title' => $issue->title,
+            'description' => $issue->description,
+            'priority' => $issue->priority,
+            'state' => $issue->state,
+        ]);
+        return redirect('/project/'.$project->id);
+    }
+
+    public function closeIssue(Request $request)
+    {
+        $project = Project::find($request->project_id);
+        $issue = Issue::find($request->issue_id);
+        $issue->update([
+            'state' => 'close',
         ]);
         $issue->logs()->create([
             'title' => $issue->title,
