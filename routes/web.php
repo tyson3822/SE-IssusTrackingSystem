@@ -111,7 +111,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/project/{project_id}/issue/{issue_id}','IssueController@showIssue')->name('issue');
 
 	//變更issue資訊
-	//input: project_id,issue_id,priority,descript,state
+	//input: project_id,issue_id,priority,description,state
 	//output: 
 	//redirect('Issue')
 	//Route::get('/project/{project_id}/issue/{issue_id}',function(){})->name('Change_issue_info');
