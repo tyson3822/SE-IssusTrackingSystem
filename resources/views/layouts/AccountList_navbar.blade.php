@@ -1,7 +1,3 @@
-<?php 
-    if($user['access'] == 'admin'){
- ?>
-        <li><a href="{{url('/Access_Manage')}}">AccountList</a></li>
-<?php
-    }
-?>
+@role('admin')
+    <li><a href="{{url('/access_manage')}}">帳號管理</a></li>
+@endrole

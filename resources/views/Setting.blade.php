@@ -30,13 +30,13 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{url('/projectlist')}}">ProjectList</a></li>
+                        <li><a href="{{route('project_list')}}">專案</a></li>
                         @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="{{url('/Setting')}}">Setting</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user['name']}}</label></li>
-                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+                        <li class="active"><a href="{{route('setting')}}">設定</a></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
+                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                     </ul>
                 </div>
@@ -46,37 +46,62 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1" style="border-bottom-width:1px;border-bottom-style:solid;border-color:#bababa">
                 <div class="col-md-offset-1">
-                    <p style="font-size:50px;color:black;">Setting-</p>
+                    <p style="font-size:50px;color:black;">設定-</p>
+                    @include('flash::message')
                 </div>
             </div>     
         </div>
         <div class="row">
             <div class="container col-md-offset-1 col-md-5" style="border-right-width:1px;border-right-style:solid;border-color:#bababa">
-                <label class="col-md-offset-2" style="font-size:30px; color:black;">Personal information</label>
+                <label class="col-md-offset-4" style="font-size:30px; color:black;">個人資訊</label>
                 <p class="col-md-offset-1" style="font-size:18px;color: black">
-                    <label>User Name : {{$user['name']}}</label><br>
-                    <label>Email : {{$user['email']}}</label><br>
-                    <label>Password : {{$user['password']}}</label><br>
-                    <label>access : {{$user['access']}}</label>
+                    <label>使用者名稱 : {{$user->name}}</label><br>
+                    <label>Email : {{$user->email}}</label><br>
+                    <label>權限 : {{$user->role}}</label>
                 </p>
             </div>
             <div class="container col-md-5" style="border-left-width:1px;border-left-style:solid;border-color:#bababa">
-                <label class="col-md-offset-2" style="font-size:30px; color:black;">Edit personal information</label>
-                <form class="form-horizontal" role="form" method="POST" action="/Setting">
+                <label class="col-md-offset-4" style="font-size:30px; color:black;">編輯個人資訊</label>
+
+                {!! Form::open(array('url' => 'setting/update', 'method' => 'put')) !!}
                     {{ csrf_field() }}
-                    {{ method_field('PUT') }}
+
                     <div class="col-md-offset-1">
-                        <label class="col-md-4" style="font-size:18px;color: black">User Name : </label>
-                        <input type="text" name="user_name" class="form-control" style="width:60%">  
+                        {{Form::label('name', '使用者名稱',[
+                            'class' => 'col-md-4' ,
+                            'style' => 'font-size:18px;color: black'])}}
+
+                        {{Form::text('name',null,[
+                            'class' => 'form-control',
+                            'style' => 'width:60%'])}}
+
+                        <br>
                     </div>
-                    <br>
+
                     <div class="col-md-offset-1">
-                        <label class="col-md-4" style="font-size:18px;color: black">Password : </label>
-                        <input id="password" type="password" class="form-control" name="password" style="width:60%">  
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary col-md-offset-9" style="width:20%">Save</button>
-                </form>      
+                        {{Form::label('password', '密碼',[
+                            'class' => 'col-md-4', 
+                            'style' => 'font-size:18px;color: black'])}}
+
+                        {{Form::password('password',[
+                            'class' => 'form-control',
+                            'style' => 'width:60%'])}}
+
+                        {{Form::label('password_confirmation', '再次輸入密碼',[
+                            'class' => 'col-md-4', 
+                            'style' => 'font-size:18px;color: black'])}}
+
+                        {{Form::password('password_confirmation',[
+                            'class' => 'form-control',
+                            'style' => 'width:60%'])}}
+
+                        <br>
+                    </div>                    
+                    {{Form::submit('儲存',[
+                        'class' => 'btn btn-primary col-md-offset-9',
+                        'style' => 'width:20%'])}}
+                    
+                {!! Form::close() !!}   
             </div>
         </div>
     </div>

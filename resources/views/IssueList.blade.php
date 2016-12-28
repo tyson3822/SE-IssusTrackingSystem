@@ -24,9 +24,9 @@
     </script>
 </head>
 <body>
-    @include('Project.Create_Project_Modal')
-    @include('Project.Close_Project_Modal')
-
+   @include('Issue.Add_issue_modal')
+   @include('Issue.Close_issue_modal')
+   
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
             <div class="container-fluid">
@@ -34,11 +34,16 @@
                     <a class="navbar-brand">ITS</a>
                 </div>
 
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{route('project_list')}}">專案</a>
+                </div>
+
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{route('project_list')}}">專案</a></li>
+                        <li class="active"><a href="{{ route('issue_list',['project_id' => $project->id]) }}">議題</a></li>
                         @include('layouts.AccountList_navbar')
                     </ul>
+
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{route('setting')}}">設定</a></li>
                         <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
@@ -50,78 +55,70 @@
         </nav>
 
         <div class="row col-md-offset-1">
-            <h1 style="color: black;" class="col-md-8">專案列表</h1>
-            <div class="col-md-4">
+            <h1 style="color: black;" class="col-md-3">{{$project->subject}}</h1><br>
+            <a class="col-md-2" href="{{ route('project_member', ['project_id' => $project->id]) }}" style="margin-top: 15px">專案成員</a>
+            <div class="col-md-3 col-md-offset-4">
                 <form>
-                    <button type="button" class="btn btn-default col-md-4 " data-toggle="modal" data-target="#CreateProjectModal">
-                        <span class="glyphicon glyphicon-plus-sign"></span>建立專案
+                    <button type="button" class="btn btn-default col-md-6" data-toggle="modal" data-target="#AddIssueModal">
+                        <span class="glyphicon glyphicon-plus-sign"></span>Add Issue
                     </button>
                 </form>
+                <!--<form>
+                    <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseIssueModal">
+                        <span class="glyphicon glyphicon-minus-sign"></span>Close Issue
+                    </button>
+                </form>-->
             </div>
+            <!-- <br> -->
         </div>
+
         <div class="row col-md-offset-1 col-md-10">
             <?php
                 $index = 0;
             ?>
-            @foreach ($user->projects as $project)
+            @foreach ($project->issues as $issue)
             <div class="col-md-4">
-                <div class="panel panel-info" style="padding-left: 0px;padding-right: 0px;">
+                <div class="panel panel-primary" style="padding-left: 0px;padding-right: 0px;">
                     <div class="panel-heading">
-                        <div class="panel-title clearfix">
+                        <div class="panel-title  clearfix">
                             <div class="pull-left">
-                                {{$project->subject}}
+                                {{$issue->title}}
                             </div>
+                            
                             @if($project->pivot['user_auth'] == 'manager')
                                 <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
 
-                                <form method="POST" action="{{ route('Close_Project',$project->id) }}">
+                                <form method="POST" action="{{ route('Delete_issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
                                     {{ csrf_field() }}
-                                    {{ method_field('PUT') }}
-                                    <button type="submit" class="close" style="margin-left: 5px;">&times;</button>
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" class="close">&times;</button>
                                 </form>
                             @endif
-
-                            <form method="GET" action="{{ url('/project',['project_id' =>$project->id]) }}">
-                                {{ csrf_field() }}
-                                <button type="submit" class="btn btn-default btn-sm pull-right" style="padding: 4px;">Go</button>
-                            </form>
+                            <div class="pull-right">
+                                <form id= method="GET" action="{{ route('issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-default btn-xs">Descript</button>
+                                </form> 
+                                
+                            </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        @foreach($project->issues as $issue)
-                            <img src="simple_issue.png" class="col-md-offset-1">
-                        @endforeach
+                        <div> 
+                            <p>Priority: {{$issue->priority}}</p>
+                            <p>State: {{$issue->state}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <?php
-//                $index++;
-            ?>
             @endforeach
         </div>
+
     </div>
 
-    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Scripts -->
-    <!--<script src="/js/app.js"></script>-->
 
     <!-- Referencing Bootstrap JS that is hosted locally -->
     <script src="/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript">
-        $('#CloseProjectModal').on('show.bs.modal', function(e) {
-
-            //get data-id attribute of the clicked element
-            var button = $(e.relatedTarget);
-            var project_name = button.data('project_name');
-            
-            var modal = $(this);
-            //modal.find('.modal-body label').text(project);
-            //populate the textbox
-            $(e.currentTarget).find('label[name="project"]').text(project_name);
-        });
-    </script>
 </body>
 </html>

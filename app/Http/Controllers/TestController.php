@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
-class HomeController extends Controller
+use App\Project;
+use App\User;
+use App\Issue;
+class TestController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('auth');
     }
 
     /**
@@ -22,8 +23,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('auth.login');
+        $user = User::find(2);
+        $issue = Issue::find(1);
+        return view('/Issue',compact('user','issue'));s
+
     }
+
 }

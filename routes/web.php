@@ -20,40 +20,41 @@ Route::group(['middleware' => ['web']], function () {
 	Auth::routes();
 
 
-	//導向Setting頁面,傳入使用者的資料(user_name,email,password,access)
-	Route::get('/Setting',function(){
-		$user = ['name'=>'ABC','email'=>'a@b.com','password'=>'123456','access'=>'admin'];
+	//顯示使用者設定頁面
+	//input: 
+	//output: user
+	//view('Setting')
+	Route::get('/setting','ProfileController@index')->name('setting');
 
-		return view('Setting')
-			->with('user',$user);
-	});
+	//使用者變更自己的資料
+	//input: user_name,password,email(null代表沒有更改,email用來指向使用者)
+	//
+	//redirect('Setting')
+	Route::put('/setting/update','ProfileController@update')->name('Change_user_info');;
 
-	//接收使用者更新的自己的資料(user_name,password,email)(null代表沒有更改,email用來指向使用者)
-	//導向Setting頁面,傳入使用者的資料(user_name,email,password,access)
-	Route::put('/Setting',function (){
-		$user = ['name'=>'abc','email'=>'a@b.com','password'=>'123','access'=>'admin'];
-
-		return view('Setting')
-			->with('user',$user);
-	});
-
-	//導向Access_Manage頁面,傳入目前使用者的名稱,以及所有使用者的名稱和權限(陣列)
-	//users裡面放很多個user,一個user有自己的名稱和權限
-	//user_name:目前使用者的名稱
-	Route::get('/Access_Manage',function(){
-		$users = array(['name'=>'abc','access'=>'admin'],['name'=>'efd','access'=>'user']);
-
-		return view('Access_Manage')
-			->with('users',$users)
-			->with('user_name','abc');
-	});
+	//顯示管理使用者畫面
+	//input:
+	//output: user, users
+	//view('Access_Manage')
+	Route::get('/access_manage','AccessManagerController@index');
 
 	//接收使用者權限變更資訊
-	//導向Access_Manage,傳入目前使用者的名稱,以及所有使用者的名稱和權限(陣列)(更改過的)
-	Route::put('/Access_Manage',function(){});
+	//input: user_id,auth
+	//output: 
+	//redirect('Access_Manage')
+	//Route::put('/access_manage/{user_id}',function(){})->name('Change_user_auth');
+  
+	//刪除使用者
+	//input: user id
+	//output: 
+	//redirect('Access_Manage')
+	Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
 
-	//導向Project List頁面
-	Route::get('/projectlist','ProjectController@index');
+	//顯示Project List頁面
+	//input: 
+	//output: 使用者參與的所有專案，user
+	//view('ProjectList')
+	Route::get('/project','ProjectController@index')->name('project_list');
 
 	//建立project
 	//input: project需要的所有資訊
