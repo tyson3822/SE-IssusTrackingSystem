@@ -114,5 +114,5 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id,issue_id,priority,description,state
 	//output: 
 	//redirect('Issue')
-	Route::put('/project/{project_id}/issue/{issue_id}',function(){})->name('Change_issue_info');
+	Route::put('/project/{project_id}/issue/{issue_id}','IssueController@showIssue')->name('Change_issue_info');
 });
