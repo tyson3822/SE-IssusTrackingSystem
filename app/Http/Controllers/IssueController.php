@@ -75,4 +75,22 @@ class IssueController extends Controller
         $user = $request->user();
         return view('Issue',compact('user','issue'));
     }
+
+    public function updateIssueInfo(Request $request)
+    {
+        $project = Project::find($request->project_id);
+        $issue = Issue::find($request->issue_id);
+        $issue->update([
+            'description' => $request->description,
+            'priority' => $request->priority,
+            'state'=>$request->state,
+        ]);
+        $issue->logs()->create([
+            'title' => $issue->title,
+            'description' => $issue->description,
+            'priority' => $issue->priority,
+            'state' => $issue->state,
+        ]);
+        return redirect('/project/'.$project->id.'/issue/'.$issue->id);
+    }
 }
