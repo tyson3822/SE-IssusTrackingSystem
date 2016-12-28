@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-md-3" style="text-align: left;">Issue Title : </label>
-                        <input class="form-control" style="width:60%" type="text" name="Issue_name">
+                        <input class="form-control" style="width:60%" type="text" name="title">
                     </div>
                     <br>
                     <div class="form-group">
@@ -25,7 +25,7 @@
                     <br>
                     <div class="form-group">
                         <label class="control-label col-md-3" style="text-align: left;">Issue Descript : </label>
-                        <textarea class="form-control" rows="4" name="descript" style="width: 95%;margin-left: 13px"></textarea>
+                        <textarea class="form-control" rows="4" name="description" style="width: 95%;margin-left: 13px"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
