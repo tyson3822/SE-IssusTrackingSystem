@@ -53,11 +53,11 @@
                 {{ csrf_field() }}
                 <div class="row">
                     <h1 style="color: black;" class="col-md-3">議題 : {{$issue->title}}</h1>
-                    {{--@if($issue->user_id == $user->id)--}}
+                    @if($issue->user_id == $user->id)
                         <button id="edit_button" type="button" class="btn btn-default col-md-1" style="margin-top: 25px">
                             <span class="glyphicon glyphicon-pencil">編輯
                         </button>
-                    {{--@endif--}}
+                    @endif
                     <h2 class="col-md-offset-1 col-md-3">重要性 : 
                         @if($issue->priority == 'low')
                             <label id="priority" style="color:green;">{{$issue->priority}}</label>
