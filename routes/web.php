@@ -108,7 +108,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id,issue_id
 	//output: user,issue
 	//view('Issue')
-	Route::get('/project/{project_id}/issue/{issue_id}','TestController@index')->name('issue');
+	Route::get('/project/{project_id}/issue/{issue_id}','IssueController@showIssue')->name('issue');
 
 	//變更issue資訊
 	//input: project_id,issue_id,priority,descript,state

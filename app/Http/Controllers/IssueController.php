@@ -68,4 +68,11 @@ class IssueController extends Controller
         ]);
         return redirect('/project/'.$project->id);
     }
+
+    public function showIssue(Request $request)
+    {
+        $issue = Issue::find($request->issue_id);
+        $user = $request->user();
+        return view('Issue',compact('user','issue'));
+    }
 }

@@ -97,7 +97,7 @@
                             <div class="pull-right">
                                 <form id= method="GET" action="{{ route('issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
                                     {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-default btn-xs">Descript</button>
+                                    <button type="submit" class="btn btn-default btn-xs">Description</button>
                                 </form> 
                                 
                             </div>
