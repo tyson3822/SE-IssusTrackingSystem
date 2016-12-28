@@ -24,78 +24,9 @@
     </script>
 </head>
 <body>
-   <!-- Add Issue Modal -->
-    <div class="modal fade" id="AddIssueModal" tabindex="-1" role="dialog" aria-labelledby="IssueModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add Issue</h4>
-                </div>
-                <form class="form-horizontal" role="form" method="POST" action="/Add_Issue">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <label class="control-label col-md-3" style="text-align: left;">Issue Title : </label>
-                        <input class="form-control" style="width:60%" type="text" name="Issue_name">
-                        <label class="control-label col-md-4" style="text-align: left;">Priority : </label>
-                    <!--
-                    <div class="dropdown">
-                        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                        Extra small button <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                          </ul>
-                    </div>
-                    -->
-                    
-
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                            High
-                                <span class="caret"></span>
-                            </button>
-                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                          </ul>
-                        </div>
-
-
-                        <label class="control-label col-md-4" style="text-align: left;">Issue Descript : </label>
-                        <textarea class="form-control" rows="4" name="descript"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Close Issue Modal -->
-    <div class="modal fade" id="CloseIssueModal" tabindex="-1" role="dialog" aria-labelledby="IssueModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Close Issue</h4>
-                </div>
-                <form class="form-horizontal" role="form" method="POST" action="/Create_Issue">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
+   @include('Issue.Add_issue_modal')
+   @include('Issue.Close_issue_modal')
+    
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
             <div class="container-fluid">
@@ -109,45 +40,80 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a>議題</a></li>
+                        <li class="active"><a href="{{ route('issue_list',['project_id' => $project->id]) }}">議題</a></li>
+                        @include('layouts.AccountList_navbar')
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{route('setting')}}">Setting</a></li>
+                        <li><a href="{{route('setting')}}">設定</a></li>
                         <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
-                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-
                     </ul>
                 </div>
             </div>
         </nav>
 
         <div class="row col-md-offset-1">
-            <h1 style="color: black;" class="col-md-8">Project Name</h1>
-            <div class="col-md-4">
+            <h1 style="color: black;" class="col-md-3">{{$project->subject}}</h1><br>
+            <a class="col-md-2" href="{{ route('project_member', ['project_id' => $project->id]) }}" style="margin-top: 15px">專案成員</a>
+            <div class="col-md-3 col-md-offset-4">
                 <form>
-                    <button type="button" class="btn btn-default col-md-4 " data-toggle="modal" data-target="#AddIssueModal">
+                    <button type="button" class="btn btn-default col-md-6" data-toggle="modal" data-target="#AddIssueModal">
                         <span class="glyphicon glyphicon-plus-sign"></span>Add Issue
                     </button>
                 </form>
-                <form>
+                <!--<form>
                     <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseIssueModal">
                         <span class="glyphicon glyphicon-minus-sign"></span>Close Issue
                     </button>
-                </form>
+                </form>-->
             </div>
+            <!-- <br> -->
         </div>
 
         <div class="row col-md-offset-1 col-md-10">
             <?php
                 $index = 0;
             ?>
-            <a href="{{ route('project_member',['project_id' => $project->id]) }}">project member</a>
+            @foreach ($project->issues as $issue)
+            <div class="col-md-4">
+                <div class="panel panel-primary" style="padding-left: 0px;padding-right: 0px;">
+                    <div class="panel-heading">
+                        <div class="panel-title  clearfix">
+                            <div class="pull-left">
+                                {{$issue->title}}
+                            </div>
+                            
+                            @if($project->pivot['user_auth'] == 'manager')
+                                <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
+
+                                <form method="POST" action="{{ route('Delete_issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" class="close">&times;</button>
+                                </form>
+                            @endif
+                            <div class="pull-right">
+                                <form id= method="GET" action="{{ route('issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-default btn-xs">Descript</button>
+                                </form> 
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div> 
+                            <p>Priority: {{$issue->priority}}</p>
+                            <p>State: {{$issue->state}}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            @endforeach
         </div>
-
-
-
 
     </div>
 
