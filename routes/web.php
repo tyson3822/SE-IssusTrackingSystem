@@ -75,7 +75,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/project/{project_id}','IssueController@index')->name('issue_list');
 
 	//新增issue
-	//input: project_id,issue_name,priority,descript,state預設是doing
+	//input: project_id,title,priority,description,state預設是doing
 	//output:
 	//redirect('IssueList')
 	Route::post('/project/{project_id}/add_issue','IssueController@createIssue')->name('Add_issue');
@@ -111,7 +111,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/project/{project_id}/issue/{issue_id}','IssueController@showIssue')->name('issue');
 
 	//變更issue資訊
-	//input: project_id,issue_id,priority,description,state
+	//input: project_id,issue_id,priority,description,state,owner
 	//output: 
 	//redirect('Issue')
 	Route::put('/project/{project_id}/issue/{issue_id}','IssueController@showIssue')->name('Change_issue_info');

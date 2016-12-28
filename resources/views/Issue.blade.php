@@ -48,19 +48,96 @@
             </div>
         </nav>
 
-        <div class="row col-md-offset-1">
-        	<h1 style="color: black;" class="col-md-3">{{$issue->title}}</h1><br>
-        	<h3 class="col-md-offset-1 col-md-3">狀態 :　{{$issue->state}}</h3>
-        	<h3 class="col-md-offset-1 col-md-3">重要性 : 
-        	 	@if($issue->priority == 'low')
-        	 		<label style="color:green;">{{$issue->priority}}</label>
-        	 	@elseif($issue->priority == 'mid')
-        	 		<label style="color:orange;">{{$issue->priority}}</label>
-        		@elseif($issue->priority == 'high')
-        	 		<label style="color:red;">{{$issue->priority}}</label>
-        	 	@endif
-        	</h3>
+        <div class="row col-md-offset-1 col-md-10">
+            <form method="POST" action="{{ route('Change_issue_info') }}">
+                {{ csrf_field() }}
+                <div>
+                    <h1 style="color: black;" class="col-md-3">{{$issue->title}}</h1>
+                    @if($issue->user->id == $user->id)
+                        <button id="edit_button" type="button" class="btn btn-default col-md-4">
+                            <span class="glyphicon glyphicon-pencil">編輯
+                        </button>
+                    @endif
+                    <h2 class="col-md-offset-1 col-md-3">重要性 : 
+                        @if($issue->priority == 'low')
+                            <label id="priority" style="color:green;">{{$issue->priority}}</label>
+                        @elseif($issue->priority == 'mid')
+                            <label id="priority" style="color:orange;">{{$issue->priority}}</label>
+                        @elseif($issue->priority == 'high')
+                            <label id="priority" style="color:red;">{{$issue->priority}}</label>
+                        @endif
+                        <select id="edit_priority" name="issue_priority" style="display: none;">
+                            <option value="high" style="color: red">High</option>
+                            <option value="mid" style="color: orange">Mid</option>
+                            <option value="low" style="color: green">Low</option>
+                        </select>
+                    </h2>
+                    <h2 class="col-md-offset-1 col-md-3">狀態 :　
+                        <label id="state">{{$issue->state}}</label>
+                        <select id="edit_state" style="display: none;">
+                            <option value="ready">ready</option>
+                            <option value="doing">doing</option>
+                            <option value="close">close</option>
+                        </select>
+                    </h2>
+                </div>
+
+                <div class="content">
+                    <h3 class="col-md-6">建立日期 : </h3>
+                    <h3 class="col-md-6">指派日期 : </h3>
+                    <h3>負責人 : 
+                        <label id="owner">{{$issue->user->name}}</label>
+                    </h3>
+                    <h3>最後更新日期 : </h3>
+                    <h3>描述 : </h3>
+                    <p id="description" style="border-style:ridge; border-radius:10px">{{$issue->description}}</p>
+                    <textarea id="edit_description" name="issue_description" class="form-control" style="display: none"></textarea>
+
+                    <div id="logs">
+                        @foreach($issue->logs as $log)
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">更新日期 : </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>{{$issue->description}}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <button id="save_button" type="submit" class="btn btn-primary col-md-3" style="display: none;">儲存</button>
+            </form>
         </div>
     </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Scripts -->
+    <!--<script src="/js/app.js"></script>-->
+
+    <!-- Referencing Bootstrap JS that is hosted locally -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#edit_button").click(funtion(){
+                $("#edit_button").css("display","none");
+                $("#priority").css("display","none");
+                $("#edit_priority").css("display","inline");
+                $("#state").css("display","none");
+                $("#edit_state").css("display","inline");
+                $("#owner").css("display","none");
+                $("#edit_owner").css("display","inline");
+                $("#description").css("display","none");
+                $("#edit_description").css("display","inline");
+                $("#logs").css("display","none");
+                $("#save_button").css("display","inline");
+            });
+        });
+    </script>
+
 </body>
 </html>
