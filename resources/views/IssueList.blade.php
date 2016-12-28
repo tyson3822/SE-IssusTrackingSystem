@@ -26,7 +26,7 @@
 <body>
    @include('Issue.Add_issue_modal')
    @include('Issue.Close_issue_modal')
-    
+   
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
             <div class="container-fluid">
@@ -108,7 +108,6 @@
                             <p>Priority: {{$issue->priority}}</p>
                             <p>State: {{$issue->state}}</p>
                         </div>
-
                     </div>
                 </div>
             </div>
