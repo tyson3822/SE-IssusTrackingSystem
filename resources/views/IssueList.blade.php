@@ -24,62 +24,8 @@
     </script>
 </head>
 <body>
-   <!-- Add Issue Modal -->
-    <div class="modal fade" id="AddIssueModal" tabindex="-1" role="dialog" aria-labelledby="IssueModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add Issue</h4>
-                </div>
-                <form class="form-horizontal" role="form" method="POST" action="/Add_Issue">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <label class="control-label col-md-3" style="text-align: left;">Issue Title : </label>
-                        <input class="form-control" style="width:60%" type="text" name="Issue_name"><br>
-                        <label class="control-label col-md-3" style="text-align: left;">Priority : </label>
-                       <div>
-                           <form >                            
-                                <select name="selected" style="width:12%" >
-                                    <option value="High" style="color:red;">High</option>
-                                    <option value="Mid">Mid</option>
-                                    <option value="Low">Low</option>
-                                </select>                         
-                            </form> 
-                        </div>
-                        <br>
-                        <label class="control-label col-md-3" style="text-align: left;">Issue Descript : </label>
-                        <textarea class="form-control" rows="4" name="descript"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Close Issue Modal -->
-    <div class="modal fade" id="CloseIssueModal" tabindex="-1" role="dialog" aria-labelledby="IssueModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Close Issue</h4>
-                </div>
-                <form class="form-horizontal" role="form" method="POST" action="/Create_Issue">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+   @include('Issue.Add_issue_modal')
+   @include('Issue.Close_issue_modal')
    
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
@@ -94,7 +40,8 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a>議題</a></li>
+                        <li class="active"><a href="{{ route('issue_list',['project_id' => $project->id]) }}">議題</a></li>
+                        @include('layouts.AccountList_navbar')
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -108,19 +55,19 @@
         </nav>
 
         <div class="row col-md-offset-1">
-            <h1 style="color: black;" class="col-md-8">{{$project->subject}}</h1><br>
-
-            <div class="col-md-4">
+            <h1 style="color: black;" class="col-md-3">{{$project->subject}}</h1><br>
+            <a class="col-md-2" href="{{ route('project_member', ['project_id' => $project->id]) }}" style="margin-top: 15px">專案成員</a>
+            <div class="col-md-3 col-md-offset-4">
                 <form>
-                    <button type="button" class="btn btn-default col-md-4 " data-toggle="modal" data-target="#AddIssueModal">
+                    <button type="button" class="btn btn-default col-md-6" data-toggle="modal" data-target="#AddIssueModal">
                         <span class="glyphicon glyphicon-plus-sign"></span>Add Issue
                     </button>
                 </form>
-                <form>
+                <!--<form>
                     <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseIssueModal">
                         <span class="glyphicon glyphicon-minus-sign"></span>Close Issue
                     </button>
-                </form>
+                </form>-->
             </div>
             <!-- <br> -->
         </div>
@@ -130,25 +77,29 @@
                 $index = 0;
             ?>
             @foreach ($project->issues as $issue)
-
             <div class="col-md-4">
                 <div class="panel panel-primary" style="padding-left: 0px;padding-right: 0px;">
                     <div class="panel-heading">
-                        <div class="panel-title">
-                            {{$issue->title}}
+                        <div class="panel-title  clearfix">
+                            <div class="pull-left">
+                                {{$issue->title}}
+                            </div>
+                            
+                            @if($project->pivot['user_auth'] == 'manager')
+                                <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
+
+                                <form method="POST" action="{{ route('Delete_issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" class="close">&times;</button>
+                                </form>
+                            @endif
                             <div class="pull-right">
-
-                                <a href="#" class="btn btn-default btn-sm" role="button" onclick="event.preventDefault();document.getElementById('issue_Descript').submit();">Descript</a>
-                                <form id="issue_Descript" action="{{ url('/issue/'.$issue->id) }}" method="GET" style="display: none;">{{ csrf_field() }}</form> 
-                                @if($project->pivot['user_auth'] == 'manager')
-                                    <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
-
-                                    <button type="submit" class="close" onclick="event.preventDefault();document.getElementById('CloseIssue').submit();">&times;</button>
-                                    <form id="CloseIssue" action="{{ url('Close_Issue',$issue->id) }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
-                                    </form>
-                                @endif
+                                <form id= method="GET" action="{{ route('issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-default btn-xs">Descript</button>
+                                </form> 
+                                
                             </div>
                         </div>
                     </div>
@@ -156,17 +107,12 @@
                         <div> 
                             <p>Priority: {{$issue->priority}}</p>
                             <p>State: {{$issue->state}}</p>
-
                         </div>
-
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
-
-
-
 
     </div>
 

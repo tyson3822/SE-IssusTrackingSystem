@@ -43,7 +43,7 @@ Route::group(['middleware' => ['web']], function () {
 	//output: 
 	//redirect('Access_Manage')
 	//Route::put('/access_manage/{user_id}',function(){})->name('Change_user_auth');
-
+  
 	//刪除使用者
 	//input: user id
 	//output: 
@@ -66,7 +66,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id
 	//output: 
 	//redirect('ProjectList')
-	//Route::put('/project/{project_id}/close',function(){})->name('Close_Project');
+	Route::put('/project/{project_id}/close','ProjectController@closeProject')->name('Close_Project');
 
 	//顯示Issue List頁面
 	//input: project_id
