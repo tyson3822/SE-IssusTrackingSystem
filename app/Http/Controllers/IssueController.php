@@ -68,4 +68,22 @@ class IssueController extends Controller
         ]);
         return redirect('/project/'.$project->id);
     }
+
+    public function updateIssueInfo(Request $request)
+    {
+        $project = Project::find($request->project_id);
+        $issue = Issue::find($request->issue_id);
+        $issue->update([
+            'description' => $request->description,
+            'priority' => $request->priority,
+            'state'=>$request->state,
+        ]);
+        $issue->logs()->create([
+            'title' => $issue->title,
+            'description' => $issue->description,
+            'priority' => $issue->priority,
+            'state' => $issue->state,
+        ]);
+        return redirect('/project/'.$project->id);
+    }
 }
