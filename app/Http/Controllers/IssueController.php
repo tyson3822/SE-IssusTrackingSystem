@@ -33,4 +33,22 @@ class IssueController extends Controller
         $project = $user->projects()->find($project_id);
         return view('IssueList', compact('project', 'user'));
     }
+
+    public function createIssue(Request $request)
+    {
+        $project = Project::find($request->project_id);
+        $issue = $project.issues()->create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'priority' => $request->priority,
+            'state' => 'ready',
+        ]);
+        $issue->logs()->create([
+            'title' => $issue->title,
+            'description' => $issue->description,
+            'priority' => $issue->priority,
+            'state' => $issue->state,
+        ]);
+        return redirect('/project/'.$project->id);
+    }
 }

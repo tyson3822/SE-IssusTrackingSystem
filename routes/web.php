@@ -48,7 +48,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: user id
 	//output: 
 	//redirect('Access_Manage')
-	Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
+	//Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
 
 	//顯示Project List頁面
 	//input: 
@@ -78,7 +78,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id,issue_name,priority,descript,state預設是doing
 	//output:
 	//redirect('IssueList')
-	//Route::post('/project/{project_id}/add_issue',function(){})->name('Add_issue');
+	Route::post('/project/{project_id}/add_issue','IssueController@createIssue')->name('Add_issue');
 
 	//關閉issue
 	//input: project_id,issue_id
