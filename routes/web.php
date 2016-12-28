@@ -42,13 +42,13 @@ Route::group(['middleware' => ['web']], function () {
 	//input: user_id,auth
 	//output: 
 	//redirect('Access_Manage')
-	Route::put('/access_manage/{user_id}',function(){})->name('Change_user_auth');
+	//Route::put('/access_manage/{user_id}',function(){})->name('Change_user_auth');
 
 	//刪除使用者
 	//input: user id
 	//output: 
 	//redirect('Access_Manage')
-	Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
+	//Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
 
 	//顯示Project List頁面
 	//input: 
@@ -66,7 +66,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id
 	//output: 
 	//redirect('ProjectList')
-	Route::put('/project/{project_id}/close',function(){})->name('Close_Project');
+	//Route::put('/project/{project_id}/close',function(){})->name('Close_Project');
 
 	//顯示Issue List頁面
 	//input: project_id
@@ -78,13 +78,13 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id,issue_name,priority,descript,state預設是doing
 	//output:
 	//redirect('IssueList')
-	Route::post('/project/{project_id}/add_issue',function(){})->name('Add_issue');
+	//Route::post('/project/{project_id}/add_issue',function(){})->name('Add_issue');
 
 	//關閉issue
 	//input: project_id,issue_id
 	//output:
 	//redirect('IssueList')
-	Route::delete('/project/{project_id}/delete_issue/{issue_id}',function(){})->name('Delete_issue');
+	//Route::delete('/project/{project_id}/delete_issue/{issue_id}',function(){})->name('Delete_issue');
 
 	//顯示專案成員畫面
 	//input: project_id
@@ -114,5 +114,5 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id,issue_id,priority,descript,state
 	//output: 
 	//redirect('Issue')
-	Route::get('/project/{project_id}/issue/{issue_id}',function(){})->name('Change_issue_info');
+	//Route::get('/project/{project_id}/issue/{issue_id}',function(){})->name('Change_issue_info');
 });
