@@ -48,7 +48,13 @@ class ProjectController extends Controller
         $user = $request->user();
         $user->projects()->attach($projectId, ['user_auth' => 'manager']);
 
-        return redirect('/projectlist');
+        return redirect('/project');
+    }
+
+    public function closeProject(Request $request)
+    {
+        Project::find($request->project_id)->update(['state' => 'close']);
+        return redirect('/project');
     }
 
     public function closeProject(Request $request)

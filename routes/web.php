@@ -56,15 +56,62 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/projectlist','ProjectController@index');
 
 	//建立project
-	//從前端拿project_name,descript
-	//建立好後回到projectlist畫面
-	Route::post('/Create_Project','ProjectController@createProject');
+	//input: project需要的所有資訊
+	//output: 
+	//redirect('ProjectList')
+	Route::post('/project/create','ProjectController@createProject')->name('Create_Project');
 
-	//進入點擊的project裡點,導向Issue List頁面
-	Route::get('/IssueList/{project}',function(){});
+	//關閉project
+	//input: project_id
+	//output: 
+	//redirect('ProjectList')
+	Route::put('/project/{project_id}/close','ProjectController@closeProject')->name('Close_Project');
 
-    //關閉project
-    //從前端拿id
-    //關閉project後回到projectlist畫面
-    Route::post('/Close_Project','closeProject@createProject');
+	//顯示Issue List頁面
+	//input: project_id
+	//output: project，user
+	//view('IssueList')
+	Route::get('/project/{project_id}','IssueController@index')->name('issue_list');
+
+	//新增issue
+	//input: project_id,issue_name,priority,descript,state預設是doing
+	//output:
+	//redirect('IssueList')
+	//Route::post('/project/{project_id}/add_issue',function(){})->name('Add_issue');
+
+	//關閉issue
+	//input: project_id,issue_id
+	//output:
+	//redirect('IssueList')
+	//Route::delete('/project/{project_id}/delete_issue/{issue_id}',function(){})->name('Delete_issue');
+
+	//顯示專案成員畫面
+	//input: project_id
+	//output: user，project
+	//view('Project_Member')
+	Route::get('/project/{project_id}/project_member','MemberController@index')->name('project_member');
+
+	//剔除專案成員
+	//input: user_id,project_id
+	//output: 
+	//redirect('Project_Memeber')
+	Route::delete('/project/{project_id}/project_member/{member_id}/delete','MemberController@removeProjectMember')->name('Delete_project_member');
+
+	//變更專案成員的權限
+	//input: user_id,project_id,權限
+	//output: 
+	//redirect('Project_Memeber')
+	Route::put('/project/{project_id}/project_member/{member_id}/change_auth','MemberController@updateProjectMember')->name('Change_project_member_auth');
+
+	//顯示單一一個issue
+	//input: project_id,issue_id
+	//output: user,issue
+	//view('Issue')
+	Route::get('/project/{project_id}/issue/{issue_id}','TestController@index')->name('issue');
+
+	//變更issue資訊
+	//input: project_id,issue_id,priority,descript,state
+	//output: 
+	//redirect('Issue')
+	//Route::get('/project/{project_id}/issue/{issue_id}',function(){})->name('Change_issue_info');
 });
