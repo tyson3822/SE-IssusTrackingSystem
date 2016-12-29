@@ -124,8 +124,13 @@
                     </div>
                 </div>
 
-                <button id="save_button" type="submit" class="btn btn-primary col-md-offset-9 col-md-2" style="display: none;">儲存</button>
+                <button id="save_button" type="submit" class="btn btn-primary col-md-offset-7 col-md-2" style="display: none;">儲存</button>
             </form>
+            <form method="GET" action="{{ route('issue',['project_id' => $issue->project->id,'issue_id' => $issue->id]) }}">
+                {{ csrf_field() }}
+                <button  id="cancel_button" type="submit" class="btn btn-default col-md-2" style="margin-left: 5px;display: none;">取消</button>
+            </form>
+                
         </div>
     </div>
 
@@ -151,6 +156,7 @@
             $("#edit_description").css("display","inline");
             $("#logs").css("display","none");
             $("#save_button").css("display","inline");
+            $("#cancel_button").css("display","inline");
         });
     </script>
 </body>
