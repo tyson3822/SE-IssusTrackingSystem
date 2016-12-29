@@ -12,6 +12,11 @@
 
     <!-- Styles -->
     <!--<link href="/css/app.css" rel="stylesheet">-->
+    <style id="my-search">
+        .wrap:not([data-index*=""]){
+            display: none;
+        }
+    </style>
 
     <!-- Referencing Bootstrap CSS that is hosted locally -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +44,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{route('setting')}}">設定</a></li>
                     <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
-                    <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登入</a></li>
+                    <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -48,6 +53,7 @@
         </div>
     </nav>
 
+    @include('Project_Member.Add_member')
     @include('Project_Member.project_manager')
     @include('Project_Member.project_developer')
     @include('Project_Member.project_tester')
@@ -58,7 +64,18 @@
 
     <!-- Scripts -->
     <!--<script src="/js/app.js"></script>-->
-
+    <script type="text/javascript">
+        var that = $(this);
+        var mSearch = $("#my-search");
+        $("#search-input").bind("change paste keyup", function(){
+            var value = $(this).val();
+            if (!value) {
+                mSearch.html("");
+                return;
+            }; 
+            mSearch.html('.wrap:not([data-index*="' + value.toLowerCase() + '"]) {display: none;}');
+        });
+    </script>
     <!-- Referencing Bootstrap JS that is hosted locally -->
     <script src="/js/bootstrap.min.js"></script>
 

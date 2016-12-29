@@ -1,7 +1,7 @@
 <div class="col-md-6 col-md-offset-2">
 	<div class="panel panel-primary">
     	<div class="panel-heading">
-        	<h3 class="panel-title">Project Manager</h3>
+        	<h3 class="panel-title">管理人員</h3>
     	</div>
     	<div class="panel-body">
         	@foreach($user->projects as $user_project)
@@ -9,7 +9,7 @@
         			@if($user_project->pivot['user_auth'] == 'manager')
         				@foreach($project->users as $member)
         					@if($member->pivot['user_auth'] == 'manager')
-                                <div class="row" style="margin: 5px;">
+                                <div class="row wrap" data-index="{{$member->name}}" style="margin: 5px;">  
                                     <label class="col-md-3" style="padding: 7px; margin: 0px;">{{$member->name}}</label>
                                     <form method="POST" action="{{ route('Change_project_member_auth',['project_id' => $project->id,'member_id' => $member->id]) }}">
                                         {{ csrf_field() }}

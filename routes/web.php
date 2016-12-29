@@ -104,6 +104,12 @@ Route::group(['middleware' => ['web']], function () {
 	//redirect('Project_Memeber')
 	Route::put('/project/{project_id}/project_member/{member_id}/change_auth','MemberController@updateProjectMember')->name('Change_project_member_auth');
 
+	//新增專案成員
+	//input: project_id,user_email,權限預設是general
+	//output:
+	//redirect('Project_Memeber')
+	Route::post('/project/{project_id}/project_member/Add_member',function(){})->name('Add_member');
+
 	//顯示單一一個issue
 	//input: project_id,issue_id
 	//output: user,issue
@@ -115,4 +121,5 @@ Route::group(['middleware' => ['web']], function () {
 	//output: 
 	//redirect('Issue')
 	Route::put('/project/{project_id}/issue/{issue_id}','IssueController@showIssue')->name('Change_issue_info');
+
 });
