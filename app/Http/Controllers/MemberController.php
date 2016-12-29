@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Project;
 
@@ -47,5 +48,13 @@ class MemberController extends Controller
         $project = Project::find($project_id);
         $project->users()->detach($member_id);
         return redirect('/project/'.$project_id.'/project_member');
+    }
+
+    public function addProjectMember(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        $project = Project::find($request->project_id);
+        $project->users()->attach($user->id, ['user_auth' => 'general']);
+        return redirect('/project/' . $project->id . '/project_member');
     }
 }
