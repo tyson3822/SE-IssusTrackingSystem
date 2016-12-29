@@ -108,7 +108,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id,user_email,權限預設是general
 	//output:
 	//redirect('Project_Memeber')
-	Route::post('/project/{project_id}/project_member/Add_member',function(){})->name('Add_member');
+	Route::post('/project/{project_id}/project_member/Add_member','MemberController@addProjectMember')->name('Add_member');
 
 	//顯示單一一個issue
 	//input: project_id,issue_id
