@@ -12,6 +12,11 @@ class IssueManage extends TestCase
 	public function testCreateIssue()
     {
         $this->assertTrue(true);
+        // $this->press('Add issue')
+        // 	 ->type('test', 'title')
+        //      ->select('Low', 'priority')
+        //      ->type('test', 'description')
+        //      ->press('summit');
     }
 
 	//修改議題
