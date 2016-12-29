@@ -86,12 +86,12 @@
                     <h3 class="col-md-6">建立日期 : {{$issue->created_at}}</h3>
                     <h3 class="col-md-6">指派日期 : </h3>
                     <div class="col-md-12">
-                        <h3 class="col-md-1" style="padding: 0px">負責人 : 
+                        <h3 class="col-md-4" style="padding: 0px">負責人 : 
                             @if($issue->user_id != null)
                                 <label id="owner">{{$issue->user->name}}</label>
                             @endif
+                            <input id="edit_owner" type="text" name="owner" class="form-control" style="width: 50%;display: none">
                         </h3>
-                        <input id="edit_owner" type="text" name="owner" class="form-control" style="width: 20%;margin-top: 15px;display: none">
                     </div>
                     <h3 class="col-md-12">最後更新日期 : {{$issue->updated_at}}</h3>
                     <div class="col-md-12">
