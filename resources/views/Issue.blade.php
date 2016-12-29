@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,8 +24,8 @@
     </script>
 </head>
 <body>
-	<div id="app">
-		<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+    <div id="app">
+        <nav class="navbar navbar-default navbar-static-top navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand">ITS</a>
@@ -33,7 +33,7 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                    	<li><a class="navbar-brand" href="{{route('project_list')}}">專案</a></li>
+                        <li><a class="navbar-brand" href="{{route('project_list')}}">專案</a></li>
                         <li class="active"><a href="{{ route('issue_list',['project_id' => $issue->project->id]) }}">議題</a></li>
                         @include('layouts.AccountList_navbar')
                     </ul>
@@ -49,12 +49,12 @@
         </nav>
 
         <div class="row col-md-offset-1 col-md-10">
-            <form method="POST" action="{{ route('Change_issue_info') }}">
+            <form method="POST" action="{{ route('Change_issue_info',['project_id' => $issue->project->id,'issue_id' => $issue->id]) }}">
                 {{ csrf_field() }}
-                <div>
-                    <h1 style="color: black;" class="col-md-3">{{$issue->title}}</h1>
-                    @if($issue->user->id == $user->id)
-                        <button id="edit_button" type="button" class="btn btn-default col-md-4">
+                <div class="row">
+                    <h1 style="color: black;" class="col-md-3">議題 : {{$issue->title}}</h1>
+                    @if($issue->user_id == $user->id)
+                        <button id="edit_button" type="button" class="btn btn-default col-md-1" style="margin-top: 25px">
                             <span class="glyphicon glyphicon-pencil">編輯
                         </button>
                     @endif
@@ -82,38 +82,60 @@
                     </h2>
                 </div>
 
-                <div class="content">
-                    <h3 class="col-md-6">建立日期 : </h3>
-                    <h3 class="col-md-6">指派日期 : </h3>
-                    <h3>負責人 : 
-                        <label id="owner">{{$issue->user->name}}</label>
-                    </h3>
-                    <h3>最後更新日期 : </h3>
-                    <h3>描述 : </h3>
-                    <p id="description" style="border-style:ridge; border-radius:10px">{{$issue->description}}</p>
-                    <textarea id="edit_description" name="issue_description" class="form-control" style="display: none"></textarea>
-
-                    <div id="logs">
-                        @foreach($issue->logs as $log)
+                <div class="row">
+                    <h3 class="col-md-6">建立日期 : {{$issue->created_at}}</h3>
+                    <!--<h3 class="col-md-6">指派日期 : </h3>-->
+                    <div class="col-md-12">
+                        <h3 class="col-md-4" style="padding: 0px">負責人 : 
+                            @if($issue->user_id != null)
+                                <label id="owner">{{$issue->user->name}}</label>
+                            @endif
+                            <input id="edit_owner" type="text" name="owner" class="form-control" style="width: 50%;display: none">
+                        </h3>
+                    </div>
+                    <h3 class="col-md-12">最後更新日期 : {{$issue->updated_at}}</h3>
+                    <div class="col-md-12">
+                        <h3>描述 : </h3>
+                        <p id="description" style="border-style:ridge; border-radius:10px">{{$issue->description}}</p>
+                        <textarea id="edit_description" name="issue_description" class="form-control" rows="3" style="display: none"></textarea>
+                    </div>
+                    
+                    <div id="logs" class="col-md-12">
+                        <h3>過去紀錄 : </h3>
+                        @for($index = count($issue->logs)-1; $index >= 0; $index--)
                             <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">更新日期 : </h3>
+                                <div class="panel-heading clearfix">
+                                    <h3 class="panel-title col-md-3">負責人 : 
+                                        @if($issue->logs[$index]->user_id != null)
+                                            {{$issue->logs[$index]->user->name}}
+                                        @endif
+                                    </h3>
+                                    <h3 class="panel-title col-md-3">更新日期 : {{$issue->logs[$index]->updated_at}}</h3>
+                                    <h3 class="panel-title col-md-3">重要性 : {{$issue->logs[$index]->priority}}</h3>
+                                    <h3 class="panel-title col-md-3">狀態 : {{$issue->logs[$index]->state}}</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <p>{{$issue->description}}</p>
+                                    <p>
+                                        {{$issue->logs[$index]->description}}
+                                    </p>     
                                 </div>
                             </div>
-                        @endforeach
+                        @endfor
                     </div>
                 </div>
 
-                <button id="save_button" type="submit" class="btn btn-primary col-md-3" style="display: none;">儲存</button>
+                <button id="save_button" type="submit" class="btn btn-primary col-md-offset-7 col-md-2" style="display: none;">儲存</button>
             </form>
+            <form method="GET" action="{{ route('issue',['project_id' => $issue->project->id,'issue_id' => $issue->id]) }}">
+                {{ csrf_field() }}
+                <button  id="cancel_button" type="submit" class="btn btn-default col-md-2" style="margin-left: 5px;display: none;">取消</button>
+            </form>
+                
         </div>
     </div>
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!-- Scripts -->
     <!--<script src="/js/app.js"></script>-->
@@ -121,23 +143,21 @@
     <!-- Referencing Bootstrap JS that is hosted locally -->
     <script src="/js/bootstrap.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $("#edit_button").click(funtion(){
-                $("#edit_button").css("display","none");
-                $("#priority").css("display","none");
-                $("#edit_priority").css("display","inline");
-                $("#state").css("display","none");
-                $("#edit_state").css("display","inline");
-                $("#owner").css("display","none");
-                $("#edit_owner").css("display","inline");
-                $("#description").css("display","none");
-                $("#edit_description").css("display","inline");
-                $("#logs").css("display","none");
-                $("#save_button").css("display","inline");
-            });
+    <script type="text/javascript">
+        $("#edit_button").on('click',function(){
+            $("#edit_button").css("display","none");
+            $("#priority").css("display","none");
+            $("#edit_priority").css("display","inline");
+            $("#state").css("display","none");
+            $("#edit_state").css("display","inline");
+            $("#owner").css("display","none");
+            $("#edit_owner").css("display","inline");
+            $("#description").css("display","none");
+            $("#edit_description").css("display","inline");
+            $("#logs").css("display","none");
+            $("#save_button").css("display","inline");
+            $("#cancel_button").css("display","inline");
         });
     </script>
-
 </body>
 </html>
