@@ -53,7 +53,7 @@
                 {{ csrf_field() }}
                 <div class="row">
                     <h1 style="color: black;" class="col-md-3">議題 : {{$issue->title}}</h1>
-                    @if($issue->user_id == $user->id)
+                    @if($issue->user_id == $user->id or $user->pivot['user_auth'] == 'manager')
                         <button id="edit_button" type="button" class="btn btn-default col-md-1" style="margin-top: 25px">
                             <span class="glyphicon glyphicon-pencil">編輯
                         </button>
@@ -86,7 +86,7 @@
                     <h3 class="col-md-6">建立日期 : {{$issue->created_at}}</h3>
                     <!--<h3 class="col-md-6">指派日期 : </h3>-->
                     <div class="col-md-12">
-                        <h3 class="col-md-4" style="padding: 0px">負責人 : 
+                        <h3 class="col-md-4" style="padding: 0px">負責人 :
                             @if($issue->user_id != null)
                                 <label id="owner">{{$issue->user->name}}</label>
                             @endif
@@ -99,7 +99,7 @@
                         <p id="description" style="border-style:ridge; border-radius:10px">{{$issue->description}}</p>
                         <textarea id="edit_description" name="issue_description" class="form-control" rows="3" style="display: none"></textarea>
                     </div>
-                    
+
                     <div id="logs" class="col-md-12">
                         <h3>過去紀錄 : </h3>
                         @for($index = count($issue->logs)-1; $index >= 0; $index--)
@@ -150,13 +150,16 @@
             $("#edit_priority").css("display","inline");
             $("#state").css("display","none");
             $("#edit_state").css("display","inline");
-            $("#owner").css("display","none");
-            $("#edit_owner").css("display","inline");
             $("#description").css("display","none");
             $("#edit_description").css("display","inline");
             $("#logs").css("display","none");
             $("#save_button").css("display","inline");
             $("#cancel_button").css("display","inline");
+
+            if('{{$user->pivot['user_auth']}}' == 'manager'){
+                $("#owner").css("display","none");
+                $("#edit_owner").css("display","inline");
+            }
         });
     </script>
 </body>
