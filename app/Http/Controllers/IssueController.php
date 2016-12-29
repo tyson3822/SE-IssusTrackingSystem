@@ -71,8 +71,10 @@ class IssueController extends Controller
 
     public function showIssue(Request $request)
     {
+        $project = Project::find($request->project_id);
         $issue = Issue::find($request->issue_id);
-        $user = $request->user();
+        $userId = $request->user()->id;
+        $user = $project->users()->find($userId);
         return view('Issue',compact('user','issue'));
     }
 
