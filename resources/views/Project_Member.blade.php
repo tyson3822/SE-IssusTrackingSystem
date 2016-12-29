@@ -72,7 +72,7 @@
             if (!value) {
                 mSearch.html("");
                 return;
-            }; 
+            }
             mSearch.html('.wrap:not([data-index*="' + value.toLowerCase() + '"]) {display: none;}');
         });
     </script>
