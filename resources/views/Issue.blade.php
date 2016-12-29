@@ -84,7 +84,7 @@
 
                 <div class="row">
                     <h3 class="col-md-6">建立日期 : {{$issue->created_at}}</h3>
-                    <h3 class="col-md-6">指派日期 : </h3>
+                    <!--<h3 class="col-md-6">指派日期 : </h3>-->
                     <div class="col-md-12">
                         <h3 class="col-md-4" style="padding: 0px">負責人 : 
                             @if($issue->user_id != null)
@@ -102,16 +102,25 @@
                     
                     <div id="logs" class="col-md-12">
                         <h3>過去紀錄 : </h3>
-                        @foreach($issue->logs as $log)
+                        @for($index = count($issue->logs)-1; $index >= 0; $index--)
                             <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">更新日期 : {{$issue->updated_at}}</h3>
+                                <div class="panel-heading clearfix">
+                                    <h3 class="panel-title col-md-3">負責人 : 
+                                        @if($issue->logs[$index]->user_id != null)
+                                            {{$issue->logs[$index]->user->name}}
+                                        @endif
+                                    </h3>
+                                    <h3 class="panel-title col-md-3">更新日期 : {{$issue->logs[$index]->updated_at}}</h3>
+                                    <h3 class="panel-title col-md-3">重要性 : {{$issue->logs[$index]->priority}}</h3>
+                                    <h3 class="panel-title col-md-3">狀態 : {{$issue->logs[$index]->state}}</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <p>{{$issue->description}}</p>
+                                    <p>
+                                        {{$issue->logs[$index]->description}}
+                                    </p>     
                                 </div>
                             </div>
-                        @endforeach
+                        @endfor
                     </div>
                 </div>
 
