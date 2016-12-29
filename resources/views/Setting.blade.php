@@ -35,7 +35,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="{{route('setting')}}">設定</a></li>
-                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user['name']}}</label></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user->name}}</label></li>
                         <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                     </ul>
@@ -53,15 +53,15 @@
         </div>
         <div class="row">
             <div class="container col-md-offset-1 col-md-5" style="border-right-width:1px;border-right-style:solid;border-color:#bababa">
-                <label class="col-md-offset-2" style="font-size:30px; color:black;">Personal information</label>
+                <label class="col-md-offset-4" style="font-size:30px; color:black;">個人資訊</label>
                 <p class="col-md-offset-1" style="font-size:18px;color: black">
-                    <label>使用者名稱 : {{$user['name']}}</label><br>
-                    <label>Email : {{$user['email']}}</label><br>
-                    <label>權限 : {{$user['role']}}</label>
+                    <label>使用者名稱 : {{$user->name}}</label><br>
+                    <label>Email : {{$user->email}}</label><br>
+                    <label>權限 : {{$user->role}}</label>
                 </p>
             </div>
             <div class="container col-md-5" style="border-left-width:1px;border-left-style:solid;border-color:#bababa">
-                <label class="col-md-offset-2" style="font-size:30px; color:black;">Edit personal information</label>
+                <label class="col-md-offset-4" style="font-size:30px; color:black;">編輯個人資訊</label>
 
                 {!! Form::open(array('url' => 'setting/update', 'method' => 'put')) !!}
                     {{ csrf_field() }}
