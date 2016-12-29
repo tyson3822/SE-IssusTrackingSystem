@@ -39,11 +39,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/access_manage','AccessManagerController@index');
 
 	//接收使用者權限變更資訊
-	//input: 使用者名稱,使用者email,使用者密碼(新的)
+	//input: user_id,auth
 	//output: 
 	//redirect('Access_Manage')
-	//Route::put('/access_manage',function(){})->name('Change_user_auth');
-
+	//Route::put('/access_manage/{user_id}',function(){})->name('Change_user_auth');
+  
 	//刪除使用者
 	//input: user id
 	//output: 
@@ -66,13 +66,25 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_id
 	//output: 
 	//redirect('ProjectList')
-	//Route::put('/project/{project_id}/close',function(){})->name('Close_Project');
+	Route::put('/project/{project_id}/close','ProjectController@closeProject')->name('Close_Project');
 
 	//顯示Issue List頁面
 	//input: project_id
 	//output: project，user
 	//view('IssueList')
 	Route::get('/project/{project_id}','IssueController@index')->name('issue_list');
+
+	//新增issue
+	//input: project_id,title,priority,description,state預設是doing
+	//output:
+	//redirect('IssueList')
+	Route::post('/project/{project_id}/add_issue','IssueController@createIssue')->name('Add_issue');
+
+	//關閉issue
+	//input: project_id,issue_id
+	//output:
+	//redirect('IssueList')
+	Route::delete('/project/{project_id}/delete_issue/{issue_id}','IssueController@closeIssue')->name('Delete_issue');
 
 	//顯示專案成員畫面
 	//input: project_id
@@ -92,4 +104,15 @@ Route::group(['middleware' => ['web']], function () {
 	//redirect('Project_Memeber')
 	Route::put('/project/{project_id}/project_member/{member_id}/change_auth','MemberController@updateProjectMember')->name('Change_project_member_auth');
 
+	//顯示單一一個issue
+	//input: project_id,issue_id
+	//output: user,issue
+	//view('Issue')
+	Route::get('/project/{project_id}/issue/{issue_id}','IssueController@showIssue')->name('issue');
+
+	//變更issue資訊
+	//input: project_id,issue_id,priority,description,state,owner
+	//output: 
+	//redirect('Issue')
+	Route::put('/project/{project_id}/issue/{issue_id}','IssueController@showIssue')->name('Change_issue_info');
 });

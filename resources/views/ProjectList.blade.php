@@ -67,14 +67,14 @@
             <div class="col-md-4">
                 <div class="panel panel-info" style="padding-left: 0px;padding-right: 0px;">
                     <div class="panel-heading">
-                        <div class="panel-title  clearfix">
+                        <div class="panel-title clearfix">
                             <div class="pull-left">
                                 {{$project->subject}}
                             </div>
                             @if($project->pivot['user_auth'] == 'manager')
                                 <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
 
-                                <form method="POST" action="{{ url('Close_Project',$project->id) }}">
+                                <form method="POST" action="{{ route('Close_Project',$project->id) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('PUT') }}
                                     <button type="submit" class="close" style="margin-left: 5px;">&times;</button>
