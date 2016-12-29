@@ -72,48 +72,50 @@
             <!-- <br> -->
         </div>
 
-        <div class="row col-md-offset-1 col-md-10">
-            <?php
-                $index = 0;
-            ?>
-            @foreach ($project->issues as $issue)
-            <div class="col-md-4">
-                <div class="panel panel-primary" style="padding-left: 0px;padding-right: 0px;">
-                    <div class="panel-heading">
-                        <div class="panel-title  clearfix">
-                            <div class="pull-left">
-                                {{$issue->title}}
-                            </div>
-                            
-                            @if($project->pivot['user_auth'] == 'manager')
-                                <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
+        <div class="container">
+            <div class="row col-md-offset-1 col-md-9"><br>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+
+                        <tr><th>#</th><th>標題</th><th>嚴重程度</th><th>狀態</th><th>建立時間</th><th></th><th></th></tr>
+                        <?php
+                            $index = 0;
+                        ?>
+                        @foreach ($project->issues as $issue)        
+                                
+                        <tr ><td>{{$issue->id}}</td><td>{{$issue->title}}</td><td>{{$issue->priority}}</td><td>{{$issue->state}}</td><td>{{$issue->created_at}}</td>
+
+                            <td>
+                                <div class="pull-right">
+                                    <form id= method="GET" action="{{ route('issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
+                                    {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-default btn-xs" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </button>
+                                            <!-- <button type="submit" class="btn btn-default btn-xs">Description</button> -->
+                                    </form>             
+                                </div> 
+
+                            </td>
+                            <td>
+                                @if($project->pivot['user_auth'] == 'manager')
+                                    <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
 
                                 <form method="POST" action="{{ route('Delete_issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
                                     <button type="submit" class="close">&times;</button>
                                 </form>
-                            @endif
-                            <div class="pull-right">
-                                <form id= method="GET" action="{{ route('issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-default btn-xs">Description</button>
-                                </form> 
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div> 
-                            <p>Priority: {{$issue->priority}}</p>
-                            <p>State: {{$issue->state}}</p>
-                        </div>
-                    </div>
+                                @endif                      
+                            </td>
+                        </tr>      
+                        @endforeach
+                    </table>
                 </div>
+                
             </div>
-            @endforeach
+        
         </div>
-
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
