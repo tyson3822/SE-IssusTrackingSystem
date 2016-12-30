@@ -121,17 +121,19 @@
             <div class="row" style="padding: 0px">
                 <div class="row">
                     <br>
-                    <button type="button" class="btn btn-success col-md-offset-5 col-md-1">圓餅圖</button>
-                    <button type="button" class="btn btn-info col-md-1" style="margin-left: 5px">長條圖</button>
+                    <button id="pei_chart_button" type="button" class="btn btn-success col-md-offset-5 col-md-1">圓餅圖</button>
+                    <button id="column_chart_button" type="button" class="btn btn-info col-md-1" style="margin-left: 5px">長條圖</button>
                 </div>
                 
-                <div class="pie_chart">
-                    <div id="issue_state" style="width: 450px; height: 300px;"></div>
-                    <div id="issue_priority" style="width: 450px; height: 300px;"></div>
-                    <div id="project_member" style="width: 450px; height: 300px;"></div>
+                <div id="pie_chart" class="col-md-offset-1">
+                    <div id="issue_state_pie" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px; padding: 0px;"></div>
+                    <div id="issue_priority_pie" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
+                    <div id="project_member_pie" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
                 </div>
-                <div class="column_chart">
-                    
+                <div id="column_chart" class="col-md-offset-1">
+                    <div id="issue_state_column" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px; padding: 0px;"></div>
+                    <div id="issue_priority_column" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
+                    <div id="project_member_column" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
                 </div>
             </div>
         </div>
@@ -146,8 +148,22 @@
     <!-- Referencing Bootstrap JS that is hosted locally -->
     <script src="/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#pei_chart_button").click(function(){
+                $("#pie_chart").toggle();
+            });
+            $("#column_chart_button").click(function(){
+                $("#column_chart").toggle();
+            });
+        });
+    </script>
+
     @include('Issue.state_pie_chart')
     @include('Issue.priority_pie_chart')
     @include('Issue.member_pie_chart')
+    @include('Issue.state_column_chart')
+    @include('Issue.priority_column_chart')
+    @include('Issue.member_column_chart')
 </body>
 </html>

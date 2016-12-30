@@ -16,7 +16,7 @@
             @endif
         @endforeach
 
-        Highcharts.chart('project_member', {
+        Highcharts.chart('project_member_pie', {
             chart: {
                 width: 450,
                 height: 300,

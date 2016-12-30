@@ -13,14 +13,14 @@
             @endif
         @endforeach
 
-        Highcharts.chart('issue_state', {
+        Highcharts.chart('issue_state_pie', {
             chart: {
                 width: 450,
                 height: 300,
                 type: 'pie'
             },
             title: {
-                text: '狀態統計'
+                text: '議題狀態統計'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

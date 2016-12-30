@@ -13,14 +13,14 @@
             @endif
         @endforeach
 
-        Highcharts.chart('issue_priority', {
+        Highcharts.chart('issue_priority_pie', {
             chart: {
                 width: 450,
                 height: 300,
                 type: 'pie'
             },
             title: {
-                text: '嚴重程度統計'
+                text: '議題嚴重程度統計'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
