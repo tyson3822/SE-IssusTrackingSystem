@@ -4,6 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Issue_history
+ *
+ * @property-read \App\User $user
+ * @property-read \App\Issue $issue
+ * @mixin \Eloquent
+ */
 class Issue_history extends Model
 {
     /**
