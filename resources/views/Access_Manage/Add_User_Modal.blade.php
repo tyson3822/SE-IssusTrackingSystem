@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel">新增使用者</h4>
             </div>
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+            <form class="form-horizontal" role="form" method="POST" action="{{ route('Add_user') }}">
                 {{ csrf_field() }}
                 <div class="modal-body">
                     <label for="name" class="control-label">使用者名稱</label>
