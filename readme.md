@@ -13,3 +13,6 @@
 
 完成
 
+安裝套件
+
+`composer update --no-scripts --lock`
