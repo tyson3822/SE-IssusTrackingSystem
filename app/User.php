@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use DCN\RBAC\Traits\HasRoleAndPermission;
 use DCN\RBAC\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 
+
 /**
  * App\User
  *
@@ -17,6 +18,7 @@ use DCN\RBAC\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
  * @property string $remember_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property bool $ability
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Project[] $projects
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Issue[] $issues
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Log[] $logs
@@ -32,10 +34,8 @@ use DCN\RBAC\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereRole($value)
- * @mixin \Eloquent
- * @property bool $ability
  * @method static \Illuminate\Database\Query\Builder|\App\User whereAbility($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasRoleAndPermissionContract
 {

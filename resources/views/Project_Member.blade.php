@@ -78,6 +78,5 @@
     </script>
     <!-- Referencing Bootstrap JS that is hosted locally -->
     <script src="/js/bootstrap.min.js"></script>
-
 </body>
 </html>

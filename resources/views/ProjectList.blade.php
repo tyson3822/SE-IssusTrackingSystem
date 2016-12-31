@@ -50,7 +50,7 @@
         </nav>
 
         <div class="row col-md-offset-1">
-            <h1 style="color: black;" class="col-md-8">專案列表</h1>
+            <h1 style="color: black;" class="col-md-12">專案列表</h1>
             <div class="col-md-4">
                 <form>
                     <button type="button" class="btn btn-default col-md-4 " data-toggle="modal" data-target="#CreateProjectModal">

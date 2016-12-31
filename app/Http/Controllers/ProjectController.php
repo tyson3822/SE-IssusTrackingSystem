@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Project;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class ProjectController extends Controller
 {
@@ -55,5 +57,16 @@ class ProjectController extends Controller
     {
         Project::find($request->project_id)->update(['state' => 'close']);
         return redirect('/project');
+    }
+
+    //傳入關鍵字
+    //回傳經過搜尋的user
+    //可取得user->project
+    public function search($query){
+        $user = new User();
+        if($query) {
+            $user = $user->projects->where('subject','like','%'.$query.'%');
+        }
+        return back();
     }
 }

@@ -57,7 +57,7 @@
                 <p class="col-md-offset-1" style="font-size:18px;color: black">
                     <label>使用者名稱 : {{$user->name}}</label><br>
                     <label>Email : {{$user->email}}</label><br>
-                    <label>權限 : {{$user->role}}</label>
+                    <label>權限 : {{$user->getRoles()->implode('name',',')}}</label>
                 </p>
             </div>
             <div class="container col-md-5" style="border-left-width:1px;border-left-style:solid;border-color:#bababa">
