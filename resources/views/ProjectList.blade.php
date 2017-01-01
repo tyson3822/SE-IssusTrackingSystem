@@ -50,7 +50,7 @@
         </nav>
 
         <div class="row">
-           <h1 class="col-md-offset-1 col-md-2" style="color: black;margin-top: 0px">專案列表</h1>
+            <h1 class="col-md-offset-1 col-md-2" style="color: black;margin-top: 0px">專案列表</h1>
             @include('Project.Search_project')
             @include('Project.Create_project') 
         </div>

@@ -1,4 +1,4 @@
-<div class="col-md-offset-2 col-md-3">
+<div class="col-md-3">
 	<form class="form-horizontal" method="POST" action="{{ route('Add_member',['project_id' => $project->id]) }}">
 		{{ csrf_field() }}
 		<div class="form-group">
