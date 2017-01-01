@@ -33,7 +33,8 @@ class MemberController extends Controller
     {
         $project = Project::find($project_id);
         $user = $request->user();
-        return view('Project_Member', compact('project', 'user'));
+        $members = $project->users;
+        return view('Project_Member', compact('project', 'user','members'));
     }
 
     public function updateProjectMember($project_id, $member_id, Request $request)
@@ -61,12 +62,15 @@ class MemberController extends Controller
     //傳入project_id跟關鍵字
     //回傳搜尋過的project
     //取得project->users
-    public function search($project_id,$query){
+    public function search($project_id,Request $request){
+        $query = $request->member_name;
         $project = Project::find($project_id);
         $user = Auth::user();
         if($query) {
-            $project = $project->users->where('name','like','%'.$query.'%');
-            return view('Project_Member', compact('project', 'user'));
+            $filter_member = \DB::table('users')->where('name','like','%'.$query.'%')->get()->pluck('id')->all();
+            $members = $project->users->whereIn('id',$filter_member);
+
+            return view('Project_Member', compact('project', 'user','members'));
         }
         return back();
     }

@@ -7,7 +7,7 @@
         	@foreach($user->projects as $user_project)
         		@if($user_project->subject == $project->subject)
         			@if($user_project->pivot['user_auth'] == 'manager')
-        				@foreach($project->users as $member)
+        				@foreach($members as $member)
         					@if($member->pivot['user_auth'] == 'tester')
                                 <div class="row" style="margin: 5px;">
                                     <label class="col-md-3" style="padding: 7px; margin: 0px;">{{$member->name}}</label>
@@ -31,7 +31,7 @@
         					@endif
         				@endforeach
         			@else
-        				@foreach($project->users as $member)
+        				@foreach($members as $member)
         					@if($member->pivot['user_auth'] == 'manager')
         						<label class="col-md-3" style="padding: 7px; margin: 0px;">{{$member->name}}</label>
         						<label class="col-md-3" style="padding: 7px; margin: 0px;">Tester</label>
