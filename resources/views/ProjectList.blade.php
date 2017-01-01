@@ -49,16 +49,12 @@
             </div>
         </nav>
 
-        <div class="row col-md-offset-1">
-            <h1 style="color: black;" class="col-md-8">專案列表</h1>
-            <div class="col-md-4">
-                <form>
-                    <button type="button" class="btn btn-default col-md-4 " data-toggle="modal" data-target="#CreateProjectModal">
-                        <span class="glyphicon glyphicon-plus-sign"></span>建立專案
-                    </button>
-                </form>
-            </div>
+        <div class="row">
+           <h1 class="col-md-offset-1 col-md-2" style="color: black;margin-top: 0px">專案列表</h1>
+            @include('Project.Search_project')
+            @include('Project.Create_project') 
         </div>
+
         <div class="row col-md-offset-1 col-md-10">
             <?php
                 $index = 0;

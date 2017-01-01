@@ -53,6 +53,7 @@
         </div>
     </nav>
 
+    @include('Project_Member.search_member')
     @include('Project_Member.Add_member')
     @include('Project_Member.project_manager')
     @include('Project_Member.project_developer')
