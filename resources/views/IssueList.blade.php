@@ -52,13 +52,12 @@
 
         <div class="row col-md-offset-1">
             <h1 style="color: black;" class="col-md-3">{{$project->subject}}</h1><br>
-            <a class="col-md-2" href="{{ route('project_member', ['project_id' => $project->id]) }}" style="margin-top: 15px">專案成員</a>
-            <div class="col-md-3 col-md-offset-4">
-                <form>
-                    <button type="button" class="btn btn-default col-md-6" data-toggle="modal" data-target="#AddIssueModal">
-                        <span class="glyphicon glyphicon-plus-sign"></span>Add Issue
-                    </button>
-                </form>
+            <a class="col-md-1" href="{{ route('project_member', ['project_id' => $project->id]) }}" style="margin-top: 15px">專案成員</a>
+            @include('Issue.Search_issue')
+            <div class="col-md-offset-1 col-md-3">
+                <button type="button" class="btn btn-default col-md-6" data-toggle="modal" data-target="#AddIssueModal">
+                    <span class="glyphicon glyphicon-plus-sign"></span>Add Issue
+                </button>
                 <!--<form>
                     <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseIssueModal">
                         <span class="glyphicon glyphicon-minus-sign"></span>Close Issue
@@ -125,15 +124,15 @@
                     <button id="column_chart_button" type="button" class="btn btn-info col-md-1" style="margin-left: 5px">長條圖</button>
                 </div>
                 
-                <div id="pie_chart" class="col-md-offset-1">
-                    <div id="issue_state_pie" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px; padding: 0px;"></div>
-                    <div id="issue_priority_pie" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
-                    <div id="project_member_pie" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
+                <div id="pie_chart" class="col-md-offset-1 col-md-5">
+                    <div id="issue_state_pie" style="min-width: 100px; height: 300px; max-width: 600px; padding: 0px;"></div>
+                    <div id="issue_priority_pie" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
+                    <div id="project_member_pie"  style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
                 </div>
-                <div id="column_chart" class="col-md-offset-1">
-                    <div id="issue_state_column" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px; padding: 0px;"></div>
-                    <div id="issue_priority_column" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
-                    <div id="project_member_column" class="col-md-5" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
+                <div id="column_chart" class="col-md-offset-1 col-md-5">
+                    <div id="issue_state_column" style="min-width: 100px; height: 300px; max-width: 600px; padding: 0px;"></div>
+                    <div id="issue_priority_column" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
+                    <div id="project_member_column" style="min-width: 100px; height: 300px; max-width: 600px;padding: 0px;"></div>
                 </div>
             </div>
         </div>

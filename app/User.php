@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use DCN\RBAC\Traits\HasRoleAndPermission;
 use DCN\RBAC\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 
-
 /**
  * App\User
  *
