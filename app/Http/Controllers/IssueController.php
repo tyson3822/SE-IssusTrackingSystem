@@ -33,7 +33,9 @@ class IssueController extends Controller
     {   
         $user = $request->user();
         $project = $user->projects()->find($project_id);
-        return view('IssueList', compact('project', 'user'));
+        $issues = $project->issues;
+
+        return view('IssueList', compact('project', 'user','issues'));
     }
 
     public function createIssue(Request $request)
@@ -100,12 +102,16 @@ class IssueController extends Controller
     //傳入project_id跟關鍵字
     //回傳搜尋過的project
     //取得project->issues
-    public function search($project_id,$query){
+    public function search($project_id,Request $request){
+        $query = $request->issue_name;
         $project = Project::find($project_id);
         $user = Auth::user();
+
         if($query) {
-            $project = $project->issues->where('title','like','%'.$query.'%');
-            return view('IssueList', compact('project', 'user'));
+            $filter_issues = \DB::table('issues')->where('title','like','%'.$query.'%')->get()->pluck('id')->all();
+            $issues = $project->issues->whereIn('id',$filter_issues);
+
+            return view('IssueList', compact('project', 'user','issues'));
         }
         return back();
     }

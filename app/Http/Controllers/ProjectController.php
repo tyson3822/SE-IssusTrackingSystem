@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use App\Project;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -28,7 +28,8 @@ class ProjectController extends Controller
     {
         if ($request->user()) {
             $user = $request->user();
-            return view('ProjectList',compact('user'));
+            $projects = $user->projects;
+            return view('ProjectList',compact('user','projects'));
         }
         /*
         return view('ProjectList')
@@ -62,10 +63,15 @@ class ProjectController extends Controller
     //傳入關鍵字
     //回傳經過搜尋的user
     //可取得user->project
-    public function search($query){
-        $user = new User();
+    public function search(Request $request){
+        $query = $request->projct_name;
+
         if($query) {
-            $user = $user->projects->where('subject','like','%'.$query.'%');
+            $user = Auth::user();
+            $filter_projects = \DB::table('projects')->where('subject','like','%'.$query.'%')->get()->pluck('id')->all();
+            $projects = $user->projects->whereIn('id',$filter_projects);
+
+            return view('ProjectList',compact('user','projects'));
         }
         return back();
     }

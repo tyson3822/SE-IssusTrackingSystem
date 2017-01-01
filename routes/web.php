@@ -78,7 +78,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: project_name
 	//output: 特定的project
 	//
-	Route::put('/project','ProjectController@search')->name('Search_Project');
+	Route::post('/project','ProjectController@search')->name('Search_Project');
 
 	//顯示Issue List頁面
 	//input: project_id
@@ -102,7 +102,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: issue_name
 	//output: 特定的issue
 	//
-	Route::put('/project/{project_id}','IssueController@search')->name('Search_issue');
+	Route::post('/project/{project_id}','IssueController@search')->name('Search_issue');
 
 	//顯示專案成員畫面
 	//input: project_id
@@ -132,7 +132,7 @@ Route::group(['middleware' => ['web']], function () {
 	//input: member_name
 	//output: 特定的member
 	//
-	Route::put('/project/{project_id}/project_member','MemberController@search')->name('Search_member');
+	Route::post('/project/{project_id}/project_member','MemberController@search')->name('Search_member');
 
 	//顯示單一一個issue
 	//input: project_id,issue_id

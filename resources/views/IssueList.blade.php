@@ -84,7 +84,7 @@
                         <?php
                             $index = 0;
                         ?>
-                        @foreach ($project->issues as $issue)           
+                        @foreach ($issues as $issue)
                         <tr>
                             <td>{{$issue->id}}</td>
                             <td>{{$issue->title}}</td>
