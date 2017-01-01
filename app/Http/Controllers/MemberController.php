@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\User;
 use Illuminate\Http\Request;
 use App\Project;
@@ -17,7 +18,6 @@ class MemberController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -56,5 +56,18 @@ class MemberController extends Controller
         $project = Project::find($request->project_id);
         $project->users()->attach($user->id, ['user_auth' => 'general']);
         return redirect('/project/' . $project->id . '/project_member');
+    }
+
+    //傳入project_id跟關鍵字
+    //回傳搜尋過的project
+    //取得project->users
+    public function search($project_id,$query){
+        $project = Project::find($project_id);
+        $user = Auth::user();
+        if($query) {
+            $project = $project->users->where('name','like','%'.$query.'%');
+            return view('Project_Member', compact('project', 'user'));
+        }
+        return back();
     }
 }

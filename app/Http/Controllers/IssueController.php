@@ -7,6 +7,8 @@
  */
 
 namespace App\Http\Controllers;
+
+use Auth;
 use App\Issue;
 use App\Project;
 use Illuminate\Http\Request;
@@ -16,7 +18,6 @@ class IssueController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -94,5 +95,18 @@ class IssueController extends Controller
             'state' => $issue->state,
         ]);
         return redirect('/project/'.$project->id.'/issue/'.$issue->id);
+    }
+
+    //傳入project_id跟關鍵字
+    //回傳搜尋過的project
+    //取得project->issues
+    public function search($project_id,$query){
+        $project = Project::find($project_id);
+        $user = Auth::user();
+        if($query) {
+            $project = $project->issues->where('title','like','%'.$query.'%');
+            return view('IssueList', compact('project', 'user'));
+        }
+        return back();
     }
 }

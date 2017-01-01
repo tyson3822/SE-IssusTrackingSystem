@@ -55,8 +55,8 @@ Route::group(['middleware' => ['web']], function () {
     //output:
     //redirect('Access_Manage')
     Route::post('/access_manage/create_user','AccessManagerController@create')->name('Add_user');
-
     //顯示Project List頁面
+  
 	//input: 
 	//output: 使用者參與的所有專案，user
 	//view('ProjectList')
