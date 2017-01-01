@@ -42,15 +42,22 @@ Route::group(['middleware' => ['web']], function () {
 	//input: user_id,auth
 	//output: 
 	//redirect('Access_Manage')
-	//Route::put('/access_manage/{user_id}',function(){})->name('Change_user_auth');
+	Route::put('/access_manage/{user_id}','AccessManagerController@update')->name('Change_user_auth');
   
 	//刪除使用者
 	//input: user id
 	//output: 
 	//redirect('Access_Manage')
-	//Route::delete('/access_manage/delete_user/{user_id}',function(){})->name('Delete_user');
+	Route::delete('/access_manage/delete_user/{user_id}','AccessManagerController@delete')->name('Delete_user');
 
-	//顯示Project List頁面
+    //create使用者
+    //input: requests
+    //output:
+    //redirect('Access_Manage')
+    Route::post('/access_manage/create_user','AccessManagerController@create')->name('Add_user');
+
+
+    //顯示Project List頁面
 	//input: 
 	//output: 使用者參與的所有專案，user
 	//view('ProjectList')
