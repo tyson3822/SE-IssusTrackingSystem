@@ -53,7 +53,11 @@
         </div>
     </nav>
 
-    @include('Project_Member.Add_member')
+    <div class="row">
+        <h1 class="col-md-offset-2 col-md-2" style="margin-top: 0px;">專案成員</h1>
+        @include('Project_Member.search_member')
+        @include('Project_Member.Add_member')
+    </div>
     @include('Project_Member.project_manager')
     @include('Project_Member.project_developer')
     @include('Project_Member.project_tester')

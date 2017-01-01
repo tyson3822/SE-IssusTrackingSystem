@@ -56,7 +56,6 @@ Route::group(['middleware' => ['web']], function () {
     //redirect('Access_Manage')
     Route::post('/access_manage/create_user','AccessManagerController@create')->name('Add_user');
 
-
     //顯示Project List頁面
 	//input: 
 	//output: 使用者參與的所有專案，user
@@ -75,6 +74,12 @@ Route::group(['middleware' => ['web']], function () {
 	//redirect('ProjectList')
 	Route::put('/project/{project_id}/close','ProjectController@closeProject')->name('Close_Project');
 
+	//搜尋project
+	//input: project_name
+	//output: 特定的project
+	//
+	Route::put('/project','ProjectController@search')->name('Search_Project');
+
 	//顯示Issue List頁面
 	//input: project_id
 	//output: project，user
@@ -92,6 +97,12 @@ Route::group(['middleware' => ['web']], function () {
 	//output:
 	//redirect('IssueList')
 	Route::delete('/project/{project_id}/delete_issue/{issue_id}','IssueController@closeIssue')->name('Delete_issue');
+
+	//搜尋issue
+	//input: issue_name
+	//output: 特定的issue
+	//
+	Route::put('/project/{project_id}','IssueController@search')->name('Search_issue');
 
 	//顯示專案成員畫面
 	//input: project_id
@@ -116,6 +127,12 @@ Route::group(['middleware' => ['web']], function () {
 	//output:
 	//redirect('Project_Memeber')
 	Route::post('/project/{project_id}/project_member/Add_member','MemberController@addProjectMember')->name('Add_member');
+
+	//搜尋專案成員
+	//input: member_name
+	//output: 特定的member
+	//
+	Route::put('/project/{project_id}/project_member','MemberController@search')->name('Search_member');
 
 	//顯示單一一個issue
 	//input: project_id,issue_id
