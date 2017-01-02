@@ -117,6 +117,12 @@
                     </table>
                 </div>   
             </div>
+
+            <div class="col-md-2">
+                <h3>狀態 : {{$project->state}}
+                </h3>
+            </div>
+
             <div class="row" style="padding: 0px">
                 <div class="row">
                     <br>
