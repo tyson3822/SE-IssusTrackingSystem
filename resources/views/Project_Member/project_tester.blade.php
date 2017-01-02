@@ -32,7 +32,7 @@
         				@endforeach
         			@else
         				@foreach($members as $member)
-        					@if($member->pivot['user_auth'] == 'manager')
+        					@if($member->pivot['user_auth'] == 'tester')
         						<label class="col-md-3" style="padding: 7px; margin: 0px;">{{$member->name}}</label>
         						<label class="col-md-3" style="padding: 7px; margin: 0px;">Tester</label>
         					@endif
