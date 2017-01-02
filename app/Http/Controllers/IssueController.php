@@ -41,7 +41,7 @@ class IssueController extends Controller
     public function createIssue(Request $request)
     {
         $project = Project::find($request->project_id);
-        $issue = $project.issues()->create([
+        $issue = $project->issues()->create([
             'title' => $request->title,
             'description' => $request->description,
             'priority' => $request->priority,
