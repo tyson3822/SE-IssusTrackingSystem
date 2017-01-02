@@ -3,7 +3,7 @@
         var ready = 0;
         var doing = 0;
         var close = 0;
-        @foreach ($project->issues as $issue)
+        @foreach ($issues as $issue)
             @if($issue->state == 'doing')
                 doing++;
             @elseif($issue->state == 'ready')
