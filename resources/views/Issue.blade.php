@@ -67,7 +67,7 @@
                             <label id="priority" style="color:red;">{{$issue->priority}}</label>
                         @endif
                         <select id="edit_priority" name="issue_priority" style="display: none;">
-                            <option value="high" style="color: red">gigh</option>
+                            <option value="high" style="color: red">high</option>
                             <option value="mid" style="color: orange">mid</option>
                             <option value="low" style="color: green">low</option>
                         </select>
