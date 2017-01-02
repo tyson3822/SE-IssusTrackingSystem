@@ -51,47 +51,21 @@
         <div class="row">
             <h1 class="col-md-offset-1 col-md-2" style="color: black;margin-top: 0px">專案列表</h1>
             @include('Project.Search_project')
-            @include('Project.Create_project') 
+            @include('Project.Create_project')
         </div>
 
         <div class="row col-md-offset-1 col-md-10">
-            <?php
-                $index = 0;
-            ?>
+            <label class="col-md-12" style="font-size: 20px;border-bottom-width:1px;border-bottom-style:solid;">active</label>
             @foreach ($projects as $project)
-            <div class="col-md-4">
-                <div class="panel panel-info" style="padding-left: 0px;padding-right: 0px;">
-                    <div class="panel-heading">
-                        <div class="panel-title clearfix">
-                            <div class="pull-left">
-                                {{$project->subject}}
-                            </div>
-                            @if($project->pivot['user_auth'] == 'manager')
-                                <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
-
-                                <form method="POST" action="{{ route('Close_Project',$project->id) }}">
-                                    {{ csrf_field() }}
-                                    {{ method_field('PUT') }}
-                                    <button type="submit" class="close" style="margin-left: 5px;">&times;</button>
-                                </form>
-                            @endif
-
-                            <form method="GET" action="{{ url('/project',['project_id' =>$project->id]) }}">
-                                {{ csrf_field() }}
-                                <button type="submit" class="btn btn-default btn-sm pull-right" style="padding: 4px;">Go</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        @foreach($project->issues as $issue)
-                            <img src="simple_issue.png" class="col-md-offset-1">
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            <?php
-//                $index++;
-            ?>
+                @if($project->state == "normal")
+                    @include('Project.a_project')
+                @endif
+            @endforeach
+            <label class="col-md-12" style="font-size: 20px;border-bottom-width:1px;border-bottom-style:solid;">closed</label>
+            @foreach ($projects as $project)
+                @if($project->state == "close")
+                    @include('Project.a_project')
+                @endif
             @endforeach
         </div>
     </div>
