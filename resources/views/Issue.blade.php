@@ -51,6 +51,7 @@
         <div class="row col-md-offset-1 col-md-10">
             <form method="POST" action="{{ route('Change_issue_info',['project_id' => $issue->project->id,'issue_id' => $issue->id]) }}">
                 {{ csrf_field() }}
+                {{ method_field('PUT') }}
                 <div class="row">
                     <h1 style="color: black;" class="col-md-3">議題 : {{$issue->title}}</h1>
                     @if($issue->user_id == $user->id or $user->pivot['user_auth'] == 'manager')

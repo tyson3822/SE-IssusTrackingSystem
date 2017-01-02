@@ -3,7 +3,7 @@
         var high = 0;
         var mid = 0;
         var low = 0;
-        @foreach ($project->issues as $issue)
+        @foreach ($issues as $issue)
             @if($issue->priority == 'mid')
                 mid++;
             @elseif($issue->priority == 'high')
