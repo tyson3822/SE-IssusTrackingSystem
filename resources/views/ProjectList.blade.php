@@ -61,7 +61,7 @@
                     @include('Project.a_project')
                 @endif
             @endforeach
-            <label class="col-md-12" style="font-size: 20px;border-bottom-width:1px;border-bottom-style:solid;">closed</label>
+            <label class="col-md-12" style="font-size: 20px;margin-top: 10px;border-bottom-width:1px;border-bottom-style:solid;">closed</label>
             @foreach ($projects as $project)
                 @if($project->state == "close")
                     @include('Project.a_project')
