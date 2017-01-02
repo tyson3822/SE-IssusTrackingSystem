@@ -17,9 +17,9 @@
                     <div class="form-group">
                         <label class="control-label col-md-3" style="text-align: left;">Priority : </label>
                         <select name="priority" style="width:12%; padding-top: 10px;">
-                            <option value="High" style="color:red;">High</option>
-                            <option value="Mid" style="color:orange;">Mid</option>
-                            <option value="Low" style="color:green;">Low</option>
+                            <option value="high" style="color:red;">high</option>
+                            <option value="mid" style="color:orange;">mid</option>
+                            <option value="low" style="color:green;">low</option>
                         </select>
                     </div>
                     <br>
