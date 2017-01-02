@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Auth;
 use App\Issue;
 use App\Project;
@@ -83,12 +84,14 @@ class IssueController extends Controller
 
     public function updateIssueInfo(Request $request)
     {
+        $user = User::where('name', $request->owner)->first();
         $project = Project::find($request->project_id);
         $issue = Issue::find($request->issue_id);
         $issue->update([
             'description' => $request->description,
             'priority' => $request->priority,
             'state'=>$request->state,
+            'user_id'=>$user->id,
         ]);
         $issue->logs()->create([
             'title' => $issue->title,
