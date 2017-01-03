@@ -1,6 +1,7 @@
 <?php
 
 use App\Issue;
+use App\Project;
 use Illuminate\Database\Seeder;
 
 class IssuesTableSeeder extends Seeder
@@ -12,94 +13,115 @@ class IssuesTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->issue1();
+        $this->project1();
 
-        $this->issue2();
+        $this->project2();
 
-        $this->issue3();
+        $this->project3();
     }
 
     /**
      * unassigned issue
      */
-    public function issue1()
+    public function project1()
     {
-        $issue = Issue::create([
-            'title' => 'good',
-            'description' => 'good....description',
-            'priority' => 'low',
-            'state' => 'ready',
-//            'user_id' => 3,
-            'project_id' => '1'
-        ]);
-        $issue->logs()->create([
-            'title' => $issue['title'],
-            'description' => $issue['description'],
-            'priority' => $issue['priority'],
-            'state' => $issue['state'],
-            'user_id' => $issue['user_id'],
-        ]);
-    }
+        $project = Project::find(1);
 
-    /**
-     * has assigned issue
-     */
-    public function issue2()
-    {
-        $issue = Issue::create([
-            'title' => 'hello',
-            'description' => 'hello....description',
+        $issue = $project->issues()->create([
+            'title' => 'site',
+            'description' => 'decide election site',
             'priority' => 'low',
             'state' => 'ready',
-//            'user_id' => 3,
-            'project_id' => '1'
         ]);
-        $issue->logs()->create([
-            'title' => $issue['title'],
-            'description' => $issue['description'],
-            'priority' => $issue['priority'],
-            'state' => $issue['state'],
-            'user_id' => $issue['user_id'],
+        $this->createLog($issue);
+
+        $issue = $project->issues()->create([
+            'title' => 'date',
+            'description' => 'decide election date',
+            'priority' => 'mid',
+            'state' => 'ready',
         ]);
-        $issue->update([
+        $this->createLog($issue);
+
+        $issue = $project->issues()->create([
+            'title' => 'candidate',
+            'description' => 'decide election candidate',
             'priority' => 'high',
+            'state' => 'ready',
+        ]);
+        $this->createLog($issue);
+        $issue->update([
             'state' => 'doing',
             'user_id' => 3,
         ]);
-        $issue->logs()->create([
-            'title' => $issue['title'],
-            'description' => $issue['description'],
-            'priority' => $issue['priority'],
-            'state' => $issue['state'],
-            'user_id' => $issue['user_id'],
-        ]);
-        $issue->update([
-            'description' => 'hello...anything description',
-            'priority' => 'mid',
-            'user_id' => 2,
-        ]);
-        $issue->logs()->create([
-            'title' => $issue['title'],
-            'description' => $issue['description'],
-            'priority' => $issue['priority'],
-            'state' => $issue['state'],
-            'user_id' => $issue['user_id'],
-        ]);
+        $this->createLog($issue);
     }
 
-    /**
-     * unassigned issue
-     */
-    public function issue3()
+    public function project2()
     {
-        $issue = Issue::create([
-            'title' => 'goodbye',
-            'description' => 'goodbye....description',
+        $project = Project::find(2);
+
+        $issue = $project->issues()->create([
+            'title' => 'site',
+            'description' => 'decide demonstration site',
             'priority' => 'low',
             'state' => 'ready',
-//            'user_id' => 3,
-            'project_id' => '1'
         ]);
+        $this->createLog($issue);
+
+        $issue = $project->issues()->create([
+            'title' => 'date',
+            'description' => 'decide demonstration date',
+            'priority' => 'mid',
+            'state' => 'ready',
+        ]);
+        $this->createLog($issue);
+
+        $issue = $project->issues()->create([
+            'title' => 'meal',
+            'description' => 'booking meal for attendee',
+            'priority' => 'high',
+            'state' => 'ready',
+        ]);
+        $this->createLog($issue);
+        $issue->update([
+            'state' => 'doing',
+            'user_id' => 2,
+        ]);
+        $this->createLog($issue);
+    }
+
+    public function project3()
+    {
+        $project = Project::find(3);
+
+        $issue = $project->issues()->create([
+            'title' => 'site',
+            'description' => 'decide petition site',
+            'priority' => 'low',
+            'state' => 'ready',
+        ]);
+        $this->createLog($issue);
+
+        $issue = $project->issues()->create([
+            'title' => 'date',
+            'description' => 'decide demonstration date',
+            'priority' => 'mid',
+            'state' => 'ready',
+        ]);
+        $this->createLog($issue);
+
+        $issue = $project->issues()->create([
+            'title' => 'meal',
+            'description' => 'booking meal for attendee',
+            'priority' => 'high',
+            'state' => 'ready',
+        ]);
+        $this->createLog($issue);
+    }
+
+    public function createLog($issue)
+    {
         $issue->logs()->create([
             'title' => $issue['title'],
             'description' => $issue['description'],
