@@ -67,7 +67,7 @@
                         @elseif($issue->priority == 'high')
                             <label id="priority" style="color:red;">{{$issue->priority}}</label>
                         @endif
-                        <select id="edit_priority" name="issue_priority" style="display: none;">
+                        <select id="edit_priority" name="priority" style="display: none;">
                             <option value="high" style="color: red">high</option>
                             <option value="mid" style="color: orange">mid</option>
                             <option value="low" style="color: green">low</option>
@@ -75,7 +75,7 @@
                     </h2>
                     <h2 class="col-md-offset-1 col-md-3">狀態 :　
                         <label id="state">{{$issue->state}}</label>
-                        <select id="edit_state" style="display: none;">
+                        <select id="edit_state" name="state" style="display: none;">
                             <option value="ready">ready</option>
                             <option value="doing">doing</option>
                             <option value="close">close</option>
@@ -90,6 +90,7 @@
                         <h3 class="col-md-4" style="padding: 0px">負責人 :
                             @if($issue->user_id != null)
                                 <label id="owner">{{$issue->user->name}}</label>
+                                <input id="edit_owner" type="text" name="owner" class="form-control" value="{{$issue->user->name}}" style="width: 50%;display: none">
                             @endif
                             <input id="edit_owner" type="text" name="owner" class="form-control" style="width: 50%;display: none">
                         </h3>
@@ -98,7 +99,7 @@
                     <div class="col-md-12">
                         <h3>描述 : </h3>
                         <p id="description" style="border-style:ridge; border-radius:10px">{{$issue->description}}</p>
-                        <textarea id="edit_description" name="issue_description" class="form-control" rows="3" style="display: none"></textarea>
+                        <textarea id="edit_description" name="description" class="form-control" rows="3" style="display: none"></textarea>
                     </div>
 
                     <div id="logs" class="col-md-12">
