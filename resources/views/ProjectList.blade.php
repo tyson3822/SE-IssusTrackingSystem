@@ -26,7 +26,6 @@
 <body>
     @include('Project.Create_Project_Modal')
     @include('Project.Close_Project_Modal')
-
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top navbar-inverse">
             <div class="container-fluid">
@@ -38,6 +37,7 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="{{route('project_list')}}">專案</a></li>
                         @include('layouts.AccountList_navbar')
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{route('setting')}}">設定</a></li>
@@ -50,10 +50,10 @@
         </nav>
         <div class="row">
             <h1 class="col-md-offset-1 col-md-2" style="color: black;margin-top: 0px">專案列表</h1>
+
             @include('Project.Search_project')
             @include('Project.Create_project')
         </div>
-
         <div class="row col-md-offset-1 col-md-10">
             <label class="col-md-12" style="font-size: 20px;border-bottom-width:1px;border-bottom-style:solid;">active</label>
             @foreach ($projects as $project)
@@ -69,7 +69,6 @@
             @endforeach
         </div>
     </div>
-
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
