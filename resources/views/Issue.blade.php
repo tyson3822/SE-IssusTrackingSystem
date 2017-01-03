@@ -90,7 +90,6 @@
                         <h3 class="col-md-4" style="padding: 0px">負責人 :
                             @if($issue->user_id != null)
                                 <label id="owner">{{$issue->user->name}}</label>
-                                <input id="edit_owner" type="text" name="owner" class="form-control" value="{{$issue->user->name}}" style="width: 50%;display: none">
                             @endif
                             <input id="edit_owner" type="text" name="owner" class="form-control" style="width: 50%;display: none">
                         </h3>
@@ -160,6 +159,7 @@
 
             if('{{$user->pivot['user_auth']}}' == 'manager'){
                 $("#owner").css("display","none");
+                $("#edit_owner").val("{{$issue->user->name}}");
                 $("#edit_owner").css("display","inline");
             }
         });
