@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use App\User;
 use Auth;
 use App\Issue;
@@ -42,18 +43,21 @@ class IssueController extends Controller
     public function createIssue(Request $request)
     {
         $project = Project::find($request->project_id);
+
         $issue = $project->issues()->create([
             'title' => $request->title,
             'description' => $request->description,
             'priority' => $request->priority,
             'state' => 'ready',
         ]);
+
         $issue->logs()->create([
             'title' => $issue->title,
             'description' => $issue->description,
             'priority' => $issue->priority,
             'state' => $issue->state,
         ]);
+
         return redirect('/project/'.$project->id);
     }
 
@@ -61,15 +65,33 @@ class IssueController extends Controller
     {
         $project = Project::find($request->project_id);
         $issue = Issue::find($request->issue_id);
+
         $issue->update([
             'state' => 'close',
         ]);
+
         $issue->logs()->create([
             'title' => $issue->title,
             'description' => $issue->description,
             'priority' => $issue->priority,
             'state' => $issue->state,
         ]);
+
+        $manager_id = User::join('project_user_relations','users.id','=','project_user_relations.user_id')
+                    ->select('project_user_relations.user_id')
+                    ->where('user_auth','manager')
+                    ->where('project_id',$request->project_id)
+                    ->get()
+                    ->pluck('user_id')
+                    ->all();
+
+        $manager = User::where('id',$manager_id)->first();
+        
+        Mail::raw('Dear '.$manager->name, function ($m) use ($issue,$project,$manager) {
+
+            $m->to($manager->email)->subject('你的專案 '.$project->subject.'的issue '.$issue->title.' 已關閉');
+        });
+
         return redirect('/project/'.$project->id);
     }
 

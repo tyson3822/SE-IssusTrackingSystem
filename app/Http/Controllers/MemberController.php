@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
@@ -40,7 +41,16 @@ class MemberController extends Controller
     public function updateProjectMember($project_id, $member_id, Request $request)
     {
         $project = Project::find($project_id);
+
         $project->find($project_id)->users()->updateExistingPivot($member_id,['user_auth'=>$request['user_auth']]);
+
+        $user = User::find($member_id);
+
+        Mail::raw('Take care! ', function ($m) use ($request,$project,$user) {
+
+            $m->to($user->email)->subject('你被指派為'.$project->subject.'的'.$request->user_auth);
+        });
+
         return redirect('/project/'.$project_id.'/project_member');
     }
 
@@ -53,10 +63,25 @@ class MemberController extends Controller
 
     public function addProjectMember(Request $request)
     {
+
         $user = User::where('email', $request->email)->first();
-        $project = Project::find($request->project_id);
-        $project->users()->attach($user->id, ['user_auth' => 'general']);
-        return redirect('/project/' . $project->id . '/project_member');
+
+        if($user){
+            $project = Project::find($request->project_id);
+            $project->users()->attach($user->id, ['user_auth' => 'general']);
+
+            Mail::raw('Best wishes! ', function ($m) use ($request,$project) {
+
+                $m->to($request->email)->subject('你被指派為'.$project->subject.'的成員');
+            });
+
+            return redirect('/project/' . $project->id . '/project_member');
+        }
+
+       
+
+
+        return back();
     }
 
     //傳入project_id跟關鍵字

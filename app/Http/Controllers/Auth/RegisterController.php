@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Mail;
 use App\User;
 use DCN\RBAC\Models\Role;
 use Validator;
@@ -66,12 +67,18 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => $data['password'],
         ]);
 
-        $role = Role::where('slug','user');
+
+        $role = Role::where('slug','user')->first();
 
         $user->attachRole($role);
+        
+        Mail::raw('Hello, '.$user->name, function ($m) use ($user) {
+
+            $m->to($user->email, $user->name)->subject('歡迎使用最牛B的ITS');
+        });
 
         return $user;
     }
