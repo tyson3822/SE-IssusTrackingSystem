@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use Auth;
 use DCN\RBAC\Models\Role;
 use Illuminate\Http\Request;
@@ -41,6 +42,11 @@ class AccessManagerController extends Controller
         $user->detachAllRoles();
         $role = (new Role())->where('slug',$request->auth)->first();
         $user->attachRole($role);
+
+        Mail::raw('Dear '.$user->name, function ($m) use ($user,$role) {
+
+            $m->to($user->email)->subject('你的權限被更改為 '.$role->name);
+        });
 
         return redirect('/access_manage');
     }
