@@ -7,6 +7,7 @@ use Auth;
 use DCN\RBAC\Models\Role;
 use Illuminate\Http\Request;
 use App\User;
+use DCN\RBAC\Exceptions\RoleDeniedException;
 
 class AccessManagerController extends Controller
 {
@@ -27,6 +28,10 @@ class AccessManagerController extends Controller
     public function index()
     {
         $user = Auth::user();
+        if(!$user->roleIs('admin')){
+            return back();
+        }
+
         $users = User::get()->where('ability',true);
 
         return view('/Access_Manage',compact('user','users'));
