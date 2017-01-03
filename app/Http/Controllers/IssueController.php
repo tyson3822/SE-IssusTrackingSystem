@@ -106,8 +106,8 @@ class IssueController extends Controller
 
     public function updateIssueInfo(Request $request)
     {
-        $user = User::where('name', $request->owner)->first();
         $project = Project::find($request->project_id);
+        $user = $project->users()->where('name', $request->owner)->first();
         $issue = Issue::find($request->issue_id);
         $issue->update([
             'description' => $request->description,
