@@ -118,7 +118,7 @@
                 </div>   
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-offset-1 col-md-1" style="padding: 0px">
                 <h3>狀態 : {{$project->state}}
                 </h3>
             </div>
