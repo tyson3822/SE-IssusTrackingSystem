@@ -55,9 +55,11 @@
             <a class="col-md-1" href="{{ route('project_member', ['project_id' => $project->id]) }}" style="margin-top: 15px">專案成員</a>
             @include('Issue.Search_issue')
             <div class="col-md-offset-1 col-md-3">
-                <button type="button" class="btn btn-default col-md-6" data-toggle="modal" data-target="#AddIssueModal">
-                    <span class="glyphicon glyphicon-plus-sign"></span>Add Issue
-                </button>
+                @if($project->state == 'normal')
+                    <button type="button" class="btn btn-default col-md-6" data-toggle="modal" data-target="#AddIssueModal">
+                        <span class="glyphicon glyphicon-plus-sign"></span>Add Issue
+                    </button>
+                @endif
                 <!--<form>
                     <button type="button" class="btn btn-default col-md-4" data-toggle="modal" data-target="#CloseIssueModal">
                         <span class="glyphicon glyphicon-minus-sign"></span>Close Issue
@@ -102,7 +104,7 @@
                                 </div> 
                             </td>
                             <td>
-                                @if($project->pivot['user_auth'] == 'manager')
+                                @if($project->pivot['user_auth'] == 'manager' and $project->state =='normal')
                                     <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
 
                                 <form method="POST" action="{{ route('Delete_issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">

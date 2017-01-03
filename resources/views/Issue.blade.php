@@ -54,7 +54,7 @@
                 {{ method_field('PUT') }}
                 <div class="row">
                     <h1 style="color: black;" class="col-md-3">議題 : {{$issue->title}}</h1>
-                    @if($issue->user_id == $user->id or $user->pivot['user_auth'] == 'manager' or $issue->project->state != 'close')
+                    @if(($issue->user_id == $user->id or $user->pivot['user_auth'] == 'manager') and $issue->project->state == 'normal')
                         <button id="edit_button" type="button" class="btn btn-default col-md-1" style="margin-top: 25px">
                             <span class="glyphicon glyphicon-pencil">編輯
                         </button>
