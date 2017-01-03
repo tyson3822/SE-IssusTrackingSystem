@@ -25,7 +25,7 @@
                             		<form method="POST" action="{{ route('Delete_project_member',['project_id'=> $project->id,'member_id' => $member->id]) }}">
                                    		{{ csrf_field() }}
                                 		{{ method_field('DELETE') }}
-                                		<button type="button" class="btn btn-danger col-md-2">剔除</button>
+                                		<button type="submit" class="btn btn-danger col-md-2">剔除</button>
                             		</form>
                                 </div>
         					@endif
