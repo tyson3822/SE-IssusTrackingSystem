@@ -91,13 +91,14 @@ class IssueController extends Controller
             'description' => $request->description,
             'priority' => $request->priority,
             'state'=>$request->state,
-            'user_id'=>$user->id,
+            'user_id' => $user ? $user->id : null,
         ]);
         $issue->logs()->create([
             'title' => $issue->title,
             'description' => $issue->description,
             'priority' => $issue->priority,
             'state' => $issue->state,
+            'user_id' => $issue->user_id,
         ]);
         return redirect('/project/'.$project->id.'/issue/'.$issue->id);
     }
