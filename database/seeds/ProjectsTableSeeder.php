@@ -13,43 +13,29 @@ class ProjectsTableSeeder extends Seeder
     public function run()
     {
         Project::create([
-            'subject' => 'Trump principle',
-            'description' => str_random(10).'.......description of Trump principle',
-            'visible' => 'private',
-            'state' => 'normal',
-        ]);
-
-        Project::create([
-            'subject' => 'Obama principle',
-            'description' => str_random(10).'.......description of Obama principle',
-            'visible' => 'private',
-            'state' => 'normal',
-        ]);
-
-        Project::create([
-            'subject' => 'Waston principle',
-            'description' => str_random(10).'.......description of Waston principle',
-            'visible' => 'private',
-            'state' => 'normal',
-        ]);
-
-        Project::create([
-            'subject' => 'Steve principle',
-            'description' => str_random(10).'.......description of Steve principle',
+            'subject' => 'Presidential election',
+            'description' => '2016 Presidential election at Taiwan',
             'visible' => 'public',
             'state' => 'normal',
         ]);
 
         Project::create([
-            'subject' => 'Joe principle',
-            'description' => str_random(10).'.......description of Joe principle',
+            'subject' => 'Gay marriage',
+            'description' => 'Gay marriage legalization at Taiwan',
             'visible' => 'public',
             'state' => 'normal',
         ]);
 
         Project::create([
-            'subject' => 'Bush principle',
-            'description' => str_random(10).'.......description of Bush principle',
+            'subject' => 'death penalty',
+            'description' => 'about repealing death penalty',
+            'visible' => 'public',
+            'state' => 'normal',
+        ]);
+
+        Project::create([
+            'subject' => 'Login to Mars',
+            'description' => 'about planing on landing to Mars',
             'visible' => 'public',
             'state' => 'normal',
         ]);
