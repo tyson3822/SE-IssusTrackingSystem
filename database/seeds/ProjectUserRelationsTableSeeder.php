@@ -16,6 +16,7 @@ class ProjectUserRelationsTableSeeder extends Seeder
         User::find(2)->projects()->attach(1,['user_auth'=>'manager']);
         User::find(2)->projects()->attach(2,['user_auth'=>'developer']);
         User::find(2)->projects()->attach(3,['user_auth'=>'general']);
+        User::find(2)->projects()->attach(4,['user_auth'=>'manager']);
 
         User::find(3)->projects()->attach(2,['user_auth'=>'manager']);
         User::find(3)->projects()->attach(1,['user_auth'=>'developer']);
