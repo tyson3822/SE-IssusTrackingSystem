@@ -159,7 +159,9 @@
 
             if('{{$user->pivot['user_auth']}}' == 'manager'){
                 $("#owner").css("display","none");
-                $("#edit_owner").val("{{$issue->user->name}}");
+                @if($issue->user_id != null)
+                    $("#edit_owner").val("{{$issue->user->name}}");
+                @endif
                 $("#edit_owner").css("display","inline");
             }
         });
