@@ -30,12 +30,14 @@
 
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <p class="navbar-text" style="margin-bottom:0px">test</p>
+                        <li><a href="{{url('/ProjectList')}}">ProjectList</a></li>
+                        @include('layouts.AccountList_navbar')
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <p class="navbar-text" style="margin-bottom:0px">Setting</p>
-                        <p class="navbar-text" style="margin-bottom:0px">User Name</p>
-                        <p class="navbar-text" style="margin-bottom:0px">Log Out</p>
+                        <li class="active"><a href="{{url('/setting')}}">Setting</a></li>
+                        <li><label class="navbar-text" style="margin-bottom:0px">{{$user['name']}}</label></li>
+                        <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a></li>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                     </ul>
                 </div>
             </div>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Mail;
 use App\User;
+use DCN\RBAC\Models\Role;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/project';
 
     /**
      * Create a new controller instance.
@@ -62,10 +64,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => $data['password'],
         ]);
+
+
+        $role = Role::where('slug','user')->first();
+
+        $user->attachRole($role);
+        
+        Mail::raw('Hello, '.$user->name, function ($m) use ($user) {
+
+            $m->to($user->email, $user->name)->subject('歡迎使用最牛B的ITS');
+        });
+
+        return $user;
     }
 }

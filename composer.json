@@ -6,7 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*"
+        "laravel/framework": "5.3.*",
+        "dcn/rbac": "dev-master",
+        "laravelcollective/html": "~5.0",
+        "laracasts/flash": "^2.0",
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -46,5 +51,12 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "repositories": [
+    {
+    "type": "composer",
+    "url": "https://packagist.org"
+    },
+    { "packagist": false }
+    ]
 }
