@@ -104,7 +104,7 @@
                                 </div> 
                             </td>
                             <td>
-                                @if($project->pivot['user_auth'] == 'manager' and $project->state =='normal')
+                                @if(($issue->user_id == $user->id or $project->pivot['user_auth'] == 'manager') and $project->state =='normal')
                                     <!--<button type="button" class="close" data-toggle="modal" data-target="#CloseProjectModal" data-project_name="{{$project->subject}}">&times;</button>-->
 
                                 <form method="POST" action="{{ route('Delete_issue',['project_id' => $project->id,'issue_id' => $issue->id]) }}">
