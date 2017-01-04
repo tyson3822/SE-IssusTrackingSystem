@@ -107,14 +107,17 @@ class IssueController extends Controller
     public function updateIssueInfo(Request $request)
     {
         $project = Project::find($request->project_id);
+
         $user = $project->users()->where('name', $request->owner)->first();
         $issue = Issue::find($request->issue_id);
+
         $issue->update([
             'description' => $request->description,
             'priority' => $request->priority,
             'state'=>$request->state,
             'user_id' => $user ? $user->id : null,
         ]);
+
         $issue->logs()->create([
             'title' => $issue->title,
             'description' => $issue->description,
@@ -122,6 +125,36 @@ class IssueController extends Controller
             'state' => $issue->state,
             'user_id' => $issue->user_id,
         ]);
+
+
+        $manager = User::where('id',$manager_id)->first();
+
+
+        if($request->state == 'close'){
+
+            $manager_id = User::join('project_user_relations','users.id','=','project_user_relations.user_id')
+                    ->select('project_user_relations.user_id')
+                    ->where('user_auth','manager')
+                    ->where('project_id',$request->project_id)
+                    ->get()
+                    ->pluck('user_id')
+                    ->all();
+
+            $manager = User::where('id',$manager_id)->first();
+
+            Mail::raw('Dear '.$user->name, function ($m) use ($issue,$project,$manager) {
+
+                $m->to($user->email)->subject('你的專案 '.$project->subject.'的issue '.$issue->title.' 已關閉');
+            });
+        }
+
+        if($user){
+            Mail::raw('Dear '.$user->name, function ($m) use ($issue,$project,$user) {
+
+                $m->to($user->email)->subject('你的專案 '.$project->subject.'的issue '.$issue->title.' 已關閉');
+            });
+        }
+
         return redirect('/project/'.$project->id.'/issue/'.$issue->id);
     }
 
